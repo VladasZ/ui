@@ -22,9 +22,13 @@ Rect& Rect::operator = (const Rect& r2) {
     return *this;
 }
 
-float Rect::max_x() const { return origin.x + size.width; }
+float Rect::max_x() const { 
+	return origin.x + size.width; 
+}
 
-float Rect::max_y() const { return origin.y + size.height; }
+float Rect::max_y() const { 
+	return origin.y + size.height; 
+}
 
 bool Rect::contains(const Point &point) const {
     return  point.x > origin.x &&

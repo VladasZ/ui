@@ -6,11 +6,16 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include "TestView.hpp"
+#include "View.hpp"
+
+#include "ConsoleDrawer.hpp"
 
 int main() {
 
-  ui::View::say_hello();
+	ui::ConsoleDrawer drawer;
 
-  return 0;
+	drawer.draw_rect({});
+
+
+	return 0;
 }

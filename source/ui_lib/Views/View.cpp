@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-#include "TestView.hpp"
+#include "View.hpp"
 
 using namespace std;
 using namespace ui;
