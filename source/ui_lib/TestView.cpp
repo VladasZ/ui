@@ -8,10 +8,11 @@
 
 #include <iostream>
 
-#include "View.hpp"
+#include "TestView.hpp"
 
 using namespace std;
+using namespace ui;
 
-void view::say_hello() {
+void View::say_hello() {
   cout << "hello" << endl;
 }

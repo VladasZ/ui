@@ -6,7 +6,7 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include "View.hpp"
+#include "TestView.hpp"
 
 int main() {
 
