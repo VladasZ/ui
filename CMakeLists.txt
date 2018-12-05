@@ -8,4 +8,5 @@ project(ui)
 
 add_subdirectory(source/ui)
 add_subdirectory(source/ui_lib)
+add_subdirectory(source/geometry)
 
