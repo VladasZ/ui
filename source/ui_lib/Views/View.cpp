@@ -35,7 +35,6 @@ void View::draw() {
 
 void View::_calculate_absolute_frame() {
 	_absolute_frame = _frame;
-	if (!_superview)
-		return;
-	_absolute_frame.origin += _superview->_absolute_frame.origin;
+	if (_superview)
+		_absolute_frame.origin += _superview->_absolute_frame.origin;
 }

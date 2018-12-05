@@ -14,9 +14,9 @@
 
 namespace ui {
   class Win10ConsoleDrawer : public Drawer {
-  public:
-	void draw_rect(const Rect& rect) override;
-	void fill_rect(const Rect& rect, const Color& color) override;
+	void _draw_rect(const Rect& rect) override;
+	void _fill_rect(const Rect& rect, const Color& color) override;
+	const Rect _convert_rect(const Rect& rect) override;
   };
 }
 

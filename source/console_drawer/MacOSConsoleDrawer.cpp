@@ -15,11 +15,11 @@
 using namespace std;
 using namespace ui;
 
-void MacOSConsoleDrawer::draw_rect(const Rect& rect) {
+void MacOSConsoleDrawer::_draw_rect(const Rect& rect) {
 	cout << "MacOSConsoleDrawer::draw_rect" << endl;
 }
 
-void MacOSConsoleDrawer::fill_rect(const Rect& rect, const Color& color) {
+void MacOSConsoleDrawer::_fill_rect(const Rect& rect, const Color& color) {
 	cout << "MacOSConsoleDrawer::fill_rect" << endl;
 }
 
