@@ -8,11 +8,34 @@
 
 #include <iostream>
 
+#include "ui.hpp"
 #include "View.hpp"
 
 using namespace std;
 using namespace ui;
 
-void View::say_hello() {
-  cout << "hello" << endl;
+View::View(const Rect& rect) : _frame(rect), _absolute_frame(rect) { }
+
+View::~View() {
+	for (auto view : _subviews)
+		delete view;
+}
+
+void View::add_subview(View* view) {
+	view->_superview = this;
+	view->_calculate_absolute_frame();
+	_subviews.push_back(view);
+}
+
+void View::draw() {
+	ui::config::drawer()->draw_rect(_absolute_frame);
+	for (auto view : _subviews)
+		view->draw();
+}
+
+void View::_calculate_absolute_frame() {
+	_absolute_frame = _frame;
+	if (!_superview)
+		return;
+	_absolute_frame.origin += _superview->_absolute_frame.origin;
 }

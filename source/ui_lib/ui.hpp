@@ -10,6 +10,7 @@
 
 #include "Drawer.hpp"
 
-namespace ui {
+namespace ui::config {
 	void set_drawer(Drawer* drawer);
+	Drawer* drawer();
 }

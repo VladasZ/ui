@@ -6,37 +6,27 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include <Windows.h>
-
 #include <iostream>
 using namespace std;
 
 #include "View.hpp"
 
+#include "ui.hpp"
 #include "ConsoleDrawer.hpp"
 
 int main() {
 
-	ui::ConsoleDrawer drawer;
+	ui::config::set_drawer(new ui::ConsoleDrawer());
 
-	drawer.draw_rect({ 0, 0, 5, 5 });
+	auto view1 = new ui::View({ 10, 10, 30, 15 });
+	auto view2 = new ui::View({ 3, 3, 10, 10 });
+	auto view3 = new ui::View({ 1, 1, 5, 5 });
 
+	view1->add_subview(view2);
+	view2->add_subview(view3);
 
-	drawer.draw_rect({ 10, 10, 10, 10 });
-	drawer.draw_rect({ 10, 10, 3, 3 });
+	view1->draw();
 
-
-	drawer.draw_rect({ 30, 10, 10, 10 });
-
-
-	//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	//// you can loop k higher to see more color choices
-	//for (int k = 1; k < 255; k++)
-	//{
-	//	// pick the colorattribute k you want
-	//	SetConsoleTextAttribute(hConsole, k);
-	//	cout << k << " I want to be nice today!";
-	//}
 
 	return 0;
 }
