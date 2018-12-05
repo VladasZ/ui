@@ -15,7 +15,7 @@ enum Direction {
     Down
 };
 
-namespace Geometry {
+namespace ui {
 
     class Point {
 
@@ -48,5 +48,3 @@ namespace Geometry {
         void  operator *= (float value);
     };
 }
-
-using namespace Geometry;

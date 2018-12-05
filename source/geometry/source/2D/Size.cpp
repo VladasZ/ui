@@ -8,6 +8,8 @@
 
 #include "Size.hpp"
 
+using namespace ui;
+
 Size::Size(float width, float height) : width(width), height(height) { }
 
 Size Size::operator /(float value) const {

@@ -8,6 +8,8 @@
 
 #include "Rect.hpp"
 
+using namespace ui;
+
 Rect::Rect(const Size &_size) : size(_size) { }
 
 Rect::Rect(float width, float height) : size({ width, height }) { }

@@ -9,6 +9,7 @@
 #include "Color.hpp"
 
 using namespace std;
+using namespace ui;
 
 Color::Color(Color const& obj) {
     r = obj.r;

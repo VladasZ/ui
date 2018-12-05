@@ -10,7 +10,7 @@
 
 #include "Point.hpp"
 
-namespace Geometry {
+namespace ui {
     
     class Size {
         
@@ -31,5 +31,3 @@ namespace Geometry {
 		bool operator == (const Size& size) const;
     };
 }
-
-using namespace Geometry;

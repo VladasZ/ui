@@ -11,24 +11,28 @@
 #include "Point.hpp"
 #include "Size.hpp"
 
-class Rect {
-    
-public:
-    
-    Point origin;
-    Size  size;
-    
-    Rect() = default;
-	Rect(const Size &size);
-    Rect(float width, float height);
-    Rect(float x, float y, float width, float height);
-    
-    Rect& operator = (const Rect& r2);
+namespace ui {
 
-    float max_x() const;
-    float max_y() const;
-    
-    bool contains(const Point& point) const;
-    
-    Rect with_zero_origin() const;
-};
+	class Rect {
+
+	public:
+
+		Point origin;
+		Size  size;
+
+		Rect() = default;
+		Rect(const Size &size);
+		Rect(float width, float height);
+		Rect(float x, float y, float width, float height);
+
+		Rect& operator = (const Rect& r2);
+
+		float max_x() const;
+		float max_y() const;
+
+		bool contains(const Point& point) const;
+
+		Rect with_zero_origin() const;
+	};
+
+}
