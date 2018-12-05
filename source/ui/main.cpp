@@ -18,7 +18,7 @@ int main() {
 
 	ui::config::set_drawer(new ui::ConsoleDrawer());
 
-	auto view1 = new ui::View({ 10, 10, 30, 15 });
+	auto view1 = new ui::View({ 10, 10, 15, 15 });
 	auto view2 = new ui::View({ 3, 3, 10, 10 });
 	auto view3 = new ui::View({ 1, 1, 5, 5 });
 

@@ -13,7 +13,7 @@
 #include "Drawer.hpp"
 
 namespace ui {
-	class MacOSConsoleDrawer : Drawer {
+	class MacOSConsoleDrawer : public Drawer {
 	public:
 		void draw_rect(const Rect& rect) override;
 		void fill_rect(const Rect& rect, const Color& color) override;
