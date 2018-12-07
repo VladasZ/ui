@@ -14,7 +14,7 @@
 namespace ui {
 #if WINDOWS
 	using ConsoleDrawer = Win10ConsoleDrawer;
-#elif MAC_OS
+#else
 	using ConsoleDrawer = MacOSConsoleDrawer;
 #endif
 }

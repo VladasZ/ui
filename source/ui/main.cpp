@@ -16,6 +16,8 @@ using namespace std;
 
 int main() {
 
+#if !LINUX
+  
 	ui::config::set_drawer(new ui::ConsoleDrawer());
 
 	auto view1 = new ui::View({ 10, 10, 15, 15 });
@@ -26,7 +28,7 @@ int main() {
 	view2->add_subview(view3);
 
 	view1->draw();
-
+#endif
 
 	return 0;
 }
