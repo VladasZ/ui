@@ -8,8 +8,5 @@
 
 #pragma once
 
-#include "Color.hpp"
-#include "Rect.hpp"
-
-template <class T> constexpr T pi  = (T)3.14159265358979323846;
-template <class T> constexpr T pi2 = (T)1.57079632679489661923;
+template <class T> constexpr T pi  = T(3.14159265358979323846);
+template <class T> constexpr T pi2 = T(1.57079632679489661923);

@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <string>
+
 class Vector3 {
     
 public:
@@ -19,7 +21,7 @@ public:
     Vector3() = default;
     Vector3(float x, float y, float z);
 
-    float lenght() const;
+    float length() const;
     
 	Vector3 cross(const Vector3& vec) const;
 	float dot(const Vector3& vec) const;
@@ -32,5 +34,6 @@ public:
 	Vector3  operator *  (float value) const;
 	Vector3& operator *= (float value);
 
+	std::string to_string() const;
 };
 

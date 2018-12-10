@@ -13,7 +13,7 @@
 
 Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) { }
 
-float Vector3::lenght() const {
+float Vector3::length() const {
     return static_cast<float>(sqrt(x * x + y * y + z * z));
 }
 
@@ -30,7 +30,7 @@ float Vector3::dot(const Vector3& vec) const {
 }
 
 Vector3& Vector3::normalize() {
-    auto ratio = 1 / lenght();
+    auto ratio = 1 / length();
     return this->operator*=(ratio);
 }
 
@@ -62,4 +62,8 @@ Vector3& Vector3::operator *= (float value) {
 	y *= value;
 	z *= value;
 	return *this;
+}
+
+std::string Vector3::to_string() const {
+	return std::string() + "[ " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + " ]";
 }
