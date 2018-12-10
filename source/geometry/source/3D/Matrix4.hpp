@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <stdlib.h> 
+
 #include <initializer_list>
 
 #include "Vector3.hpp"
