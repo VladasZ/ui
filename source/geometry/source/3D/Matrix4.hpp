@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdlib.h> 
+#include <cstring> 
 
 #include <initializer_list>
 
@@ -29,7 +29,7 @@ public:
     template <class CompatibleClass>
     Matrix4(const CompatibleClass& obj) {
         static_assert(sizeof(Matrix4) == sizeof(CompatibleClass), "Matrix4 invalid initializer");
-        memcpy(&data[0][0], static_cast<void*>(&obj), sizeof(Matrix4));
+		std::memcpy(&data[0][0], static_cast<void*>(&obj), sizeof(Matrix4));
     }
     
     Matrix4  operator * (const Matrix4& mat) const;
