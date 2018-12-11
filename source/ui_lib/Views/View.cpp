@@ -28,7 +28,7 @@ void View::add_subview(View* view) {
 }
 
 void View::draw() {
-	ui::config::drawer()->draw_rect(_absolute_frame);
+	ui::config::drawer()->fill_rect(_absolute_frame, color);
 	for (auto view : _subviews)
 		view->draw();
 }

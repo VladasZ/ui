@@ -6,19 +6,26 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#pragma once
+
 #include <vector>
 
 #include "Rect.hpp"
+#include "Color.hpp"
 
 namespace ui {
   
   class View {
+
+  protected:
 
 	  Rect _frame;
 	  View* _superview = nullptr;
 	  std::vector<View*> _subviews;
 
   public:
+
+	  Color color;
 
 	  View(const Rect& rect);
 	  virtual ~View();
@@ -28,7 +35,7 @@ namespace ui {
   public:
 	  virtual void draw();
 
-  private:
+  protected:
 
 	  Rect _absolute_frame;
 	  void _calculate_absolute_frame();
