@@ -30,18 +30,23 @@ Image::Image(const string& path) {
 	_size = { static_cast<float>(width), static_cast<float>(height) };
 }
 
+Image::Image(const Size& size, void* data, int channels) : _size(size), _data(data), _channels(channels) {
+
+}
+
 Image::~Image() {
-	SOIL_free_image_data(static_cast<unsigned char*>(_data));
+	_free_data();
 }
 
-const void* Image::data() const {
-	return _data;
-}
-
-Size Image::size() const {
+const Size& Image::size() const {
 	return _size;
 }
 
-int Image::channels() const {
-	return _channels;
+bool Image::is_monochrome() const { 
+	return _channels == 1; 
+}
+
+void Image::_free_data() {
+	if (_data)
+		free(_data);
 }

@@ -10,11 +10,13 @@
 
 #include <string>
 
-#include "Size.hpp"
+#include "Rect.hpp"
 
 namespace ui {
 
 	class Image {
+
+	protected:
 
 		void* _data = nullptr;
 		Size _size;
@@ -23,11 +25,19 @@ namespace ui {
 	public:
 
 		explicit Image(const std::string& path);
-		~Image();
+		explicit Image(const Size& size, void* data, int channels);
+		virtual ~Image();
 
-		const void* data() const;
-		Size size() const;
-		int channels() const;
+		const Size& size() const;
+
+		bool is_monochrome() const;
+
+		virtual void draw_in_rect(const Rect& rect) = 0;
+
+	protected:
+
+		void _free_data();
+	
 	};
 	
 };

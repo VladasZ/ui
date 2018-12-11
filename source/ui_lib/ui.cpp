@@ -6,9 +6,12 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include <string>
+
 #include "ui.hpp"
 
 using namespace ui;
+using namespace std;
 
 static Drawer* _drawer;
 
@@ -19,5 +22,7 @@ void config::set_drawer(Drawer* drawer) {
 }
 
 Drawer* config::drawer() {
+	if (_drawer == nullptr)
+		throw string() + "Accessign nullptr ui::Drawer";
 	return _drawer;
 }
