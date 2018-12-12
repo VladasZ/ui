@@ -10,11 +10,12 @@
 
 #include "Vector3.hpp"
 
+Vector3::Vector3(Float x, Float y, Float z) : x(x), y(y), z(z) {
 
-Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) { }
+}
 
-float Vector3::length() const {
-    return static_cast<float>(sqrt(x * x + y * y + z * z));
+Vector3::Float Vector3::length() const {
+    return static_cast<Float>(sqrt(x * x + y * y + z * z));
 }
 
 Vector3 Vector3::cross(const Vector3& vec) const {
@@ -25,7 +26,7 @@ Vector3 Vector3::cross(const Vector3& vec) const {
 	};
 }
 
-float Vector3::dot(const Vector3& vec) const {
+Vector3::Float Vector3::dot(const Vector3& vec) const {
 	return x * vec.x + y * vec.y + z * vec.z;
 }
 
@@ -49,7 +50,7 @@ Vector3& Vector3::operator -= (const Vector3& vec) {
 	return *this;
 }
 
-Vector3 Vector3::operator * (float value) const {
+Vector3 Vector3::operator * (Float value) const {
 	return {
 		x * value,
 		y * value,
@@ -57,7 +58,7 @@ Vector3 Vector3::operator * (float value) const {
 	};
 }
 
-Vector3& Vector3::operator *= (float value) {
+Vector3& Vector3::operator *= (Float value) {
 	x *= value;
 	y *= value;
 	z *= value;

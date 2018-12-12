@@ -17,14 +17,16 @@
 class Matrix4 {
     
 public:
+
+	using Float = float;
     
     static const size_t size = 16;
     
-    float data[4][4];
+	Float data[4][4];
     
     Matrix4();
-	Matrix4(float value);
-    Matrix4(const std::initializer_list<float>& list);
+	Matrix4(Float value);
+    Matrix4(const std::initializer_list<Float>& list);
     
     template <class CompatibleClass>
     Matrix4(const CompatibleClass& obj) {
@@ -35,9 +37,9 @@ public:
     Matrix4  operator * (const Matrix4& mat) const;
     Matrix4& operator *=(const Matrix4& mat);
 
-	static Matrix4 scale(float scale);
+	static Matrix4 scale(Float scale);
 	static Matrix4 translation(const Vector3& location);
-    static Matrix4 rotation(float angle, const Vector3& axis);
-	static Matrix4 perspective(float fovy, float aspect, float zNear, float zFar);
+    static Matrix4 rotation(Float angle, const Vector3& axis);
+	static Matrix4 perspective(Float fovy, Float aspect, Float zNear, Float zFar);
 
 };

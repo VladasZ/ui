@@ -13,26 +13,28 @@
 class Vector3 {
     
 public:
+
+	using Float = float;
     
-    float x = 0;
-    float y = 0;
-    float z = 0;
+    Float x = 0;
+	Float y = 0;
+	Float z = 0;
     
     Vector3() = default;
-    Vector3(float x, float y, float z);
+    Vector3(Float x, Float y, Float z);
 
-    float length() const;
+	Float length() const;
     
 	Vector3 cross(const Vector3& vec) const;
-	float dot(const Vector3& vec) const;
+	Float dot(const Vector3& vec) const;
 
     Vector3& normalize();
 
 	Vector3  operator -  (const Vector3& vec) const;
 	Vector3& operator -= (const Vector3& vec);
 
-	Vector3  operator *  (float value) const;
-	Vector3& operator *= (float value);
+	Vector3  operator *  (Float value) const;
+	Vector3& operator *= (Float value);
 
 	std::string to_string() const;
 };

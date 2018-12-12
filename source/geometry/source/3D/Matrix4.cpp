@@ -22,12 +22,12 @@ Matrix4::Matrix4() : Matrix4 {
     0, 0, 0, 1
 } { }
 
-Matrix4::Matrix4(float value) {
+Matrix4::Matrix4(Float value) {
 	for (int i = 0; i < Matrix4::size; i++)
 		*(&data[0][0] + i) = value;
 }
 
-Matrix4::Matrix4(const std::initializer_list<float>& list) {
+Matrix4::Matrix4(const std::initializer_list<Float>& list) {
     if (list.size() != Matrix4::size)
         throw "Matrix4 invalid initializer";
     std::copy(list.begin(), list.end(), &data[0][0]);
@@ -58,11 +58,10 @@ Matrix4 Matrix4::operator *(const Matrix4& mat) const {
 }
 
 Matrix4& Matrix4::operator *=(const Matrix4& mat) {
-    *this = this->operator*(mat);
-    return *this;
+    return *this = this->operator*(mat);
 }
 
-Matrix4 Matrix4::scale(float scale) {
+Matrix4 Matrix4::scale(Float scale) {
 	return  {
 		scale,     0,     0, 0,
 			0, scale,     0, 0,
@@ -80,26 +79,21 @@ Matrix4 Matrix4::translation(const Vector3& location) {
 	};
 }
 
-Matrix4 Matrix4::rotation(float angle, const Vector3& in) {
+Matrix4 Matrix4::rotation(Float angle, const Vector3& in) {
     return {};//glm::rotate(glm::mat4(), angle, {in.x, in.y, in.z});
 }
 
-Matrix4 Matrix4::perspective(float fovy, float aspect, float zNear, float zFar) {
+Matrix4 Matrix4::perspective(Float fovy, Float aspect, Float zNear, Float zFar) {
 
-	float const tanHalfFovy = tan(fovy / 2.0f);
+	Float const tan_half_fovy = tan(fovy / 2.0f);
 
 	Matrix4 result(0.0f);
-	result.data[0][0] = 1.0f / (aspect * tanHalfFovy);
-	result.data[1][1] = 1.0f / (tanHalfFovy);
+	result.data[0][0] = 1.0f / (aspect * tan_half_fovy);
+	result.data[1][1] = 1.0f / (tan_half_fovy);
 	result.data[2][3] = -1.0f;
 
-//#		if GLM_DEPTH_CLIP_SPACE == GLM_DEPTH_ZERO_TO_ONE
-//	Result[2][2] = zFar / (zNear - zFar);
-//	Result[3][2] = -(zFar * zNear) / (zFar - zNear);
-//#		else
 	result.data[2][2] = -(zFar + zNear) / (zFar - zNear);
 	result.data[3][2] = -(2.0f * zFar * zNear) / (zFar - zNear);
-//#		endif
 
 	return result;
 }
