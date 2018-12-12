@@ -9,9 +9,6 @@
 #include <math.h>
 #include <algorithm>
 
-//#include "glm/glm.hpp"
-//#include "glm/gtc/matrix_transform.hpp"
-
 #include "Matrix4.hpp"
 
 
@@ -72,9 +69,9 @@ Matrix4 Matrix4::scale(Float scale) {
  
 Matrix4 Matrix4::translation(const Vector3& location) {
 	return {
-		1,					 0,			 0, 0,
-		0,					 1,			 0, 0,
-		0,					 0,			 1, 0,
+		         1,		     0,			 0, 0,
+		         0,			 1,			 0, 0,
+				 0,		     0,			 1, 0,
 		location.x, location.y, location.z, 1
 	};
 }
