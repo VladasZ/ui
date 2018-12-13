@@ -70,6 +70,7 @@ namespace ui {
   public:
 
 	  void set_origin(const Point& origin);
+	  void set_center(const Point& center);
 
   public:
 

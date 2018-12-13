@@ -31,6 +31,7 @@ namespace ui {
 		float max_y() const;
 
 		bool contains(const Point& point) const;
+		bool contains_with_edge(const Point& point, float edge) const;
 
 		Rect with_zero_origin() const;
 	};

@@ -28,7 +28,14 @@ void View::add_subview(View* view) {
 }
 
 void View::set_origin(const Point& origin) {
-	_absolute_frame.origin = origin;
+	_frame.origin = origin;
+	_calculate_absolute_frame();
+}
+
+void View::set_center(const Point& center) {
+	_frame.origin.x = center.x - _frame.size.width  / 2;
+	_frame.origin.y = center.y - _frame.size.height / 2;
+	_calculate_absolute_frame();
 }
 
 void View::draw() {
@@ -41,6 +48,9 @@ View::Edge View::get_edge(const Point& point) const {
 
 	uint8_t edge = 0;
 
+	if (!_absolute_frame.contains_with_edge(point, EdgeInfo::width / 2))
+		return static_cast<Edge>(edge);
+
 	if (point.x >= _edge_info.left_min && point.x <= _edge_info.left_max)
 		edge += static_cast<uint8_t>(Edge::Left);
 
@@ -52,8 +62,6 @@ View::Edge View::get_edge(const Point& point) const {
 
 	if (point.y >= _edge_info.bottom_min && point.y <= _edge_info.bottom_max)
 		edge += static_cast<uint8_t>(Edge::Bottom);
-
-	cout << (int)edge << endl;
 
 	return static_cast<Edge>(edge);
 }

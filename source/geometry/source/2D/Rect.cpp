@@ -43,6 +43,13 @@ bool Rect::contains(const Point &point) const {
            (point.y <= origin.y + size.height);
 }
 
+bool Rect::contains_with_edge(const Point& point, float edge) const {
+	return  point.x >= origin.x - edge               &&
+	    	point.y >= origin.y - edge               &&
+		    point.x <= origin.x + size.width  + edge &&
+		    point.y <= origin.y + size.height + edge;
+}
+
 Rect Rect::with_zero_origin() const {
 	return { size.width, size.height };
 }
