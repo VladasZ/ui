@@ -14,7 +14,9 @@
 using namespace std;
 using namespace ui;
 
-View::View(const Rect& rect) : _frame(rect), _absolute_frame(rect) { }
+View::View(const Rect& rect) : _frame(rect) {
+
+}
 
 View::~View() {
 	for (auto view : _subviews)
@@ -23,22 +25,32 @@ View::~View() {
 
 void View::add_subview(View* view) {
 	view->_superview = this;
-	view->_calculate_absolute_frame();
 	_subviews.push_back(view);
+}
+
+void View::set_frame(const Rect& frame) {
+	_frame = frame;
+	_needs_layout = true;
 }
 
 void View::set_origin(const Point& origin) {
 	_frame.origin = origin;
-	_calculate_absolute_frame();
+	_needs_layout = true;
 }
 
 void View::set_center(const Point& center) {
 	_frame.origin.x = center.x - _frame.size.width  / 2;
 	_frame.origin.y = center.y - _frame.size.height / 2;
-	_calculate_absolute_frame();
+	_needs_layout = true;
 }
 
 void View::draw() {
+
+	if (_needs_layout) {
+		_layout();
+		_needs_layout = false;
+	}
+
 	ui::config::drawer()->fill_rect(_absolute_frame, color);
 	for (auto view : _subviews)
 		view->draw();
@@ -66,7 +78,7 @@ View::Edge View::get_edge(const Point& point) const {
 	return static_cast<Edge>(edge);
 }
 
-void View::_calculate_absolute_frame() {
+void View::_layout() {
 	_absolute_frame = _frame;
 
 	if (_superview)
@@ -83,4 +95,7 @@ void View::_calculate_absolute_frame() {
 
 	_edge_info.bottom_min = _absolute_frame.origin.y + _absolute_frame.size.height - EdgeInfo::width / 2;
 	_edge_info.bottom_max = _absolute_frame.origin.y + _absolute_frame.size.height + EdgeInfo::width / 2;
+
+	for (auto subview : _subviews)
+		subview->_layout();
 }

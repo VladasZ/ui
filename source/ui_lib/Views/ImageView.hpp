@@ -16,7 +16,18 @@ namespace ui {
 
 	class ImageView : public View {
 
+	public:
+
+		enum class ContentMode {
+			Fill,
+			AspectFit
+		};
+
+	private:
+
+		ContentMode _content_mode = ContentMode::Fill;
 		Image* _image = nullptr;
+		View* _content_view = nullptr;
 
 	public:
 
@@ -24,10 +35,15 @@ namespace ui {
 
 		const Image* image() const;
 		void set_image(Image* image);
+		void set_content_mode(ContentMode mode);
 
 	public:
 
 		void draw() override;
+
+	protected:
+
+		void _layout() override;
 
 	};
 

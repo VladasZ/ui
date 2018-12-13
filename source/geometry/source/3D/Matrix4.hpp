@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <cstring> 
+#include <string> 
 
 #include <initializer_list>
 
@@ -36,6 +36,8 @@ public:
     
     Matrix4  operator * (const Matrix4& mat) const;
     Matrix4& operator *=(const Matrix4& mat);
+
+	std::string to_string() const;
 
 	static Matrix4 scale(Float scale);
 	static Matrix4 translation(const Vector3& location);

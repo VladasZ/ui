@@ -58,6 +58,20 @@ Matrix4& Matrix4::operator *=(const Matrix4& mat) {
     return *this = this->operator*(mat);
 }
 
+std::string Matrix4::to_string() const {
+	std::string result;
+
+	static const uint8_t row_count = static_cast<uint8_t>(sqrt(Matrix4::size));
+
+	for (int i = 0; i < Matrix4::size; i++) {
+		if (i % row_count == 0)
+			result += "\n";
+		result += std::to_string(*(&data[0][0] + i)) + " ";
+	}
+
+	return result;
+}
+
 Matrix4 Matrix4::scale(Float scale) {
 	return  {
 		scale,     0,     0, 0,

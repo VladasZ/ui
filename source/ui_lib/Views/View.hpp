@@ -54,6 +54,7 @@ namespace ui {
 
   protected:
 
+	  bool _needs_layout = true;
 	  Rect _frame;
 	  View* _superview = nullptr;
 	  std::vector<View*> _subviews;
@@ -62,13 +63,14 @@ namespace ui {
 
 	  Color color;
 
-	  View(const Rect& rect);
+	  View(const Rect& rect = { });
 	  virtual ~View();
 
 	  void add_subview(View* view);
 
   public:
 
+	  void set_frame(const Rect& frame);
 	  void set_origin(const Point& origin);
 	  void set_center(const Point& center);
 
@@ -80,7 +82,7 @@ namespace ui {
   protected:
 
 	  Rect _absolute_frame;
-	  void _calculate_absolute_frame();
+	  virtual void _layout();
 
   };
 }

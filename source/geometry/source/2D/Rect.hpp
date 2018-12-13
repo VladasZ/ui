@@ -21,7 +21,7 @@ namespace ui {
 		Size  size;
 
 		Rect() = default;
-		Rect(const Size &size);
+		Rect(const Size& size);
 		Rect(float width, float height);
 		Rect(float x, float y, float width, float height);
 
@@ -30,8 +30,12 @@ namespace ui {
 		float max_x() const;
 		float max_y() const;
 
+		Point center() const;
+
 		bool contains(const Point& point) const;
 		bool contains_with_edge(const Point& point, float edge) const;
+
+		Size fit_size(const Size& size) const;
 
 		Rect with_zero_origin() const;
 	};
