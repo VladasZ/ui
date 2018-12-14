@@ -38,6 +38,8 @@ public:
     Matrix4  operator * (const Matrix4& mat) const;
     Matrix4& operator *=(const Matrix4& mat);
 
+	Vector3  operator * (const Vector3& vec) const;
+
 	std::string to_string() const;
 
 	static Matrix4 scale(Float scale);

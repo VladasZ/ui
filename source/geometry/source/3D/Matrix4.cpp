@@ -58,6 +58,14 @@ Matrix4& Matrix4::operator *=(const Matrix4& mat) {
     return *this = this->operator*(mat);
 }
 
+Vector3 Matrix4::operator * (const Vector3& vec) const {
+	return {
+		data[0][0] * vec.x + data[0][1] * vec.y + data[0][2] * vec.z + data[0][3] * 1,
+		data[1][0] * vec.x + data[1][1] * vec.y + data[1][2] * vec.z + data[1][3] * 1,
+		data[2][0] * vec.x + data[2][1] * vec.y + data[2][2] * vec.z + data[2][3] * 1
+	};
+}
+
 std::string Matrix4::to_string() const {
 	std::string result;
 
