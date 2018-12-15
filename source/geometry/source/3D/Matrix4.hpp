@@ -34,6 +34,8 @@ public:
         static_assert(sizeof(Matrix4) == sizeof(CompatibleClass), "Matrix4 invalid initializer");
 		std::memcpy(&data[0][0], static_cast<void*>(&obj), sizeof(Matrix4));
     }
+
+	Matrix4 inversed() const;
     
     Matrix4  operator * (const Matrix4& mat) const;
     Matrix4& operator *=(const Matrix4& mat);
