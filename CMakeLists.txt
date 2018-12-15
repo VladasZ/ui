@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9.2 FATAL_ERROR)
 
-include(utils/utils.cmake)
+include(build_tools/utils.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 
