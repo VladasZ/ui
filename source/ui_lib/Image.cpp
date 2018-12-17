@@ -30,7 +30,7 @@ Image::Image(const string& path) {
 	_size = { static_cast<float>(width), static_cast<float>(height) };
 }
 
-Image::Image(const Size& size, void* data, int channels) : _size(size), _data(data), _channels(channels) {
+Image::Image(const Size& size, void* data, int channels) : _data(data), _size(size), _channels(channels) {
 
 }
 

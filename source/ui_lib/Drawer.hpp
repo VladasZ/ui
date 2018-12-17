@@ -12,13 +12,15 @@
 #include "Color.hpp"
 
 namespace ui {
-	class Drawer {
-		virtual void _draw_rect(const Rect& rect) = 0;
-		virtual void _fill_rect(const Rect& rect, const Color& color) = 0;
-		virtual const Rect _convert_rect(const Rect& rect);
-	public:
-		Size screen_resolution;
-		void draw_rect(const Rect& rect);
-		void fill_rect(const Rect& rect, const Color& color);
-	};
+class Drawer {
+    virtual void _draw_rect(const Rect& rect) = 0;
+    virtual void _fill_rect(const Rect& rect, const Color& color) = 0;
+    virtual const Rect _convert_rect(const Rect& rect);
+public:
+    virtual ~Drawer() { }
+
+    Size screen_resolution;
+    void draw_rect(const Rect& rect);
+    void fill_rect(const Rect& rect, const Color& color);
+};
 }
