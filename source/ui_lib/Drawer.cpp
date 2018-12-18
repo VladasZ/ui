@@ -23,5 +23,5 @@ void Drawer::fill_rect(const Rect& rect, const Color& color) {
 }
 
 void Drawer::set_cursor_mode(CursorMode cursor_mode) {
-    _set_cursor_mode(cursor_mode);
+    //_set_cursor_mode(cursor_mode);
 }
