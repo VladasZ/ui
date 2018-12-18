@@ -9,10 +9,11 @@
 #pragma once
 
 #include "Drawer.hpp"
+
 #include "View.hpp"
 #include "ImageView.hpp"
 
 namespace ui::config {
-	void set_drawer(Drawer* drawer);
-	Drawer* drawer();
+    Drawer* drawer(); void set_drawer(Drawer* drawer);
+
 }
