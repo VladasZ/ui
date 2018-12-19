@@ -38,10 +38,11 @@ static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Window::Edge edge) {
     auto int_value = static_cast<int>(edge);
 
     if (int_value < static_cast<int>(Window::Edge::Left))
-        return Mouse::CursorMode::HResize;
-
-    if (int_value < static_cast<int>(Window::Edge::TopLeft))
         return Mouse::CursorMode::VResize;
+
+    if (int_value == static_cast<int>(Window::Edge::Left) ||
+		int_value == static_cast<int>(Window::Edge::Right))
+        return Mouse::CursorMode::HResize;
 
     return Mouse::CursorMode::Drag;
 }

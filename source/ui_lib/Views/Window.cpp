@@ -28,9 +28,6 @@ Window::Edge Window::get_edge(const Point& point) const {
 
     uint8_t edge = 0;
 
-    if (_absolute_frame.contains(point))
-        return Edge::Top;
-
     if (!_absolute_frame.contains_with_edge(point, EdgeInfo::width / 2))
         return static_cast<Edge>(edge);
 
