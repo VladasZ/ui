@@ -8,12 +8,23 @@
 
 #pragma once
 
+#include "Mouse.hpp"
 #include "Drawer.hpp"
 
-#include "View.hpp"
-#include "ImageView.hpp"
+namespace ui {
 
-namespace ui::config {
-    Drawer* drawer(); void set_drawer(Drawer* drawer);
+struct config {
+
+    static Drawer* drawer();
+    static void set_drawer(Drawer* drawer);
+
+};
+
+struct input {
+
+    static inline Mouse* const mouse = new Mouse();
+
+};
 
 }
+

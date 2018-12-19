@@ -10,15 +10,20 @@
 
 #include "stdint.h"
 
+#include <vector>
+
 #include "Point.hpp"
+#include "Touch.hpp"
 
 namespace ui {
 
+class View;
+
 class Input final {
+
+    std::vector<View*> _subscribed_views;
+
 public:
-
-    using TouchID = int64_t;
-
 
 
 };

@@ -13,77 +13,87 @@
 
 #include "Rect.hpp"
 #include "Color.hpp"
+#include "Input.hpp"
+#include "Touch.hpp"
 
 namespace ui {
-  
-  class View {
 
-  public:
+class View {
 
-	  enum class Edge : uint8_t {
-		  Top         = 0b00000001,
-		  Bottom      = 0b00000010,
-		  Left        = 0b00000100,
-		  Right       = 0b00001000,
-		  TopLeft     = Top    | Left,
-		  TopRight    = Top    | Right,
-		  BottomLeft  = Bottom | Left,
-		  BottomRight = Bottom | Right,
-		  None        = 0
-	  };
+public:
 
-  private:
+    enum class Edge : uint8_t {
+        Top         = 0b00000001,
+        Bottom      = 0b00000010,
+        Left        = 0b00000100,
+        Right       = 0b00001000,
+        TopLeft     = Top    | Left,
+        TopRight    = Top    | Right,
+        BottomLeft  = Bottom | Left,
+        BottomRight = Bottom | Right,
+        None        = 0
+    };
 
-	  struct EdgeInfo {
+private:
 
-		  inline static const float width = 16;
+    struct EdgeInfo {
 
-		  float left_min = 0;
-		  float left_max = 0;
+        inline static const float width = 16;
 
-		  float right_min = 0;
-		  float right_max = 0;
+        float left_min = 0;
+        float left_max = 0;
 
-		  float top_min = 0;
-		  float top_max = 0;
+        float right_min = 0;
+        float right_max = 0;
 
-		  float bottom_min = 0;
-		  float bottom_max = 0;
-	  };
+        float top_min = 0;
+        float top_max = 0;
 
-	  EdgeInfo _edge_info;
+        float bottom_min = 0;
+        float bottom_max = 0;
+    };
 
-  protected:
+    EdgeInfo _edge_info;
 
-	  bool _needs_layout = true;
-	  Rect _frame;
-	  View* _superview = nullptr;
-	  std::vector<View*> _subviews;
+protected:
 
-  public:
+    bool _needs_layout = true;
+    Rect _frame;
+    View* _superview = nullptr;
+    std::vector<View*> _subviews;
 
-	  Color color;
+public:
 
-	  View(const Rect& rect = { });
-	  virtual ~View();
+    Color color;
 
-	  void add_subview(View* view);
+    View(const Rect& rect = { });
+    virtual ~View();
 
-  public:
+    void add_subview(View* view);
 
-	  void set_frame(const Rect& frame);
-	  void set_origin(const Point& origin);
-	  void set_center(const Point& center);
+public:
 
-  public:
+    void set_frame(const Rect& frame);
+    void set_origin(const Point& origin);
+    void set_center(const Point& center);
 
-	  virtual void draw();
-	  Edge get_edge(const Point& point) const;
+public:
 
-  protected:
+    virtual void draw();
+    Edge get_edge(const Point& point) const;
 
-	  Rect _absolute_frame;
-	  virtual void _layout();
+protected:
 
-  };
+    Rect _absolute_frame;
+    virtual void _layout();
+
+protected:
+
+    friend Input;
+
+    std::vector<Touch*> _touches;
+    void touch_event(Touch* touch);
+
+};
+
 }
