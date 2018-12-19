@@ -9,12 +9,14 @@
 #ifdef UI_DESKTOP
 
 #include "Mouse.hpp"
+#include "Input.hpp"
 
 using namespace ui;
 
 
 void Mouse::position_changed(const Point& position) {
    _position = position;
+   Input::cursor_moved(position);
 }
 
 Point Mouse::position() const {

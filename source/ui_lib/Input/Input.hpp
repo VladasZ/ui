@@ -18,13 +18,20 @@
 namespace ui {
 
 class View;
+class Window;
 
 class Input final {
 
-    std::vector<View*> _subscribed_views;
+    friend Window;
+
+    static inline std::vector<View*> _subscribed_views;
+    static inline std::vector<Window*> _windows;
 
 public:
 
+#ifdef UI_DESKTOP
+    static void cursor_moved(const Point& position);
+#endif
 
 };
 
