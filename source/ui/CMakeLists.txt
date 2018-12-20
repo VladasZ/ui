@@ -8,3 +8,5 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 link_project(ui_lib)
 link_project(geometry)
 link_project(soil)
+
+conan_target_link_libraries(${PROJECT_NAME})

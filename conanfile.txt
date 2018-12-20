@@ -1,0 +1,7 @@
+[requires]
+
+freetype/2.9.0@bincrafters/stable
+
+[generators]
+cmake
+
