@@ -54,6 +54,7 @@ public:
 public:
 
     Point global_point_lo_local(const Point& point) const;
+    bool contains_global_point(const Point& point) const;
 
 public:
 
@@ -69,11 +70,14 @@ protected:
     friend Input;
 
     std::vector<Touch*> _touches;
-    void touch_event(Touch* touch);
+    virtual void touch_event(Touch* touch);
 
 public:
 
+    bool _user_interaction_enabled = false;
 
+    void enable_user_interaction();
+    void disable_user_interaction();
 
 };
 

@@ -11,6 +11,7 @@
 
 #include "ui.hpp"
 #include "View.hpp"
+#include "Input.hpp"
 #include "Drawer.hpp"
 
 using namespace std;
@@ -21,6 +22,8 @@ View::View(const Rect& rect) : _frame(rect) {
 }
 
 View::~View() {
+    if (_user_interaction_enabled)
+        Input::_unsubscribe_view(this);
 	for (auto view : _subviews)
 		delete view;
 }
@@ -69,6 +72,10 @@ Point View::global_point_lo_local(const Point& point) const {
     return result;
 }
 
+bool View::contains_global_point(const Point& point) const {
+    return _frame.contains(global_point_lo_local(point));
+}
+
 void View::draw() {
 
 	if (_needs_layout) {
@@ -107,4 +114,18 @@ void View::touch_event(Touch *touch) {
         _touches.erase(iter);
         break;
     }
+}
+
+void View::enable_user_interaction() {
+    if (_user_interaction_enabled)
+        return;
+    _user_interaction_enabled = true;
+    Input::_subscribed_views.push_back(this);
+}
+
+void View::disable_user_interaction() {
+    if (!_user_interaction_enabled)
+        return;
+    _user_interaction_enabled = false;
+    Input::_unsubscribe_view(this);
 }

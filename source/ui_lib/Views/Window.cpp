@@ -6,6 +6,9 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include <iostream>
+using namespace std; //REMOVE
+
 #include <algorithm>
 
 #include "Input.hpp"
@@ -18,13 +21,17 @@ Window::Window(const Rect& rect) : View(rect) {
 }
 
 Window::~Window() {
-    auto iter = std::find(Input::_windows.begin(), Input::_windows.end(), this);
-    if (iter == Input::_windows.end())
-        return;
-    Input::_windows.erase(iter);
+    Input::_unsubscribe_window(this);
 }
 
-Rect::Edge Window::get_edge(const Point& point) const {
+void Window::touch_event(Touch* touch) {
+    cout << "touch location: " << touch->location.to_string() << endl;
+    _frame.set_edge(_current_edge, touch->location);
+    cout << "new frame: " << _frame.to_string() << endl;
+    _needs_layout = true;
+}
+
+Rect::Edge Window::get_edge(const Point& point) {
 
     using Edge = Rect::Edge;
 
@@ -45,7 +52,9 @@ Rect::Edge Window::get_edge(const Point& point) const {
     if (point.y >= _edge_info.bottom_min && point.y <= _edge_info.bottom_max)
         edge += static_cast<uint8_t>(Edge::Bottom);
 
-    return static_cast<Edge>(edge);
+    _current_edge = static_cast<Edge>(edge);
+
+    return _current_edge;
 }
 
 void Window::_layout() {

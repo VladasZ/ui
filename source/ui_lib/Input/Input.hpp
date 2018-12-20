@@ -32,6 +32,9 @@ class Input final {
     static inline std::list<Window*> _windows;
     static inline std::list<Touch*> _touches;
 
+    static void _unsubscribe_view(View* view);
+    static void _unsubscribe_window(Window* view);
+
 public:
 
     static void touch_event(Touch* touch);

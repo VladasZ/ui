@@ -12,6 +12,8 @@
 
 namespace ui {
 
+class Input;
+
 class Window : public View {
 
 public:
@@ -38,11 +40,19 @@ private:
         float bottom_max = 0;
     };
 
+
+    friend Input;
+
+    void touch_event(Touch* touch) override;
+
+private:
+
     EdgeInfo _edge_info;
+    Rect::Edge _current_edge;
 
 public:
 
-    Rect::Edge get_edge(const Point& point) const;
+    Rect::Edge get_edge(const Point& point);
 
 protected:
 
