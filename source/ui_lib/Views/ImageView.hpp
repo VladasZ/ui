@@ -18,7 +18,7 @@ namespace ui {
 
 	public:
 
-        enum class ContentMode : uint64_t {
+        enum class ContentMode {
 			Fill,
 			AspectFit
 		};

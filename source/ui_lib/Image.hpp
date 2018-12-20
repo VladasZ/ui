@@ -14,30 +14,30 @@
 
 namespace ui {
 
-	class Image {
+class Image {
 
-	protected:
+protected:
 
-		void* _data = nullptr;
-		Size _size;
-		int _channels = 0;
+    void* _data = nullptr;
+    Size _size;
+    int _channels = 0;
 
-	public:
+public:
 
-		explicit Image(const std::string& path);
-		explicit Image(const Size& size, void* data, int channels);
-		virtual ~Image();
+    explicit Image(const std::string& path);
+    explicit Image(const Size& size, void* data, int channels);
+    virtual ~Image();
 
-		const Size& size() const;
+    const Size& size() const;
 
-		bool is_monochrome() const;
+    bool is_monochrome() const;
 
-		virtual void draw_in_rect(const Rect& rect) = 0;
+    virtual void draw_in_rect(const Rect& rect) = 0;
 
-	protected:
+protected:
 
-		void _free_data();
-	
-	};
-	
+    void _free_data();
+
+};
+
 };

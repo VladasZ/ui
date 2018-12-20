@@ -34,6 +34,8 @@ public:
     bool is_began() const;
     bool is_moved() const;
     bool is_ended() const;
+
+    const char* to_string() const;
 };
 
 }
