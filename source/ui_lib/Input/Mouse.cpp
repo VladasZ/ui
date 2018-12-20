@@ -13,10 +13,17 @@
 
 using namespace ui;
 
+static Touch* mouse_touch = new Touch(1, { }, Touch::Event::Ended);
 
 void Mouse::position_changed(const Point& position) {
    _position = position;
-   Input::cursor_moved(position);
+   if (_left_button_state == ButtonState::Up) {
+       Input::hover_moved(position);
+   } else {
+       mouse_touch->location = position;
+       mouse_touch->event = Touch::Event::Moved;
+       Input::touch_event(mouse_touch);
+   }
 }
 
 Point Mouse::position() const {
@@ -25,6 +32,8 @@ Point Mouse::position() const {
 
 void Mouse::set_left_button_state(ButtonState state) {
     _left_button_state = state;
+    mouse_touch->event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
+    Input::touch_event(mouse_touch);
 }
 
 Mouse::ButtonState Mouse::left_button_state() const {

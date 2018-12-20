@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <functional>
 
 #include "Rect.hpp"
 #include "Color.hpp"
@@ -34,13 +35,25 @@ public:
     View(const Rect& rect = { });
     virtual ~View();
 
+public:
+
     void add_subview(View* view);
 
 public:
 
+    Rect frame() const;
+    View* superview() const;
+
+public:
+
     void set_frame(const Rect& frame);
+    void edit_frame(std::function<void(Rect&)> edit);
     void set_origin(const Point& origin);
     void set_center(const Point& center);
+
+public:
+
+    Point global_point_lo_local(const Point& point) const;
 
 public:
 
@@ -57,6 +70,10 @@ protected:
 
     std::vector<Touch*> _touches;
     void touch_event(Touch* touch);
+
+public:
+
+
 
 };
 

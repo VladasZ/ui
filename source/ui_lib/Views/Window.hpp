@@ -16,20 +16,6 @@ class Window : public View {
 
 public:
 
-    enum class Edge {
-        Top         = 0b00000001,
-        Bottom      = 0b00000010,
-        Left        = 0b00000100,
-        Right       = 0b00001000,
-        TopLeft     = Top    | Left,
-        TopRight    = Top    | Right,
-        BottomLeft  = Bottom | Left,
-        BottomRight = Bottom | Right,
-        None        = 0
-    };
-
-public:
-
     Window(const Rect& rect = { });
     ~Window() override;
 
@@ -56,7 +42,7 @@ private:
 
 public:
 
-    Edge get_edge(const Point& point) const;
+    Rect::Edge get_edge(const Point& point) const;
 
 protected:
 

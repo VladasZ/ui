@@ -3,7 +3,7 @@
 //  ui
 //
 //  Created by Vladas Zakrevskis on 8/21/18.
-//  Copyright © 2017 VladasZ. All rights reserved.
+//  Copyright © 2018 VladasZ. All rights reserved.
 //
 
 #pragma once
@@ -11,6 +11,8 @@
 #include <stdint.h>
 
 #include "Point.hpp"
+
+namespace ui {
 
 class Touch {
 public:
@@ -21,15 +23,17 @@ public:
         Began,
         Moved,
         Ended
-	};
+    };
 
     ID id;
-	ui::Point location;
+    ui::Point location;
     Event event;
 
     Touch(ID id, const ui::Point& location, Event event);
 
-	bool is_began() const;
-	bool is_moved() const;
-	bool is_ended() const;
+    bool is_began() const;
+    bool is_moved() const;
+    bool is_ended() const;
 };
+
+}

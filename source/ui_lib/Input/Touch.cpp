@@ -3,10 +3,12 @@
 //  ui
 //
 //  Created by Vladas Zakrevskis on 8/21/18.
-//  Copyright © 2017 VladasZ. All rights reserved.
+//  Copyright © 2018 VladasZ. All rights reserved.
 //
 
 #include "Touch.hpp"
+
+using namespace ui;
 
 Touch::Touch(ID id, const ui::Point& location, Touch::Event event) : id(id), location(location), event(event) {
 

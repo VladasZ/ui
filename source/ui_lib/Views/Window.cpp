@@ -24,12 +24,14 @@ Window::~Window() {
     Input::_windows.erase(iter);
 }
 
-Window::Edge Window::get_edge(const Point& point) const {
+Rect::Edge Window::get_edge(const Point& point) const {
+
+    using Edge = Rect::Edge;
 
     uint8_t edge = 0;
 
     if (!_absolute_frame.contains_with_edge(point, EdgeInfo::width / 2))
-        return static_cast<Edge>(edge);
+        return Edge::None;
 
     if (point.x >= _edge_info.left_min && point.x <= _edge_info.left_max)
         edge += static_cast<uint8_t>(Edge::Left);

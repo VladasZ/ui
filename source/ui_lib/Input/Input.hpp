@@ -10,7 +10,7 @@
 
 #include "stdint.h"
 
-#include <vector>
+#include <list>
 
 #include "Point.hpp"
 #include "Touch.hpp"
@@ -18,19 +18,26 @@
 namespace ui {
 
 class View;
+class Touch;
 class Window;
 
 class Input final {
 
+    friend View;
     friend Window;
 
-    static inline std::vector<View*> _subscribed_views;
-    static inline std::vector<Window*> _windows;
+    static inline Window* _resizing_window = nullptr;
+
+    static inline std::list<View*> _subscribed_views;
+    static inline std::list<Window*> _windows;
+    static inline std::list<Touch*> _touches;
 
 public:
 
+    static void touch_event(Touch* touch);
+
 #ifdef UI_DESKTOP
-    static void cursor_moved(const Point& position);
+    static void hover_moved(const Point& position);
 #endif
 
 };

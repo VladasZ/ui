@@ -30,9 +30,22 @@ void View::add_subview(View* view) {
 	_subviews.push_back(view);
 }
 
+Rect View::frame() const {
+    return _frame;
+}
+
+View* View::superview() const {
+    return _superview;
+}
+
 void View::set_frame(const Rect& frame) {
 	_frame = frame;
 	_needs_layout = true;
+}
+
+void View::edit_frame(std::function<void(Rect&)> edit) {
+    edit(_frame);
+    _needs_layout = true;
 }
 
 void View::set_origin(const Point& origin) {
@@ -46,6 +59,16 @@ void View::set_center(const Point& center) {
 	_needs_layout = true;
 }
 
+Point View::global_point_lo_local(const Point& point) const {
+    auto result = point - _frame.origin;
+    auto superview = _superview;
+    while (superview) {
+        result -= superview->frame().origin;
+        superview = superview->superview();
+    }
+    return result;
+}
+
 void View::draw() {
 
 	if (_needs_layout) {
@@ -53,7 +76,9 @@ void View::draw() {
 		_needs_layout = false;
 	}
 
-	ui::config::drawer()->fill_rect(_absolute_frame, color);
+    if (!_frame.size.is_negative())
+        ui::config::drawer()->fill_rect(_absolute_frame, color);
+
 	for (auto view : _subviews)
 		view->draw();
 }
