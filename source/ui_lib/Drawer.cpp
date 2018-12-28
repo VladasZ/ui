@@ -21,9 +21,3 @@ void Drawer::draw_rect(const Rect& rect) {
 void Drawer::fill_rect(const Rect& rect, const Color& color) {
     _fill_rect(_convert_rect(rect), color);
 }
-
-#ifdef UI_DESKTOP
-void Drawer::set_cursor_mode(Mouse::CursorMode cursor_mode) {
-    _set_cursor_mode(cursor_mode);
-}
-#endif

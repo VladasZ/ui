@@ -11,6 +11,7 @@
 #include "Rect.hpp"
 #include "Mouse.hpp"
 #include "Color.hpp"
+#include "Image.hpp"
 
 namespace ui {
 
@@ -26,11 +27,10 @@ public:
     void draw_rect(const Rect& rect);
     void fill_rect(const Rect& rect, const Color& color);
 
+    virtual Image::Drawer* init_image_drawer(Image* image) = 0;
+
 #ifdef UI_DESKTOP
-private:
-    virtual void _set_cursor_mode(Mouse::CursorMode cursor_mode) = 0;
-public:
-    virtual void set_cursor_mode(Mouse::CursorMode cursor_mode);
+    virtual void set_cursor_mode(Mouse::CursorMode cursor_mode) = 0;
 #endif
 
 };

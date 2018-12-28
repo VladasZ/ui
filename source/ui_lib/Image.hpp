@@ -16,23 +16,32 @@ namespace ui {
 
 class Image {
 
+public:
+
+    class Drawer {
+    public:
+        virtual ~Drawer();
+        virtual void draw_in_rect(const Rect&) = 0;
+    };
+
 protected:
 
-    void* _data = nullptr;
-    Size _size;
-    int _channels = 0;
+    Drawer* _drawer;
+    void*   _data;
+    Size    _size;
+    uint8_t _channels;
 
 public:
 
     explicit Image(const std::string& path);
-    explicit Image(const Size& size, void* data, int channels);
     virtual ~Image();
 
-    const Size& size() const;
+    const Size& size()          const;
+    void*       data()          const;
+    uint8_t     channels()      const;
+    bool        is_monochrome() const;
 
-    bool is_monochrome() const;
-
-    virtual void draw_in_rect(const Rect& rect) = 0;
+    void draw_in_rect(const Rect&);
 
 protected:
 
