@@ -34,6 +34,7 @@ protected:
 public:
 
     explicit Image(const std::string& path);
+    explicit Image(const Size& size, void* data, uint8_t channels);
     virtual ~Image();
 
     const Size& size()          const;

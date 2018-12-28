@@ -37,6 +37,10 @@ Image::Image(const string& path) {
     _drawer = config::drawer()->init_image_drawer(this);
 }
 
+Image::Image(const Size& size, void* data, uint8_t channels) : _data(data), _size(size), _channels(channels) {
+    _drawer = config::drawer()->init_image_drawer(this);
+}
+
 Image::~Image() {
 	_free_data();
 }
