@@ -16,6 +16,7 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Touch.hpp"
+#include "Layout.hpp"
 
 namespace ui {
 
@@ -38,6 +39,7 @@ public:
 public:
 
     void add_subview(View* view);
+    void remove_all_subviews();
 
 public:
 

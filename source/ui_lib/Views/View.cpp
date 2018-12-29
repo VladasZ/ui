@@ -6,7 +6,6 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include <iostream>
 #include <algorithm>
 
 #include "ui.hpp"
@@ -14,7 +13,6 @@
 #include "Input.hpp"
 #include "Drawer.hpp"
 
-using namespace std;
 using namespace ui;
 
 View::View(const Rect& rect) : _frame(rect) {
@@ -31,6 +29,12 @@ View::~View() {
 void View::add_subview(View* view) {
 	view->_superview = this;
 	_subviews.push_back(view);
+}
+
+void View::remove_all_subviews() {
+    for (auto view : _subviews)
+        delete view;
+    _subviews.clear();
 }
 
 Rect View::frame() const {
@@ -63,17 +67,11 @@ void View::set_center(const Point& center) {
 }
 
 Point View::global_point_lo_local(const Point& point) const {
-    auto result = point - _frame.origin;
-    auto superview = _superview;
-    while (superview) {
-        result -= superview->frame().origin;
-        superview = superview->superview();
-    }
-    return result;
+    return point - _absolute_frame.origin;
 }
 
 bool View::contains_global_point(const Point& point) const {
-    return _frame.contains(global_point_lo_local(point));
+    return _absolute_frame.contains(point);
 }
 
 void View::draw() {
