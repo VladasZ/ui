@@ -24,14 +24,12 @@ class Font {
   
 public:
     
-    Font(const std::string& file_name);
+    Font(const std::string& file_name, unsigned int size = 28);
     ~Font();
     
-    float  baseline_shift()            const { return _baseline_shift; }
-    float  height()                    const { return _height;         }
-    ui::Glyph* glyph_for_char(char ch) const { return _glyphs[ch];     }
-    
-    Font* withSize(int size);
+    float  baseline_shift()            const;
+    float  height()                    const;
+    ui::Glyph* glyph_for_char(char ch) const;
 };
 
 }
