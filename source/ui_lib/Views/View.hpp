@@ -36,6 +36,10 @@ public:
     View(const Rect& rect = { });
     virtual ~View();
 
+protected:
+
+    virtual void _setup() { }
+
 public:
 
     void add_subview(View* view);
@@ -58,14 +62,16 @@ public:
     Point global_point_lo_local(const Point& point) const;
     bool contains_global_point(const Point& point) const;
 
-public:
+protected:
 
-    virtual void draw();
+    virtual void _draw();
 
 protected:
 
     Rect _absolute_frame;
     virtual void _layout();
+    void _calculate_absolute_frame();
+    void _layout_subviews();
 
 protected:
 

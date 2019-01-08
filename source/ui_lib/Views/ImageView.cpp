@@ -28,9 +28,17 @@ void ImageView::set_content_mode(ContentMode mode) {
 	_content_mode = mode;
 }
 
-void ImageView::draw() {
-	View::draw();
+void ImageView::_draw() {
+
+    if (_needs_layout) {
+        _layout();
+        _needs_layout = false;
+    }
+
 	_image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
+
+    for (auto view : _subviews)
+        reinterpret_cast<decltype(this)>(view)->_draw();
 }
 
 void ImageView::_layout() {

@@ -9,10 +9,9 @@
 #pragma once
 
 #include "View.hpp"
+#include "Image.hpp"
 
 namespace ui {
-
-	class Image;
 
 	class ImageView : public View {
 
@@ -39,7 +38,7 @@ namespace ui {
 
 	public:
 
-		void draw() override;
+        void _draw() override;
 
 	protected:
 

@@ -29,6 +29,7 @@ View::~View() {
 void View::add_subview(View* view) {
 	view->_superview = this;
 	_subviews.push_back(view);
+    view->_setup();
 }
 
 void View::remove_all_subviews() {
@@ -74,7 +75,7 @@ bool View::contains_global_point(const Point& point) const {
     return _absolute_frame.contains(point);
 }
 
-void View::draw() {
+void View::_draw() {
 
 	if (_needs_layout) {
 		_layout();
@@ -85,17 +86,23 @@ void View::draw() {
         ui::config::drawer()->fill_rect(_absolute_frame, color);
 
 	for (auto view : _subviews)
-		view->draw();
+        view->_draw();
 }
 
 void View::_layout() {
-	_absolute_frame = _frame;
+    _calculate_absolute_frame();
+    _layout_subviews();
+}
 
-	if (_superview)
-		_absolute_frame.origin += _superview->_absolute_frame.origin;
+void View::_calculate_absolute_frame() {
+    _absolute_frame = _frame;
+    if (_superview)
+        _absolute_frame.origin += _superview->_absolute_frame.origin;
+}
 
-	for (auto subview : _subviews)
-		subview->_layout();
+void View::_layout_subviews() {
+    for (auto subview : _subviews)
+        subview->_layout();
 }
 
 void View::touch_event(Touch *touch) {
