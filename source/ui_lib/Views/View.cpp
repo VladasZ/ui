@@ -32,6 +32,11 @@ void View::add_subview(View* view) {
     view->_setup();
 }
 
+void View::add_subviews(std::initializer_list<View*> views) {
+    for (auto view : views)
+        add_subview(view);
+}
+
 void View::remove_all_subviews() {
     for (auto view : _subviews)
         delete view;

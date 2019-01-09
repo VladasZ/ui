@@ -30,6 +30,11 @@ void Label::set_aligment(Alignment aligment){
     _needs_layout = true;
 }
 
+void Label::resize_to_fit_text() {
+    _frame.size = static_cast<decltype(this)>(_content_view)->_frame.size;
+    _needs_layout = true;
+}
+
 void Label::_set_glyphs() {
 
     _content_view->remove_all_subviews();

@@ -22,12 +22,14 @@ class Label : public View {
 
 public:
 
-    Label(const Rect&);
+    Label(const Rect& = { });
 
 public:
 
     void set_text(const std::string&);
     void set_aligment(Alignment);
+
+    void resize_to_fit_text();
 
 private:
 
