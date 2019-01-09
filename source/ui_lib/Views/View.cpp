@@ -134,3 +134,10 @@ void View::disable_user_interaction() {
     _user_interaction_enabled = false;
     Input::_unsubscribe_view(this);
 }
+
+View* View::dummy() {
+    auto view = new View({ 28, 28 });
+    view->color = Color::random();
+    return view;
+}
+

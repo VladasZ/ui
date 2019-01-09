@@ -22,9 +22,13 @@ void StackView::_layout() {
     if (_subviews.size() == 0)
         return;
 
-    auto delta = _frame.size.height / (_subviews.size() - 1);
+    auto delta = _frame.size.height / (_subviews.size() * 2);
 
-    for (size_t i = 1; i < _subviews.size() - 1; i++)
-        _subviews[i]->set_center( { delta * i, _frame.size.width / 2 } );
+    float position = delta;
+
+    for (size_t i = 0; i < _subviews.size(); i++) {
+        _subviews[i]->set_center( { _frame.size.width / 2, position });
+        position += delta * 2;
+    }
 
 }

@@ -87,6 +87,10 @@ public:
     void enable_user_interaction();
     void disable_user_interaction();
 
+public:
+
+    static View* dummy();
+
 };
 
 }
