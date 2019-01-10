@@ -27,12 +27,13 @@ void Mouse::position_changed(const Point& position) {
 }
 
 Point Mouse::position() const {
-    return  _position;
+    return _position;
 }
 
 void Mouse::set_left_button_state(ButtonState state) {
     _left_button_state = state;
     mouse_touch->event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
+    mouse_touch->location = _position;
     Input::touch_event(mouse_touch);
 }
 

@@ -26,22 +26,19 @@ Window::~Window() {
 
 void Window::touch_event(Touch* touch) {
 
-    cout << "current: " << touch->to_string() << endl;
-    cout << "prev: " << _previous_touch.to_string() << endl;
-
-
     if (touch->is_began()) {
-        _previous_touch = touch->location;
+        _initial_touch = touch->location;
         return;
     }
 
     if (_current_edge == Rect::Edge::None) {
-        _frame.origin += touch->location - _previous_touch;
+        _frame.origin += touch->location - _initial_touch;
     } else {
         _frame.set_edge(_current_edge, touch->location);
     }
+
     _needs_layout = true;
-    _previous_touch = touch->location;
+    _initial_touch = touch->location;
 }
 
 Rect::Edge Window::get_edge(const Point& point) {

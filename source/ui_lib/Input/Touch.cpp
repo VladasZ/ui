@@ -28,16 +28,23 @@ bool Touch::is_ended() const {
 	return event == Event::Ended; 
 }
 
-const char* Touch::to_string() const {
+const char* Touch::event_string() const {
     static std::string result;
-    std::string event = "Began";
+
+    if (is_began())
+        result = "Began";
 
     if (is_moved())
-        event = "Moved";
+        result = "Moved";
 
     if (is_ended())
-        event = "Ended";
+        result = "Ended";
 
-    result = std::string() + location.to_string() + " " + event;
+    return result.c_str();
+}
+
+const char* Touch::to_string() const {
+    static std::string result;
+    result = std::string() + location.to_string() + " " + event_string();
     return result.c_str();
 }

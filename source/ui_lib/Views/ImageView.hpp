@@ -13,37 +13,37 @@
 
 namespace ui {
 
-	class ImageView : public View {
+class ImageView : public View {
 
-	public:
+public:
 
-        enum class ContentMode {
-			Fill,
-			AspectFit
-		};
+    enum class ContentMode {
+        Fill,
+        AspectFit
+    };
 
-	private:
+private:
 
-		ContentMode _content_mode = ContentMode::Fill;
-		Image* _image = nullptr;
-		View* _content_view = nullptr;
+    ContentMode _content_mode = ContentMode::Fill;
+    Image* _image = nullptr;
+    View* _content_view = nullptr;
 
-	public:
+public:
 
-		ImageView(const Rect& rect, Image* image = nullptr);
+    ImageView(const Rect& rect, Image* image = nullptr);
 
-		const Image* image() const;
-		void set_image(Image* image);
-		void set_content_mode(ContentMode mode);
+    const Image* image() const;
+    void set_image(Image* image);
+    void set_content_mode(ContentMode mode);
 
-	public:
+public:
 
-        void _draw() override;
+    void _draw() override;
 
-	protected:
+protected:
 
-		void _layout() override;
+    void _layout() override;
 
-	};
+};
 
 }

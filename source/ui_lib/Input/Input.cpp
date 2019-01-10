@@ -10,11 +10,17 @@
 
 #include "ui.hpp"
 
+#include "Touch.hpp"
 #include "Mouse.hpp"
 #include "Input.hpp"
 #include "Window.hpp"
 
+#include <iostream>
+using namespace std; // REMOVE
+
 using namespace ui;
+
+static std::function<void(Touch*)> _on_touch_event_proc;
 
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Rect::Edge edge) {
     auto int_value = static_cast<int>(edge);
@@ -45,10 +51,13 @@ void Input::_unsubscribe_window(Window* view) {
 
 void Input::touch_event(Touch* touch) {
 
+    if (_on_touch_event_proc)
+        _on_touch_event_proc(touch);
+
     for (auto view : _subscribed_views) {
         if (view->_absolute_frame.contains(touch->location)) {
             view->touch_event(touch);
-            return;
+            //return;
         }
     }
 
@@ -60,6 +69,8 @@ void Input::touch_event(Touch* touch) {
         _resizing_window->touch_event(touch);
     }
 
+    cout << touch->to_string() << endl;
+
     for (auto window : _windows) {
         if (window->_absolute_frame.contains_with_edge(touch->location, Window::EdgeInfo::width)) {
             _resizing_window = window;
@@ -67,6 +78,10 @@ void Input::touch_event(Touch* touch) {
             return;
         }
     }
+}
+
+void Input::on_touch_event(std::function<void(Touch*)> proc) {
+    _on_touch_event_proc = proc;
 }
 
 #ifdef UI_DESKTOP

@@ -43,7 +43,7 @@ private:
 
     friend Input;
 
-    Point _previous_touch;
+    Point _initial_touch;
 
     void touch_event(Touch* touch) override;
 

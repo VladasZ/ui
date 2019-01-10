@@ -11,6 +11,7 @@
 #include "stdint.h"
 
 #include <list>
+#include <functional>
 
 #include "Point.hpp"
 #include "Touch.hpp"
@@ -38,6 +39,7 @@ class Input final {
 public:
 
     static void touch_event(Touch* touch);
+    static void on_touch_event(std::function<void(Touch*)>);
 
 #ifdef UI_DESKTOP
     static void hover_moved(const Point& position);

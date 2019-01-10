@@ -67,8 +67,7 @@ void View::set_origin(const Point& origin) {
 }
 
 void View::set_center(const Point& center) {
-	_frame.origin.x = center.x - _frame.size.width  / 2;
-	_frame.origin.y = center.y - _frame.size.height / 2;
+    _frame.set_center(center);
 	_needs_layout = true;
 }
 
