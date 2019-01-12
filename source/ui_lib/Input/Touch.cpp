@@ -12,7 +12,7 @@
 
 using namespace ui;
 
-Touch::Touch(ID id, const ui::Point& location, Touch::Event event) : id(id), location(location), event(event) {
+Touch::Touch(ID id, const Point& location, Touch::Event event) : id(id), location(location), event(event) {
 
 }
 

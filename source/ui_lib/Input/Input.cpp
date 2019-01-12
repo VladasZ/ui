@@ -15,21 +15,18 @@
 #include "Input.hpp"
 #include "Window.hpp"
 
-#include <iostream>
-using namespace std; // REMOVE
-
 using namespace ui;
 
 static std::function<void(Touch*)> _on_touch_event_proc;
 
-static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Rect::Edge edge) {
+static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
     auto int_value = static_cast<int>(edge);
 
-    if (int_value < static_cast<int>(Rect::Edge::Left))
+    if (int_value < static_cast<int>(Edge::Left))
         return Mouse::CursorMode::VResize;
 
-    if (int_value == static_cast<int>(Rect::Edge::Left) ||
-        int_value == static_cast<int>(Rect::Edge::Right))
+    if (int_value == static_cast<int>(Edge::Left) ||
+        int_value == static_cast<int>(Edge::Right))
         return Mouse::CursorMode::HResize;
 
     return Mouse::CursorMode::Drag;
@@ -57,7 +54,6 @@ void Input::touch_event(Touch* touch) {
     for (auto view : _subscribed_views) {
         if (view->_absolute_frame.contains(touch->location)) {
             view->touch_event(touch);
-            //return;
         }
     }
 
@@ -68,8 +64,6 @@ void Input::touch_event(Touch* touch) {
         }
         _resizing_window->touch_event(touch);
     }
-
-    cout << touch->to_string() << endl;
 
     for (auto window : _windows) {
         if (window->_absolute_frame.contains_with_edge(touch->location, Window::EdgeInfo::width)) {
@@ -89,7 +83,7 @@ void Input::hover_moved(const Point& position) {
 
     for (auto window : _windows) {
         auto edge = window->get_edge(position);
-        if (edge != Rect::Edge::None) {
+        if (edge != Edge::None) {
             ui::config::drawer()->set_cursor_mode(window_edge_to_mouse_cursor_mode(edge));
             return;
         }

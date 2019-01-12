@@ -27,7 +27,7 @@ static FT_Library ftLibrary() {
 
 int main() {
 
-    ui::Rect test = { 1, 2, 3, 4 };
+    Rect test = { 1, 2, 3, 4 };
 
     cout << test.to_string() << endl;
 

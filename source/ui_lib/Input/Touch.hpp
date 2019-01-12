@@ -26,10 +26,10 @@ public:
     };
 
     ID id;
-    ui::Point location;
+    Point location;
     Event event;
 
-    Touch(ID id, const ui::Point& location, Event event);
+    Touch(ID id, const Point& location, Event event);
 
     bool is_began() const;
     bool is_moved() const;

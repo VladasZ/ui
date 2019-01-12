@@ -50,11 +50,11 @@ private:
 private:
 
     EdgeInfo _edge_info;
-    Rect::Edge _current_edge;
+    Edge _current_edge;
 
 public:
 
-    Rect::Edge get_edge(const Point& point);
+    Edge get_edge(const Point& point);
 
 protected:
 

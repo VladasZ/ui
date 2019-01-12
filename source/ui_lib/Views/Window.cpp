@@ -6,9 +6,6 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include <iostream>
-using namespace std; //REMOVE
-
 #include <algorithm>
 
 #include "Input.hpp"
@@ -31,7 +28,7 @@ void Window::touch_event(Touch* touch) {
         return;
     }
 
-    if (_current_edge == Rect::Edge::None) {
+    if (_current_edge == Edge::None) {
         _frame.origin += touch->location - _initial_touch;
     } else {
         _frame.set_edge(_current_edge, touch->location);
@@ -41,9 +38,9 @@ void Window::touch_event(Touch* touch) {
     _initial_touch = touch->location;
 }
 
-Rect::Edge Window::get_edge(const Point& point) {
+Edge Window::get_edge(const Point& point) {
 
-    using Edge = Rect::Edge;
+    using Edge = Edge;
 
     uint8_t edge = 0;
 

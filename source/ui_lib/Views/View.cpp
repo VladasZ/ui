@@ -11,6 +11,7 @@
 #include "ui.hpp"
 #include "View.hpp"
 #include "Input.hpp"
+#include "Layout.hpp"
 #include "Drawer.hpp"
 
 using namespace ui;
@@ -32,7 +33,7 @@ void View::add_subview(View* view) {
     view->_setup();
 }
 
-void View::add_subviews(std::initializer_list<View*> views) {
+void View::add_subview(std::initializer_list<View*> views) {
     for (auto view : views)
         add_subview(view);
 }
@@ -41,6 +42,16 @@ void View::remove_all_subviews() {
     for (auto view : _subviews)
         delete view;
     _subviews.clear();
+}
+
+void View::add_layout(Layout* layout) {
+    _layouts.push_back(layout);
+    _needs_layout = true;
+}
+
+void View::add_layout(std::initializer_list<Layout*> layouts) {
+    for (auto layout : layouts)
+        add_layout(layout);
 }
 
 Rect View::frame() const {
