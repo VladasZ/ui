@@ -106,6 +106,7 @@ void View::_draw() {
 
 void View::_layout() {
     _calculate_absolute_frame();
+    _layout_constraints();
     _layout_subviews();
 }
 
@@ -113,6 +114,11 @@ void View::_calculate_absolute_frame() {
     _absolute_frame = _frame;
     if (_superview)
         _absolute_frame.origin += _superview->_absolute_frame.origin;
+}
+
+void View::_layout_constraints() {
+    for (auto layout : _layouts)
+        layout->_layout_view(this);
 }
 
 void View::_layout_subviews() {

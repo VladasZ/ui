@@ -82,6 +82,7 @@ protected:
     Rect _absolute_frame;
     virtual void _layout();
     void _calculate_absolute_frame();
+    void _layout_constraints();
     void _layout_subviews();
 
 protected:

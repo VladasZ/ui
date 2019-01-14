@@ -30,7 +30,7 @@ class Layout {
 
 public:
 
-    Layout(Edge edge, float value, View* anchor = nullptr);
+    Layout(Edge edge, float value = 0, View* anchor = nullptr);
 
 private:
 
