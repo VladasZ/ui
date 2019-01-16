@@ -55,6 +55,11 @@ public:
 
     Layout(Anchor anchor, float value = 0, View* anchor_view = nullptr);
 
+public:
+
+    bool has_width() const;
+    bool has_height() const;
+
 private:
 
     void _layout_view(View*) const;
@@ -71,11 +76,13 @@ private:
 
 private:
 
-    void _layout_one_dimension(float& origin, float& size, const float& space_size, OneDimensionAnchor anchor) const;
+    void _layout_one_dimension(float& origin, float& size, const float& space_size, bool const_size, OneDimensionAnchor anchor) const;
 
-    void _layout_center(      float& origin, const float& size, const float& space_size) const;
-    void _layout_length(const float& origin,       float& size, const float& space_size) const;
-    void _layout_origin(      float& origin,       float& size) const;
+    void _layout_length(              const float& origin,       float& size, const float& space_size) const;
+    void _layout_origin(                    float& origin,       float& size)                          const;
+    void _layout_center(                    float& origin, const float& size, const float& space_size) const;
+    void _layout_length_preserve_size(      float& origin, const float& size, const float& space_size) const;
+    void _layout_origin_preserve_size(      float& origin)                                             const;
 
 };
 

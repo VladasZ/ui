@@ -32,7 +32,10 @@ protected:
     Rect _frame;
     View* _superview = nullptr;
     std::vector<View*> _subviews;
+
     std::vector<Layout> _layouts;
+    bool _constrainted_width = false;
+    bool _constrainted_height = false;
 
 public:
 
