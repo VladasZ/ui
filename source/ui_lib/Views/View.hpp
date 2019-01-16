@@ -32,7 +32,7 @@ protected:
     Rect _frame;
     View* _superview = nullptr;
     std::vector<View*> _subviews;
-    std::vector<Layout*> _layouts;
+    std::vector<Layout> _layouts;
 
 public:
 
@@ -53,8 +53,8 @@ public:
 
 public:
 
-    void add_layout(Layout*);
-    void add_layout(std::initializer_list<Layout*>);
+    void add_layout(Layout);
+    void add_layout(std::initializer_list<Layout>);
 
 public:
 

@@ -11,59 +11,39 @@
 
 using namespace ui;
 
-Layout::Layout(Edge edge, float value, View* anchor) : _value(value), _edge(edge), _anchor(anchor) {
+Layout::Layout(Anchor anchor, float value, View* anchor_view) : _value(value), _anchor(anchor), _anchor_view(anchor_view) {
 
 }
 
 void Layout::_layout_view(View* view) const {
 
-    if (_anchor == nullptr) {
-
-        if (_edge == Edge::None)
-            return;
+    if (_anchor_view == nullptr) {
 
         const Rect& super_frame = view->_superview->_frame;
         Rect& frame = view->_frame;
 
-        auto value = static_cast<uint64_t>(_edge);
+        auto value = static_cast<uint64_t>(_anchor);
 
-//        if (value & static_cast<uint64_t>(Edge::Bottom))
-//            size.height = point.y - origin.y;
+        if (value & static_cast<uint64_t>(Anchor::CenterH))
+            frame.origin.x = super_frame.size.width / 2 - frame.size.width / 2 + _value;
 
-//        if (value & static_cast<uint64_t>(Edge::Right))
-//            size.width = point.x - origin.x;
+        if (value & static_cast<uint64_t>(Anchor::CenterV))
+            frame.origin.y = super_frame.size.height / 2 - frame.size.height / 2 + _value;
 
-//        if (value & static_cast<uint64_t>(Edge::Top)) {
-//            size.height += origin.y - point.y;
-//            origin.y = point.y;
-//        }
-
-//        if (value & static_cast<uint64_t>(Edge::Left)) {
-//            size.width += origin.x - point.x;
-//            origin.x = point.x;
-//        }
-
-        if (value & static_cast<uint64_t>(Edge::Bottom))
+        if (value & static_cast<uint64_t>(Anchor::Bottom))
             frame.size.height = super_frame.size.height - frame.origin.y - _value;
 
-        if (value & static_cast<uint64_t>(Edge::Right)) {
+        if (value & static_cast<uint64_t>(Anchor::Right))
+            frame.size.width = super_frame.size.width - frame.origin.x - _value;
 
+        if (value & static_cast<uint64_t>(Anchor::Top)) {
+            frame.size.height += frame.origin.y - _value;
+            frame.origin.y = _value;
         }
 
-        if (value & static_cast<uint64_t>(Edge::Top)) {
-
-        }
-
-        if (value & static_cast<uint64_t>(Edge::Left)) {
-
-        }
-
-        if (value & static_cast<uint64_t>(Edge::CenterH)) {
-
-        }
-
-        if (value & static_cast<uint64_t>(Edge::CenterV)) {
-
+        if (value & static_cast<uint64_t>(Anchor::Left)) {
+            frame.size.width += frame.origin.x - _value;
+            frame.origin.x = _value;
         }
 
         view->_calculate_absolute_frame();

@@ -44,12 +44,12 @@ void View::remove_all_subviews() {
     _subviews.clear();
 }
 
-void View::add_layout(Layout* layout) {
+void View::add_layout(Layout layout) {
     _layouts.push_back(layout);
     _needs_layout = true;
 }
 
-void View::add_layout(std::initializer_list<Layout*> layouts) {
+void View::add_layout(std::initializer_list<Layout> layouts) {
     for (auto layout : layouts)
         add_layout(layout);
 }
@@ -118,7 +118,7 @@ void View::_calculate_absolute_frame() {
 
 void View::_layout_constraints() {
     for (auto layout : _layouts)
-        layout->_layout_view(this);
+        layout._layout_view(this);
 }
 
 void View::_layout_subviews() {
