@@ -11,6 +11,14 @@
 
 using namespace ui;
 
+static uint64_t anchor_horisontal_elements(const Anchor anchor) {
+    return static_cast<uint64_t>(anchor) & static_cast<uint64_t>(Anchor::_Horisontal);
+}
+
+static uint64_t anchor_vertical_elements(const Anchor anchor) {
+    return static_cast<uint64_t>(anchor) & static_cast<uint64_t>(Anchor::_Vertical);
+}
+
 Layout::Layout(Anchor anchor, float value, View* anchor_view) : _value(value), _anchor(anchor), _anchor_view(anchor_view) {
 
 }
@@ -22,32 +30,41 @@ void Layout::_layout_view(View* view) const {
         const Rect& super_frame = view->_superview->_frame;
         Rect& frame = view->_frame;
 
-        auto value = static_cast<uint64_t>(_anchor);
+        auto hor_anchor  = anchor_horisontal_elements(_anchor);
+        auto vert_anchor = anchor_vertical_elements(_anchor);
 
-        if (value & static_cast<uint64_t>(Anchor::CenterH))
-            frame.origin.x = super_frame.size.width / 2 - frame.size.width / 2 + _value;
+        if (hor_anchor)
+            _layout_one_dimension(frame.origin.x, frame.size.width, super_frame.size.width, static_cast<OneDimensionAnchor>(hor_anchor));
 
-        if (value & static_cast<uint64_t>(Anchor::CenterV))
-            frame.origin.y = super_frame.size.height / 2 - frame.size.height / 2 + _value;
-
-        if (value & static_cast<uint64_t>(Anchor::Bottom))
-            frame.size.height = super_frame.size.height - frame.origin.y - _value;
-
-        if (value & static_cast<uint64_t>(Anchor::Right))
-            frame.size.width = super_frame.size.width - frame.origin.x - _value;
-
-        if (value & static_cast<uint64_t>(Anchor::Top)) {
-            frame.size.height += frame.origin.y - _value;
-            frame.origin.y = _value;
-        }
-
-        if (value & static_cast<uint64_t>(Anchor::Left)) {
-            frame.size.width += frame.origin.x - _value;
-            frame.origin.x = _value;
-        }
+        if (vert_anchor)
+            _layout_one_dimension(frame.origin.y, frame.size.height, super_frame.size.height, static_cast<OneDimensionAnchor>(vert_anchor));
 
         view->_calculate_absolute_frame();
 
         return;
     }
+}
+
+void Layout::_layout_one_dimension(float& origin, float& size, const float& space_size, OneDimensionAnchor anchor) const {
+    if (anchor & OneDimensionAnchor::Center)
+        _layout_center(origin, size, space_size);
+
+    if (anchor & OneDimensionAnchor::Origin)
+        _layout_origin(origin, size);
+
+    if (anchor & OneDimensionAnchor::Length)
+        _layout_length(origin, size, space_size);
+}
+
+void Layout::_layout_center(float& origin, const float& size, const float& space_size) const {
+    origin = space_size / 2 - size / 2 + _value;
+}
+
+void Layout::_layout_length(const float& origin, float& size, const float& space_size) const {
+    size = space_size - origin - _value;
+}
+
+void Layout::_layout_origin(float& origin, float& size) const {
+    size += origin - _value;
+    origin = _value;
 }

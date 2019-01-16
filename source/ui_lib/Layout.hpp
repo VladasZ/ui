@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 #include "Rect.hpp"
 
 namespace ui {
@@ -21,20 +23,24 @@ enum class Alignment {
 };
 
 enum class Anchor {
-    Width      = 0b00000001,
-    Height     = 0b00000010,
-    Top        = 0b00000100,
-    Bottom     = 0b00001000,
-    Right      = 0b00010000,
-    Left       = 0b00100000,
-    CenterH    = 0b01000000,
-    CenterV    = 0b10000000,
-    TR         = Top     | Right,
-    TL         = Top     | Left,
-    BR         = Bottom  | Right,
-    BL         = Bottom  | Left,
-    Center     = CenterH | CenterV,
-    Background = Top | Bottom | Right | Left
+    None        = 0b00000000,
+    Width       = 0b00000001,
+    Height      = 0b00000010,
+    Top         = 0b00000100,
+    Bottom      = 0b00001000,
+    Right       = 0b00010000,
+    Left        = 0b00100000,
+    CenterH     = 0b01000000,
+    CenterV     = 0b10000000,
+    Size        = Width   | Height,
+    TR          = Top     | Right,
+    TL          = Top     | Left,
+    BR          = Bottom  | Right,
+    BL          = Bottom  | Left,
+    Center      = CenterH | CenterV,
+    Background  = Top     | Bottom  | Right   | Left,
+    _Horisontal = Width   | Right   | Left    | CenterH,
+    _Vertical   = Height  | Top     | Bottom  | CenterV
 };
 
 class Layout {
@@ -52,6 +58,24 @@ public:
 private:
 
     void _layout_view(View*) const;
+
+private:
+
+    enum OneDimensionAnchor : uint64_t {
+        None   = static_cast<uint64_t>(Anchor::None),
+        Size   = static_cast<uint64_t>(Anchor::Width)   | static_cast<uint64_t>(Anchor::Height),
+        Origin = static_cast<uint64_t>(Anchor::Left)    | static_cast<uint64_t>(Anchor::Top),
+        Length = static_cast<uint64_t>(Anchor::Right)   | static_cast<uint64_t>(Anchor::Bottom),
+        Center = static_cast<uint64_t>(Anchor::CenterH) | static_cast<uint64_t>(Anchor::CenterV)
+    };
+
+private:
+
+    void _layout_one_dimension(float& origin, float& size, const float& space_size, OneDimensionAnchor anchor) const;
+
+    void _layout_center(      float& origin, const float& size, const float& space_size) const;
+    void _layout_length(const float& origin,       float& size, const float& space_size) const;
+    void _layout_origin(      float& origin,       float& size) const;
 
 };
 
