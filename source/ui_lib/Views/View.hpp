@@ -34,8 +34,8 @@ protected:
     std::vector<View*> _subviews;
 
     std::vector<Layout> _layouts;
-    bool _constrainted_width = false;
-    bool _constrainted_height = false;
+    bool _constrained_width  = false;
+    bool _constrained_height = false;
 
 public:
 

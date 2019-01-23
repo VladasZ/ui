@@ -48,10 +48,10 @@ void View::add_layout(Layout layout) {
     _layouts.push_back(layout);
 
     if (layout.has_width())
-        _constrainted_width = true;
+        _constrained_width = true;
 
     if (layout.has_height())
-        _constrainted_height = true;
+        _constrained_height = true;
 
     _needs_layout = true;
 }

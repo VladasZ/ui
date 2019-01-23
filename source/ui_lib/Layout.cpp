@@ -45,14 +45,14 @@ void Layout::_layout_view(View* view) const {
             _layout_one_dimension(frame.origin.x,
                                   frame.size.width,
                                   super_frame.size.width,
-                                  view->_constrainted_width,
+                                  view->_constrained_width,
                                   static_cast<OneDimensionAnchor>(hor_anchor));
 
         if (vert_anchor)
             _layout_one_dimension(frame.origin.y,
                                   frame.size.height,
                                   super_frame.size.height,
-                                  view->_constrainted_height,
+                                  view->_constrained_height,
                                   static_cast<OneDimensionAnchor>(vert_anchor));
 
         view->_calculate_absolute_frame();
@@ -63,13 +63,13 @@ void Layout::_layout_view(View* view) const {
 
 void Layout::_layout_one_dimension(float& origin, float& size, const float& space_size, bool const_size, OneDimensionAnchor anchor) const {
 
+    if (anchor & OneDimensionAnchor::Size)
+        size = _value;
+
+    if (anchor & OneDimensionAnchor::Center)
+        _layout_center(origin, size, space_size);
+
     if (const_size) {
-
-        if (anchor & OneDimensionAnchor::Size)
-            size = _value;
-
-        if (anchor & OneDimensionAnchor::Center)
-            _layout_center(origin, size, space_size);
 
         if (anchor & OneDimensionAnchor::Origin)
             _layout_origin_preserve_size(origin);
@@ -79,9 +79,6 @@ void Layout::_layout_one_dimension(float& origin, float& size, const float& spac
 
         return;
     }
-
-    if (anchor & OneDimensionAnchor::Center)
-        _layout_center(origin, size, space_size);
 
     if (anchor & OneDimensionAnchor::Origin)
         _layout_origin(origin, size);
