@@ -19,6 +19,10 @@ Label::Label(const Rect& frame) : View(frame) {
     add_subview(_content_view);
 }
 
+std::string Label::text() const {
+    return _text;
+}
+
 void Label::set_text(const std::string& text) {
     _text = text;
     _needs_layout = true;

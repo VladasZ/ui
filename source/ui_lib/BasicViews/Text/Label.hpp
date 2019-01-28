@@ -26,6 +26,7 @@ public:
 
 public:
 
+    std::string text() const;
     void set_text(const std::string&);
     void set_aligment(Alignment);
 
