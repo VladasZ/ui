@@ -10,3 +10,15 @@
 
 using namespace ui;
 
+SliderView::SliderView(const Rect& frame) : View(frame) {
+
+}
+
+float SliderView::value() const {
+    return  _value;
+}
+
+void SliderView::set_value(float value) {
+    _value = value;
+    _needs_layout = true;
+}

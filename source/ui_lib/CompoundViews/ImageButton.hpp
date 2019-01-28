@@ -1,5 +1,5 @@
 //
-//  Button.hpp
+//  ImageButton.hpp
 //  ui
 //
 //  Created by Vladas Zakrevskis on 1/28/19.
@@ -8,19 +8,17 @@
 
 #pragma once
 
-#include <functional>
-
-#include "View.hpp"
+#include "ImageView.hpp"
 
 namespace ui {
 
-class Button : public View {
+class ImageButton : public ImageView {
 
 public:
 
     std::function<void()> on_touch;
 
-    Button(const Rect& = { });
+    ImageButton(const Rect& = { });
 
     void touch_event(Touch*) override;
 };

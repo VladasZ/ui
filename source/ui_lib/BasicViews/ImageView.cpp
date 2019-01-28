@@ -35,7 +35,8 @@ void ImageView::_draw() {
         _needs_layout = false;
     }
 
-    _image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
+    if (_image)
+        _image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
 
     for (auto view : _subviews)
         reinterpret_cast<decltype(this)>(view)->_draw();

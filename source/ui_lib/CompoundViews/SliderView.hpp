@@ -12,11 +12,19 @@
 
 namespace ui {
 
+class Button;
+class ImageView;
+
 class SliderView : public View {
 
     float _value;
 
 public:
+
+    SliderView(const Rect& = { });
+
+    float value() const;
+    void set_value(float);
 
 };
 
