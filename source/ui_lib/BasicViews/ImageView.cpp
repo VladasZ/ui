@@ -6,6 +6,8 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include "ui.hpp"
+
 #include "Image.hpp"
 #include "ImageView.hpp"
 
@@ -34,6 +36,9 @@ void ImageView::_draw() {
         _layout();
         _needs_layout = false;
     }
+
+    if (!_frame.size.is_negative())
+        ui::config::drawer()->fill_rect(_absolute_frame, color);
 
     if (_image)
         _image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);

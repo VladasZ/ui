@@ -12,20 +12,37 @@
 
 namespace ui {
 
-class Button;
-class ImageView;
+class ImageButton;
 
 class SliderView : public View {
 
-    float _value;
+    float _value = 0.0f;
+
+    ImageButton* _increase_button;
+    ImageButton* _decrease_button;
+    View* _slider_content_view;
+    View* _slider_view;
 
 public:
 
+    std::function<void(float)> value_changed;
+
     SliderView(const Rect& = { });
+    ~SliderView() override;
 
     float value() const;
     void set_value(float);
 
+    void set_buttons_color(const Color&);
+    void  set_slider_color(const Color&);
+
+private:
+
+    void _setup() override;
+
+    void _layout() override;
+
+    void _set_slider_position();
 };
 
 }

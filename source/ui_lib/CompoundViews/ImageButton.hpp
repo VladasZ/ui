@@ -18,7 +18,7 @@ public:
 
     std::function<void()> on_touch;
 
-    ImageButton(const Rect& = { });
+    ImageButton(const Rect& frame = { }, Image* image = nullptr);
 
     void touch_event(Touch*) override;
 };

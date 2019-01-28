@@ -30,7 +30,7 @@ private:
 
 public:
 
-    ImageView(const Rect& rect, Image* image = nullptr);
+    ImageView(const Rect& rect = { }, Image* image = nullptr);
 
     const Image* image() const;
     void set_image(Image* image);

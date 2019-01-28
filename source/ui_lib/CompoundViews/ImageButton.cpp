@@ -10,7 +10,7 @@
 
 using namespace ui;
 
-ImageButton::ImageButton(const Rect& frame) : ImageView(frame) {
+ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, image) {
     enable_user_interaction();
 }
 
