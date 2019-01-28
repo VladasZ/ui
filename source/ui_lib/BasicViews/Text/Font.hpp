@@ -24,7 +24,7 @@ class Font {
   
 public:
     
-    Font(const std::string& file_name, unsigned int size = 28);
+    Font(const std::string& file_name, unsigned int size = 28 * 2);
     ~Font();
     
     float  baseline_shift()            const;
