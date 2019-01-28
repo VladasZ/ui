@@ -16,6 +16,6 @@ Button::Button(const Rect& frame) : View(frame) {
 
 void Button::touch_event(Touch* touch) {
     View::touch_event(touch);
-    if (on_touch && touch->is_began())
+    if (touch->is_began())
         on_touch();
 }

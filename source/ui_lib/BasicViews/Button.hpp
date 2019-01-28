@@ -11,6 +11,7 @@
 #include <functional>
 
 #include "View.hpp"
+#include "Event.hpp"
 
 namespace ui {
 
@@ -18,7 +19,7 @@ class Button : public View {
 
 public:
 
-    std::function<void()> on_touch;
+    Event<> on_touch;
 
     Button(const Rect& = { });
 
