@@ -44,11 +44,6 @@ void SliderView::set_slider_color(const Color& color) {
     _slider_view->color = color;
 }
 
-//ImageButton* _increase_button;
-//ImageButton* _decrease_button;
-//View* _slider_content_view;
-//View* _slider_view;
-
 void SliderView::_setup() {
     _increase_button     = new ImageButton();
     _decrease_button     = new ImageButton();
@@ -64,11 +59,18 @@ void SliderView::_setup() {
     _slider_content_view->add_subview(_slider_view);
 
     _increase_button->on_press.subscribe([&] {
-        this->set_value(this->value() + 0.05f);
+        set_value(this->value() + 0.05f);
     });
 
     _decrease_button->on_press.subscribe([&] {
-        this->set_value(this->value() - 0.05f);
+        set_value(this->value() - 0.05f);
+    });
+    
+    _slider_content_view->enable_user_interaction();
+    _slider_content_view->on_touch.subscribe([&](Touch* touch){
+        if (touch->is_ended())
+            return;
+        set_value(1.0f - touch->location.y / _slider_content_view->frame().size.height);
     });
 }
 

@@ -53,7 +53,9 @@ void Input::touch_event(Touch* touch) {
 
     for (auto view : _subscribed_views) {
         if (view->_absolute_frame.contains(touch->location)) {
+            touch->location -= view->_absolute_frame.origin;
             view->touch_event(touch);
+            return;
         }
     }
 
