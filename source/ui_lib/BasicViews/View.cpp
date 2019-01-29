@@ -147,6 +147,7 @@ void View::touch_event(Touch *touch) {
         _touches.erase(iter);
         break;
     }
+    on_touch(touch);
 }
 
 void View::enable_user_interaction() {

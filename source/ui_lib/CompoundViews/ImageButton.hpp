@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "Event.hpp"
 #include "ImageView.hpp"
 
 namespace ui {
@@ -16,7 +17,7 @@ class ImageButton : public ImageView {
 
 public:
 
-    std::function<void()> on_touch;
+    Event<> on_press;
 
     ImageButton(const Rect& frame = { }, Image* image = nullptr);
 

@@ -63,13 +63,13 @@ void SliderView::_setup() {
     add_subview(_slider_content_view);
     _slider_content_view->add_subview(_slider_view);
 
-    _increase_button->on_touch = [&] {
+    _increase_button->on_press.subscribe([&] {
         this->set_value(this->value() + 0.05f);
-    };
+    });
 
-    _decrease_button->on_touch = [&] {
+    _decrease_button->on_press.subscribe([&] {
         this->set_value(this->value() - 0.05f);
-    };
+    });
 }
 
 void SliderView::_layout() {

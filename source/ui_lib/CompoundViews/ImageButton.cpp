@@ -16,6 +16,6 @@ ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, ima
 
 void ImageButton::touch_event(Touch* touch) {
     View::touch_event(touch);
-    if (on_touch && touch->is_began())
-        on_touch();
+    if (touch->is_began())
+        on_press();
 }

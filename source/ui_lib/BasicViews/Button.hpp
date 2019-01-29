@@ -19,7 +19,7 @@ class Button : public View {
 
 public:
 
-    Event<> on_touch;
+    Event<> on_press;
 
     Button(const Rect& = { });
 

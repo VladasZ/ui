@@ -13,6 +13,7 @@
 #include <functional>
 
 #include "Rect.hpp"
+#include "Event.hpp"
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Touch.hpp"
@@ -97,6 +98,8 @@ protected:
 
 public:
 
+    Event<Touch*> on_touch;
+    
     bool _user_interaction_enabled = false;
 
     void enable_user_interaction();
