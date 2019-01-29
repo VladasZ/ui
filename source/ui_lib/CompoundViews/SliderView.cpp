@@ -31,8 +31,7 @@ void SliderView::set_value(float value) {
     if (_value < 0) _value = 0;
     if (_value > 1) _value = 1;
     _needs_layout = true;
-    if (value_changed)
-        value_changed(_value);
+    on_value_changed(_value);
 }
 
 void SliderView::set_buttons_color(const Color& color) {

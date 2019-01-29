@@ -34,6 +34,12 @@ void Label::set_aligment(Alignment aligment){
     _needs_layout = true;
 }
 
+void Label::set_font(Font* font) {
+    _font = font;
+    _needs_layout = true;
+    _set_glyphs();
+}
+
 void Label::resize_to_fit_text() {
     _frame.size = static_cast<decltype(this)>(_content_view)->_frame.size;
     _needs_layout = true;

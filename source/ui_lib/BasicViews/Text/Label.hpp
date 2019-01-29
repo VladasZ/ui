@@ -29,6 +29,7 @@ public:
     std::string text() const;
     void set_text(const std::string&);
     void set_aligment(Alignment);
+    void set_font(Font*);
 
     void resize_to_fit_text();
 

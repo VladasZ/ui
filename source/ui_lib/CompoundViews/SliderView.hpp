@@ -25,7 +25,7 @@ class SliderView : public View {
 
 public:
 
-    std::function<void(float)> value_changed;
+    Event<float> on_value_changed;
 
     SliderView(const Rect& = { });
     ~SliderView() override;
