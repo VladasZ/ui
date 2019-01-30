@@ -25,6 +25,8 @@ class SliderView : public View {
 
 public:
 
+    float multiplier = 1.0f;
+
     Event<float> on_value_changed;
 
     SliderView(const Rect& = { });

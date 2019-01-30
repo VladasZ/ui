@@ -12,17 +12,6 @@
 
 using namespace ui;
 
-float LabeledSliderView::value() const {
-    if (_slider_view)
-        return _slider_view->value();
-    return -1.0f;
-}
-
-void LabeledSliderView::set_value(float value) {
-    if (_slider_view)
-        _slider_view->set_value(value);
-}
-
 void LabeledSliderView::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
@@ -30,21 +19,20 @@ void LabeledSliderView::set_caption(const std::string& caption) {
 void LabeledSliderView::_setup() {
     _caption_label = new Label();
     _value_label   = new Label();
-    _slider_view   = new SliderView();
+    slider_view   = new SliderView();
 
     _caption_label->set_aligment(Alignment::Center);
     _value_label  ->set_aligment(Alignment::Center);
 
     _value_label->set_text("0.00");
 
-    _slider_view->on_value_changed.subscribe([&](float value) {
-        on_value_changed(value);
+    slider_view->on_value_changed.subscribe([&](float value) {
         _value_label->set_text(std::to_string(value).substr(0, 4));
     });
 
     add_subview(_caption_label);
     add_subview(_value_label);
-    add_subview(_slider_view);
+    add_subview(slider_view);
 }
 
 void LabeledSliderView::_layout() {
@@ -61,7 +49,7 @@ void LabeledSliderView::_layout() {
                                 label_height,
                             });
 
-    _slider_view->set_frame({
+    slider_view->set_frame({
                                 _frame.size.width / 2 - slider_width / 2,
                                 label_height,
                                 slider_width,

@@ -18,17 +18,13 @@ class LabeledSliderView : public View {
 
     Label*      _caption_label = nullptr;
     Label*      _value_label   = nullptr;
-    SliderView* _slider_view   = nullptr;
 
 
 public:
 
     using View::View;
 
-    Event<float> on_value_changed;
-
-    float value() const;
-    void set_value(float);
+    SliderView* slider_view = nullptr;
 
     void set_caption(const std::string&);
 
