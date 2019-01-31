@@ -10,6 +10,8 @@
 
 #ifdef UI_DESKTOP
 
+#include <map>
+
 #include "Point.hpp"
 
 namespace ui {
@@ -17,6 +19,12 @@ namespace ui {
 class Mouse final {
 
 public:
+
+    enum class Button {
+        Left,
+        Right,
+        Middle
+    };
 
     enum class ButtonState {
         Up,
@@ -31,18 +39,22 @@ public:
         VResize
     };
 
+    static std::map<Button,      std::string> button_to_string;
+    static std::map<ButtonState, std::string> button_state_to_string;
+    static std::map<CursorMode,  std::string> cursor_mode_to_string;
+
 private:
 
-    Point _position;
-    ButtonState _left_button_state = ButtonState::Up;
+    Point       _position;
+    Button      _button       = Button::Left;
+    ButtonState _button_state = ButtonState::Up;
 
 public:
 
-    void position_changed(const Point& position);
-    Point position() const;
+    void set_position(const Point&);
+    void set_button_state(Button, ButtonState);
 
-    void set_left_button_state(ButtonState state);
-    ButtonState left_button_state() const;
+    const char* state_string() const;
 };
 
 }

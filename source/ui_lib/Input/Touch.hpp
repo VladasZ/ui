@@ -12,6 +12,10 @@
 
 #include "Point.hpp"
 
+#ifdef UI_DESKTOP
+#include "Mouse.hpp"
+#endif
+
 namespace ui {
 
 class Touch {
@@ -29,7 +33,13 @@ public:
     Point location;
     Event event;
 
+#ifdef UI_DESKTOP
+    Mouse::Button button;
+
+    Touch(ID id, const Point& location, Event event, Mouse::Button button);
+#else
     Touch(ID id, const Point& location, Event event);
+#endif
 
     bool is_began() const;
     bool is_moved() const;
