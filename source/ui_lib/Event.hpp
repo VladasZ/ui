@@ -11,6 +11,8 @@
 #include <vector>
 #include <functional>
 
+namespace ui {
+
 template<class ...Params>
 class Event {
     
@@ -36,9 +38,9 @@ public:
     
     void operator()(Params... parameters) const {
         for (const auto& subscriber : subscribers)
-            subscriber(std::forward<Params ...>(parameters...));
+            subscriber(parameters...);
         for (const auto event : linked_events)
-            event->operator()(std::forward<Params ...>(parameters...));
+            event->operator()(parameters...);
     }
 };
 
@@ -57,3 +59,4 @@ public:
     void operator()() const { for (const auto& subscriber : subscribers) subscriber(); }
 };
 
+}
