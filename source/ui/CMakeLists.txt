@@ -6,7 +6,9 @@ add_catalog_recursive(${PROJECT_SOURCE_DIR} /source SOURCE)
 add_executable(${PROJECT_NAME} ${SOURCE})
 
 link_project(ui_lib)
-link_project(geometry)
 link_project(soil)
+
+link_project_at_path(geometry  ${geometry_path} )
+link_project_at_path(cpp_utils ${cpp_utils_path})
 
 conan_target_link_libraries(${PROJECT_NAME})
