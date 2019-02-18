@@ -107,7 +107,11 @@ void View::_draw() {
     if (!_frame.size.is_negative())
         ui::config::drawer()->fill_rect(_absolute_frame, color);
 
-	for (auto view : _subviews)
+    _draw_subviews();
+}
+
+void View::_draw_subviews() {
+    for (auto view : _subviews)
         view->_draw();
 }
 

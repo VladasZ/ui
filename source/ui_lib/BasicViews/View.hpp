@@ -80,6 +80,7 @@ public:
 protected:
 
     virtual void _draw();
+    void _draw_subviews();
 
 protected:
 

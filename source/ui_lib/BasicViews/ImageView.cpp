@@ -15,6 +15,8 @@ using namespace ui;
 
 ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
     _content_view = new View();
+    _content_view->color = Color::clear;
+    color = Color::clear;
     add_subview(_content_view);
 }
 
@@ -43,8 +45,7 @@ void ImageView::_draw() {
     if (_image)
         _image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
 
-    for (auto view : _subviews)
-        reinterpret_cast<decltype(this)>(view)->_draw();
+    _draw_subviews();
 }
 
 void ImageView::_layout() {
