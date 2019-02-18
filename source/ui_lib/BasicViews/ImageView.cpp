@@ -13,10 +13,12 @@
 
 using namespace ui;
 
+ImageView::ImageView(Image* image) : ImageView({ }, image) {
+
+}
+
 ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
     _content_view = new View();
-    _content_view->color = Color::clear;
-    color = Color::clear;
     add_subview(_content_view);
 }
 

@@ -16,7 +16,7 @@
 
 using namespace ui;
 
-View::View(const Rect& rect) : _frame(rect), color(Color::white) {
+View::View(const Rect& rect) : _frame(rect) {
 
 }
 

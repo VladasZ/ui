@@ -30,11 +30,12 @@ private:
 
 public:
 
-    ImageView(const Rect& rect = { }, Image* image = nullptr);
+    ImageView(Image* = nullptr);
+    ImageView(const Rect& = { }, Image* = nullptr);
 
     const Image* image() const;
-    void set_image(Image* image);
-    void set_content_mode(ContentMode mode);
+    void set_image(Image*);
+    void set_content_mode(ContentMode);
 
 public:
 

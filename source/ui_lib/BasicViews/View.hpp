@@ -21,8 +21,6 @@
 
 namespace ui {
 
-class Layout;
-
 class View {
 
     friend Layout;

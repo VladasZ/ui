@@ -16,8 +16,6 @@ using namespace ui;
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
     _content_view = new View(_frame.with_zero_origin());
-    _content_view->color = Color::clear;
-    color = Color::clear;
     add_subview(_content_view);
 }
 
