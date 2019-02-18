@@ -107,7 +107,7 @@ public:
 
 public:
 
-    static View* dummy();
+    static View* dummy(const Rect& = { 28, 28 });
 
 };
 

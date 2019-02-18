@@ -12,7 +12,7 @@
 #include "View.hpp"
 #include "Input.hpp"
 #include "Layout.hpp"
-#include "Drawer.hpp"
+#include "UIDrawer.hpp"
 
 using namespace ui;
 
@@ -164,8 +164,8 @@ void View::disable_user_interaction() {
     Input::_unsubscribe_view(this);
 }
 
-View* View::dummy() {
-    auto view = new View({ 28, 28 });
+View* View::dummy(const Rect& frame) {
+    auto view = new View(frame);
     view->color = Color::random();
     return view;
 }

@@ -8,16 +8,16 @@
 
 #pragma once
 
-#include "Mouse.hpp"
-#include "Drawer.hpp"
 #include "Font.hpp"
+#include "Mouse.hpp"
+#include "UIDrawer.hpp"
 
 namespace ui {
 
 struct config {
 
-    static Drawer* drawer();
-    static void set_drawer(Drawer* drawer);
+    static UIDrawer* drawer();
+    static void set_drawer(UIDrawer* drawer);
 
     static inline Font* default_font = nullptr;
 

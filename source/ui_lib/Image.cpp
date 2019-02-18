@@ -65,7 +65,9 @@ void Image::draw_in_rect(const Rect& rect) {
     _drawer->draw_in_rect(rect);
 }
 
-void Image::_free_data() {
-	if (_data)
+void Image::_free_data() {    
+    if (_data) {
 		free(_data);
+        _data = nullptr;
+    }
 }

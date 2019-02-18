@@ -26,9 +26,9 @@ public:
 
 protected:
 
-    Drawer* _drawer;
     void*   _data;
     Size    _size;
+    Drawer* _drawer;
     uint8_t _channels;
 
 public:

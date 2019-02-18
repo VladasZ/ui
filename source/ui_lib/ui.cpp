@@ -11,17 +11,16 @@
 #include "ui.hpp"
 
 using namespace ui;
-using namespace std;
 
-static Drawer* _drawer;
+static UIDrawer* _drawer;
 
-Drawer* config::drawer() {
+UIDrawer* config::drawer() {
     if (_drawer == nullptr)
-        throw string() + "Accessign nullptr ui::Drawer";
+        throw std::string() + "Accessign nullptr ui::Drawer";
     return _drawer;
 }
 
-void config::set_drawer(Drawer* drawer) {
+void config::set_drawer(UIDrawer* drawer) {
 	if (_drawer)
 		delete _drawer;
 	_drawer = drawer;
