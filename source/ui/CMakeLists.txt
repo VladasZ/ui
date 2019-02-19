@@ -8,6 +8,7 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 link_project(ui_lib)
 
 link_project_at_path(SOIL      ${soil_path}     )
+link_project_at_path(image     ${image_path}    )
 link_project_at_path(geometry  ${geometry_path} )
 link_project_at_path(cpp_utils ${cpp_utils_path})
 
