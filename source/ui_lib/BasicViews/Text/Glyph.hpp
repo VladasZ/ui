@@ -12,18 +12,18 @@
 
 namespace ui {
 
-class Image;
+class UIImage;
 
 class Glyph {
 
 public:
     
     const char ch;
-    Image* const image;
+    UIImage* const image;
     const int advance;
     const Point bearing;
     
-    Glyph(char ch, Image* image, int advance, const Point& bearing);
+    Glyph(char ch, UIImage* image, int advance, const Point& bearing);
     ~Glyph();
     
     Size size() const;

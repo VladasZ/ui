@@ -8,25 +8,24 @@
 
 #include "ui.hpp"
 
-#include "Image.hpp"
 #include "ImageView.hpp"
 
 using namespace ui;
 
-ImageView::ImageView(Image* image) : ImageView({ }, image) {
+ImageView::ImageView(UIImage* image) : ImageView({ }, image) {
 
 }
 
-ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
+ImageView::ImageView(const Rect& rect, UIImage* image) : View(rect), _image(image) {
     _content_view = new View();
     add_subview(_content_view);
 }
 
-const Image* ImageView::image() const {
+const UIImage* ImageView::image() const {
     return _image;
 }
 
-void ImageView::set_image(Image* image) {
+void ImageView::set_image(UIImage* image) {
     _image = image;
 }
 

@@ -14,7 +14,7 @@
 
 #include "Font.hpp"
 #include "Glyph.hpp"
-#include "Image.hpp"
+#include "UIImage.hpp"
 
 using namespace ui;
 
@@ -39,7 +39,7 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
     Size size = { static_cast<float>(bitmap_glyhp->bitmap.width),
                   static_cast<float>(bitmap_glyhp->bitmap.rows) };
 
-    auto image = new Image(size, bitmap_glyhp->bitmap.buffer, 1);
+    auto image = new UIImage(bitmap_glyhp->bitmap.buffer, size, 1);
 
     Point bearing = { static_cast<float>(face->glyph->metrics.horiBearingX / 64),
                       static_cast<float>(face->glyph->metrics.horiBearingY / 64) };

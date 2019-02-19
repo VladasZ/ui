@@ -11,7 +11,7 @@
 #include "Rect.hpp"
 #include "Mouse.hpp"
 #include "Color.hpp"
-#include "Image.hpp"
+#include "UIImage.hpp"
 
 namespace ui {
 
@@ -25,7 +25,7 @@ public:
     Size screen_resolution;
     void fill_rect(const Rect&, const Color&);
 
-    virtual Image::Drawer* init_image_drawer(Image*) = 0;
+    virtual UIImage::Drawer* init_image_drawer(UIImage*) = 0;
 
 #ifdef UI_DESKTOP
     virtual void set_cursor_mode(Mouse::CursorMode) = 0;

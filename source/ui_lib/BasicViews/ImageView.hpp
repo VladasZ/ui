@@ -9,7 +9,7 @@
 #pragma once
 
 #include "View.hpp"
-#include "Image.hpp"
+#include "UIImage.hpp"
 
 namespace ui {
 
@@ -25,16 +25,16 @@ public:
 private:
 
     ContentMode _content_mode = ContentMode::Fill;
-    Image* _image = nullptr;
+    UIImage* _image = nullptr;
     View* _content_view = nullptr;
 
 public:
 
-    ImageView(Image* = nullptr);
-    ImageView(const Rect& = { }, Image* = nullptr);
+    ImageView(UIImage* = nullptr);
+    ImageView(const Rect& = { }, UIImage* = nullptr);
 
-    const Image* image() const;
-    void set_image(Image*);
+    const UIImage* image() const;
+    void set_image(UIImage*);
     void set_content_mode(ContentMode);
 
 public:
