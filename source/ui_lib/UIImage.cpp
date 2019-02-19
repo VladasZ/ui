@@ -19,12 +19,12 @@ UIImage::UIImage(const std::string& path) : Image(path) {
     _drawer = config::drawer()->init_image_drawer(this);
 }
 
-UIImage::UIImage(void* data, const ::Size& size, uint8_t channels) : Image(data, reinterpret_cast<const Image::Size&>(size), channels) {
+UIImage::UIImage(void* data, const Size& size, uint8_t channels) : Image(data, size.width, size.height, channels) {
     _drawer = config::drawer()->init_image_drawer(this);
 }
 
-const ::Size& UIImage::size() const {
-    return reinterpret_cast<const ::Size&>(_size);
+const Size& UIImage::size() const {
+    return reinterpret_cast<const Size&>(_width);
 }
 
 void UIImage::draw_in_rect(const Rect& rect) {

@@ -32,9 +32,9 @@ protected:
 public:
 
     explicit UIImage(const std::string& path);
-    explicit UIImage(void* data, const ::Size& size, uint8_t channels);
+    explicit UIImage(void* data, const Size& size, uint8_t channels);
 
-    const ::Size& size() const;
+    const Size& size() const;
 
     void draw_in_rect(const Rect&);
 };
