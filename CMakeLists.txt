@@ -13,7 +13,6 @@ add_definitions(-DUI_DESKTOP=1)
 conan_basic_setup()
 
 add_subdirectory(source/ui)
-add_subdirectory(source/soil)
 add_subdirectory(source/ui_lib)
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})

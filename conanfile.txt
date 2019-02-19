@@ -1,5 +1,6 @@
 [requires]
 
+glm/0.9.8.5@bincrafters/stable
 freetype/2.9.0@bincrafters/stable
 
 [generators]
