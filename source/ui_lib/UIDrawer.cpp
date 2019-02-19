@@ -10,10 +10,6 @@
 
 using namespace ui;
 
-const Rect UIDrawer::_convert_rect(const Rect& rect) {
-    return rect;
-}
+UIDrawer::~UIDrawer() {
 
-void UIDrawer::fill_rect(const Rect& rect, const Color& color) {
-    _fill_rect(_convert_rect(rect), color);
 }

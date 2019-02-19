@@ -10,20 +10,20 @@
 
 #include "Rect.hpp"
 
-namespace ui {
+class Image;
 
-class UIImage;
+namespace ui {
 
 class Glyph {
 
 public:
     
     const char ch;
-    UIImage* const image;
+    Image* const image;
     const int advance;
     const Point bearing;
     
-    Glyph(char ch, UIImage* image, int advance, const Point& bearing);
+    Glyph(char ch, Image* image, int advance, const Point& bearing);
     ~Glyph();
     
     Size size() const;

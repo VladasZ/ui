@@ -19,7 +19,7 @@ public:
 
     Event<> on_press;
 
-    ImageButton(const Rect& frame = { }, UIImage* image = nullptr);
+    ImageButton(const Rect& frame = { }, Image* image = nullptr);
 
     void touch_event(Touch*) override;
 };

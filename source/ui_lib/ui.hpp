@@ -15,18 +15,13 @@
 namespace ui {
 
 struct config {
-
     static UIDrawer* drawer();
     static void set_drawer(UIDrawer* drawer);
-
     static inline Font* default_font = nullptr;
-
 };
 
 struct input {
-
     static inline Mouse* const mouse = new Mouse();
-
 };
 
 }

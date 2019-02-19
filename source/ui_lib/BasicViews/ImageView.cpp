@@ -12,20 +12,20 @@
 
 using namespace ui;
 
-ImageView::ImageView(UIImage* image) : ImageView({ }, image) {
+ImageView::ImageView(Image* image) : ImageView({ }, image) {
 
 }
 
-ImageView::ImageView(const Rect& rect, UIImage* image) : View(rect), _image(image) {
+ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
     _content_view = new View();
     add_subview(_content_view);
 }
 
-const UIImage* ImageView::image() const {
+const Image* ImageView::image() const {
     return _image;
 }
 
-void ImageView::set_image(UIImage* image) {
+void ImageView::set_image(Image* image) {
     _image = image;
 }
 
@@ -44,7 +44,7 @@ void ImageView::_draw() {
         ui::config::drawer()->fill_rect(_absolute_frame, color);
 
     if (_image)
-        _image->draw_in_rect(reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
+        ui::config::drawer()->draw_image_in_rect(_image, reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
 
     _draw_subviews();
 }
@@ -57,7 +57,7 @@ void ImageView::_layout() {
         _content_view->set_frame({ _frame.size });
         break;
     case ContentMode::AspectFit:
-        _content_view->set_frame(_frame.fit_size(_image->size()));
+        _content_view->set_frame(_frame.fit_size({ _image->width(), _image->height() }));
         _content_view->set_center(_frame.center());
         break;
     }

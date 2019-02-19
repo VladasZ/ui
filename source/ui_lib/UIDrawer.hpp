@@ -11,21 +11,20 @@
 #include "Rect.hpp"
 #include "Mouse.hpp"
 #include "Color.hpp"
-#include "UIImage.hpp"
+#include "Image.hpp"
 
 namespace ui {
 
 class UIDrawer {
-    virtual void _fill_rect(const Rect&, const Color&) = 0;
-    virtual const Rect _convert_rect(const Rect&);
 
 public:
-    virtual ~UIDrawer() { }
 
     Size screen_resolution;
-    void fill_rect(const Rect&, const Color&);
 
-    virtual UIImage::Drawer* init_image_drawer(UIImage*) = 0;
+    virtual ~UIDrawer();
+
+    virtual void fill_rect(const Rect&, const Color&) = 0;
+    virtual void draw_image_in_rect(Image*, const Rect&) = 0;
 
 #ifdef UI_DESKTOP
     virtual void set_cursor_mode(Mouse::CursorMode) = 0;
