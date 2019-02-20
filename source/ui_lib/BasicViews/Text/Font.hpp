@@ -16,6 +16,8 @@ namespace ui {
 class Glyph;
 
 class Font {
+
+    std::string _file;
     
     float _height;
     float _baseline_shift;
@@ -30,6 +32,8 @@ public:
     float  baseline_shift()            const;
     float  height()                    const;
     ui::Glyph* glyph_for_char(char ch) const;
+
+    Font* with_size(unsigned int) const;
 };
 
 }

@@ -9,7 +9,8 @@
 #pragma once
 
 #include "View.hpp"
-#include "Image.hpp"
+
+class Image;
 
 namespace ui {
 

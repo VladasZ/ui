@@ -9,8 +9,12 @@
 #include <string>
 
 #include "ui.hpp"
+#include "Mouse.hpp"
+#include "UIDrawer.hpp"
 
 using namespace ui;
+
+Mouse* const input::mouse = new Mouse();
 
 static UIDrawer* _drawer;
 

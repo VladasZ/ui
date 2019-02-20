@@ -8,6 +8,7 @@
 
 #include "ui.hpp"
 
+#include "UIDrawer.hpp"
 #include "ImageView.hpp"
 
 using namespace ui;

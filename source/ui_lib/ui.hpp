@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include "Font.hpp"
-#include "Mouse.hpp"
-#include "UIDrawer.hpp"
-
 namespace ui {
+
+class Font;
+class Mouse;
+class UIDrawer;
 
 struct config {
     static UIDrawer* drawer();
@@ -21,7 +21,7 @@ struct config {
 };
 
 struct input {
-    static inline Mouse* const mouse = new Mouse();
+    static Mouse* const mouse;
 };
 
 }

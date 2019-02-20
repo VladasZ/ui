@@ -50,7 +50,7 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
                      bearing);
 }
 
-Font::Font(const std::string& file_name, unsigned int size) {
+Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
@@ -113,5 +113,9 @@ float Font::height() const {
 
 Glyph* Font::glyph_for_char(char ch) const {
     return _glyphs[static_cast<size_t>(ch)];
+}
+
+Font* Font::with_size(unsigned int size) const {
+    return new Font(_file, size);
 }
 

@@ -14,6 +14,7 @@
 #include "Mouse.hpp"
 #include "Input.hpp"
 #include "Window.hpp"
+#include "UIDrawer.hpp"
 
 using namespace ui;
 
