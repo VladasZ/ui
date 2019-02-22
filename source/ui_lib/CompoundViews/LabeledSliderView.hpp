@@ -13,11 +13,14 @@
 
 namespace ui {
 
+class Button;
+
 class LabeledSliderView : public View {
 
 
-    Label*      _caption_label = nullptr;
-    Label*      _value_label   = nullptr;
+    Label*  _caption_label = nullptr;
+    Label*  _value_label   = nullptr;
+    Button* _reset_button  = nullptr;
 
 
 public:

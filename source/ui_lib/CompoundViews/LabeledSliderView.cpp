@@ -8,6 +8,7 @@
 
 #include "ui.hpp"
 #include "Font.hpp"
+#include "Button.hpp"
 #include "LabeledSliderView.hpp"
 
 using namespace ui;
@@ -19,7 +20,8 @@ void LabeledSliderView::set_caption(const std::string& caption) {
 void LabeledSliderView::_setup() {
     _caption_label = new Label();
     _value_label   = new Label();
-    slider_view   = new SliderView();
+    _reset_button  = new Button();
+    slider_view    = new SliderView();
 
     _caption_label->set_aligment(Alignment::Center);
     _value_label  ->set_aligment(Alignment::Center);
@@ -30,8 +32,13 @@ void LabeledSliderView::_setup() {
         _value_label->set_text(std::to_string(value).substr(0, 4));
     });
 
+    _reset_button->on_press.subscribe([&]{
+        slider_view->set_value(0.5f);
+    });
+
     add_subview(_caption_label);
     add_subview(_value_label);
+    add_subview(_reset_button);
     add_subview(slider_view);
 }
 
@@ -62,6 +69,8 @@ void LabeledSliderView::_layout() {
                                   _frame.size.width,
                                   label_height
                               });
+
+    _reset_button->set_frame(_caption_label->frame());
 
 
     //_layout_subviews();
