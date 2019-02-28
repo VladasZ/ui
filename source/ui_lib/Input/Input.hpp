@@ -24,21 +24,21 @@ class Window;
 
 class Input final {
 
-    friend View;
+    friend View  ;
     friend Window;
 
     static inline Window* _resizing_window = nullptr;
 
-    static inline std::list<View*> _subscribed_views;
-    static inline std::list<Window*> _windows;
-    static inline std::list<Touch*> _touches;
+    static inline std::list<View  *> _subscribed_views;
+    static inline std::list<Window*>          _windows;
+    static inline std::list<Touch *>          _touches;
 
-    static void _unsubscribe_view(View* view);
-    static void _unsubscribe_window(Window* view);
+    static void _unsubscribe_view    (View*);
+    static void _unsubscribe_window(Window*);
 
 public:
 
-    static void touch_event(Touch* touch);
+    static void    touch_event(Touch*)                     ;
     static void on_touch_event(std::function<void(Touch*)>);
 
 #ifdef UI_DESKTOP
