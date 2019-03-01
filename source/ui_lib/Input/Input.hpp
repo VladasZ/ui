@@ -41,7 +41,7 @@ public:
     static void    touch_event(Touch*)                     ;
     static void on_touch_event(std::function<void(Touch*)>);
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
     static void hover_moved(const Point& position);
 #endif
 

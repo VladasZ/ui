@@ -12,7 +12,7 @@
 
 #include "Point.hpp"
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
 #include "Mouse.hpp"
 #endif
 
@@ -33,7 +33,7 @@ public:
     Point location;
     Event event;
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
     Mouse::Button button;
 
     Touch(ID id, const Point& location, Event event, Mouse::Button button);

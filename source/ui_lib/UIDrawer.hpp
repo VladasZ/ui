@@ -26,7 +26,7 @@ public:
     virtual void fill_rect(const Rect&, const Color&) = 0;
     virtual void draw_image_in_rect(Image*, const Rect&) = 0;
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
     virtual void set_cursor_mode(Mouse::CursorMode) = 0;
 #endif
 

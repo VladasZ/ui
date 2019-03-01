@@ -81,7 +81,7 @@ void Input::on_touch_event(std::function<void(Touch*)> proc) {
     _on_touch_event_proc = proc;
 }
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
 void Input::hover_moved(const Point& position) {
 
     for (auto window : _windows) {

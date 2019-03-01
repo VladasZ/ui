@@ -12,7 +12,7 @@
 
 using namespace ui;
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
 
 Touch::Touch(ID id, const Point& location, Event event, Mouse::Button button)
     : id(id), location(location), event(event), button(button) { }

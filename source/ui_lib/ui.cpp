@@ -8,21 +8,25 @@
 
 #include <string>
 
+#include "Log.hpp"
+
 #include "ui.hpp"
 #include "Mouse.hpp"
 #include "UIDrawer.hpp"
 
 using namespace ui;
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
 Mouse* const input::mouse = new Mouse();
 #endif
 
 static UIDrawer* _drawer;
 
 UIDrawer* config::drawer() {
-    if (_drawer == nullptr)
+    if (_drawer == nullptr) {
+        Error("Accessign nullptr ui::Drawer");
         throw std::string() + "Accessign nullptr ui::Drawer";
+    }
     return _drawer;
 }
 

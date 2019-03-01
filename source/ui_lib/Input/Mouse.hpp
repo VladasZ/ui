@@ -8,7 +8,7 @@
 
 #pragma once
 
-#ifdef UI_DESKTOP
+#if DESKTOP_BUILD
 
 #include <map>
 
