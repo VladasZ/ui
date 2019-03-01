@@ -14,7 +14,9 @@
 
 using namespace ui;
 
+#ifdef UI_DESKTOP
 Mouse* const input::mouse = new Mouse();
+#endif
 
 static UIDrawer* _drawer;
 
