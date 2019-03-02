@@ -20,6 +20,7 @@ using namespace ui;
 
 static std::function<void(Touch*)> _on_touch_event_proc;
 
+#if DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
     auto int_value = static_cast<int>(edge);
 
@@ -32,6 +33,7 @@ static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
 
     return Mouse::CursorMode::Drag;
 }
+#endif
 
 void Input::_unsubscribe_view(View* view) {
     auto iter = std::find(_subscribed_views.begin(), _subscribed_views.end(), view);
