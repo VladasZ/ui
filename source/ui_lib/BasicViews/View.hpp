@@ -28,7 +28,7 @@ class View {
 protected:
 
     bool _needs_layout = true;
-    Rect _frame;
+    gm::Rect _frame;
     View* _superview = nullptr;
     std::vector<View*> _subviews;
 
@@ -38,9 +38,9 @@ protected:
 
 public:
 
-    Color color;
+    gm::Color color;
 
-    View(const Rect& = { });
+    View(const gm::Rect& = { });
     virtual ~View();
 
 protected:
@@ -60,20 +60,20 @@ public:
 
 public:
 
-    Rect frame() const;
+    gm::Rect frame() const;
     View* superview() const;
 
 public:
 
-    void set_frame(const Rect&);
-    void edit_frame(std::function<void(Rect&)>);
-    void set_origin(const Point&);
-    void set_center(const Point&);
+    void set_frame(const gm::Rect&);
+    void edit_frame(std::function<void(gm::Rect&)>);
+    void set_origin(const gm::Point&);
+    void set_center(const gm::Point&);
 
 public:
 
-    Point global_point_lo_local(const Point&) const;
-    bool contains_global_point(const Point&) const;
+    gm::Point global_point_lo_local(const gm::Point&) const;
+    bool contains_global_point(const gm::Point&) const;
 
 protected:
 
@@ -82,7 +82,7 @@ protected:
 
 protected:
 
-    Rect _absolute_frame;
+    gm::Rect _absolute_frame;
     virtual void _layout();
     void _calculate_absolute_frame();
     void _layout_constraints();
@@ -106,7 +106,7 @@ public:
 
 public:
 
-    static View* dummy(const Rect& = { 28, 28 });
+    static View* dummy(const gm::Rect& = { 28, 28 });
 
 };
 

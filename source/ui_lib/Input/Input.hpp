@@ -42,7 +42,7 @@ public:
     static void on_touch_event(std::function<void(Touch*)>);
 
 #if DESKTOP_BUILD
-    static void hover_moved(const Point& position);
+    static void hover_moved(const gm::Point& position);
 #endif
 
 };

@@ -9,6 +9,7 @@
 #include "ImageButton.hpp"
 
 using namespace ui;
+using namespace gm;
 
 ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, image) {
     enable_user_interaction();

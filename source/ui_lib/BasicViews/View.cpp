@@ -15,6 +15,7 @@
 #include "UIDrawer.hpp"
 
 using namespace ui;
+using namespace gm;
 
 View::View(const Rect& rect) : _frame(rect) {
 

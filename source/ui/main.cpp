@@ -24,6 +24,7 @@ static FT_Library ftLibrary() {
 
 #include "Rect.hpp"
 
+using namespace gm;
 
 int main() {
 

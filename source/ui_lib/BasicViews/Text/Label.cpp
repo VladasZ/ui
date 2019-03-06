@@ -12,6 +12,7 @@
 #include "ImageView.hpp"
 
 using namespace ui;
+using namespace gm;
 
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;

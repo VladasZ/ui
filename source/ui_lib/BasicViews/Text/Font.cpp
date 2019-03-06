@@ -17,6 +17,7 @@
 #include "Image.hpp"
 
 using namespace ui;
+using namespace gm;
 
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;

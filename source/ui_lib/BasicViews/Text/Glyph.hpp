@@ -21,12 +21,12 @@ public:
     const char ch;
     Image* const image;
     const int advance;
-    const Point bearing;
+    const gm::Point bearing;
     
-    Glyph(char ch, Image* image, int advance, const Point& bearing);
+    Glyph(char ch, Image* image, int advance, const gm::Point& bearing);
     ~Glyph();
     
-    Size size() const;
+    gm::Size size() const;
     float y_max() const;
     float y_min() const;
 };

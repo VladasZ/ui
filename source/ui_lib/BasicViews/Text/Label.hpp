@@ -22,7 +22,7 @@ class Label : public View {
 
 public:
 
-    Label(const Rect& = { });
+    Label(const gm::Rect& = { });
 
 public:
 

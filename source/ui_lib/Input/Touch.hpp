@@ -30,13 +30,13 @@ public:
     };
 
     ID id;
-    Point location;
+    gm::Point location;
     Event event;
 
 #if DESKTOP_BUILD
     Mouse::Button button;
 
-    Touch(ID id, const Point& location, Event event, Mouse::Button button);
+    Touch(ID id, const gm::Point& location, Event event, Mouse::Button button);
 #else
     Touch(ID id, const Point& location, Event event);
 #endif

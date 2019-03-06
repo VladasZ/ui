@@ -32,7 +32,7 @@ private:
 public:
 
     ImageView(Image* = nullptr);
-    ImageView(const Rect& = { }, Image* = nullptr);
+    ImageView(const gm::Rect& = { }, Image* = nullptr);
 
     const Image* image() const;
     void set_image(Image*);

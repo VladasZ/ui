@@ -11,6 +11,7 @@
 #include "Touch.hpp"
 
 using namespace ui;
+using namespace gm;
 
 #if DESKTOP_BUILD
 

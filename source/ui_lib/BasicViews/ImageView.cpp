@@ -12,6 +12,7 @@
 #include "ImageView.hpp"
 
 using namespace ui;
+using namespace gm;
 
 ImageView::ImageView(Image* image) : ImageView({ }, image) {
 

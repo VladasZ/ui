@@ -21,7 +21,7 @@ public:
 
     Event<> on_press;
 
-    Button(const Rect& = { });
+    Button(const gm::Rect& = { });
 
     void touch_event(Touch*) override;
 };

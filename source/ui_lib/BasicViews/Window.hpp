@@ -18,7 +18,7 @@ class Window : public View {
 
 public:
 
-    Window(const Rect& rect = { });
+    Window(const gm::Rect& rect = { });
     ~Window() override;
 
 private:
@@ -43,18 +43,18 @@ private:
 
     friend Input;
 
-    Point _initial_touch;
+    gm::Point _initial_touch;
 
     void touch_event(Touch* touch) override;
 
 private:
 
     EdgeInfo _edge_info;
-    Edge _current_edge;
+    gm::Edge _current_edge;
 
 public:
 
-    Edge get_edge(const Point& point);
+    gm::Edge get_edge(const gm::Point& point);
 
 protected:
 

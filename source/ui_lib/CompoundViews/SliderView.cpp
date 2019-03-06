@@ -10,6 +10,7 @@
 #include "SliderView.hpp"
 
 using namespace ui;
+using namespace gm;
 
 SliderView::SliderView(const Rect& frame) : View(frame) {
 

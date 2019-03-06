@@ -9,6 +9,7 @@
 #include "Button.hpp"
 
 using namespace ui;
+using namespace gm;
 
 Button::Button(const Rect& frame) : View(frame) {
     enable_user_interaction();

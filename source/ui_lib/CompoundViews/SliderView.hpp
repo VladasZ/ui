@@ -29,14 +29,14 @@ public:
 
     Event<float> on_value_changed;
 
-    SliderView(const Rect& = { });
+    SliderView(const gm::Rect& = { });
     ~SliderView() override;
 
     float value() const;
     void set_value(float);
 
-    void set_buttons_color(const Color&);
-    void  set_slider_color(const Color&);
+    void set_buttons_color(const gm::Color&);
+    void  set_slider_color(const gm::Color&);
 
 private:
 

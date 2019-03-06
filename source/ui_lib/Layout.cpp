@@ -10,6 +10,7 @@
 #include "Layout.hpp"
 
 using namespace ui;
+using namespace gm;
 
 static uint64_t anchor_horisontal_elements(const Anchor anchor) {
     return static_cast<uint64_t>(anchor) & static_cast<uint64_t>(Anchor::_Horisontal);

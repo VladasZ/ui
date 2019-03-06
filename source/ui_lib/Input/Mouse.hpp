@@ -45,13 +45,13 @@ public:
 
 private:
 
-    Point       _position                      ;
+    gm::Point   _position                      ;
     Button      _button       = Button::Left   ;
     ButtonState _button_state = ButtonState::Up;
 
 public:
 
-    void set_position(const Point&)           ;
+    void set_position(const gm::Point&)       ;
     void set_button_state(Button, ButtonState);
 
     const char* state_string() const;

@@ -12,6 +12,7 @@
 #include "Window.hpp"
 
 using namespace ui;
+using namespace gm;
 
 Window::Window(const Rect& rect) : View(rect) {
     Input::_windows.push_back(this);

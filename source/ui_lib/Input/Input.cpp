@@ -17,6 +17,7 @@
 #include "UIDrawer.hpp"
 
 using namespace ui;
+using namespace gm;
 
 static std::function<void(Touch*)> _on_touch_event_proc;
 

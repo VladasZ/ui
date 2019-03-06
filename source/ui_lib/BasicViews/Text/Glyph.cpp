@@ -10,6 +10,7 @@
 #include "Image.hpp"
 
 using namespace ui;
+using namespace gm;
 
 
 Glyph::Glyph(char ch, Image* image, int advance, const Point& bearing)

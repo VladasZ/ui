@@ -14,6 +14,7 @@
 #include "Input.hpp"
 
 using namespace ui;
+using namespace gm;
 
 std::map<Mouse::Button, std::string> Mouse::button_to_string = {
     { Mouse::Button::Left,   "Left"   },
