@@ -11,7 +11,9 @@
 namespace ui {
 
 class Font;
+#if DESKTOP_BUILD
 class Mouse;
+#endif
 class UIDrawer;
 
 struct config {
@@ -20,9 +22,11 @@ struct config {
     static inline Font* default_font = nullptr;
 };
 
+#if DESKTOP_BUILD
 struct input {
     static Mouse* const mouse;
 };
+#endif
 
 }
 

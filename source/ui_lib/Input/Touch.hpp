@@ -38,7 +38,7 @@ public:
 
     Touch(ID id, const gm::Point& location, Event event, Mouse::Button button);
 #else
-    Touch(ID id, const Point& location, Event event);
+    Touch(ID id, const gm::Point& location, Event event);
 #endif
 
     bool is_began() const;
