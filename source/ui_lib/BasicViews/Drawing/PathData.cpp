@@ -11,7 +11,7 @@
 using namespace ui;
 using namespace gm;
 
-PathData::PathData(Path* path, void* data) : _path(path), _data(data) {
+PathData::PathData(Path* path, void* data, const Color& color) : _path(path), _color(color), _data(data) {
 
 }
 

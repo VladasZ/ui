@@ -22,8 +22,12 @@ void DrawingView::add_path(gm::Path* path) {
     _paths.push_back(ui::config::drawer()->initialize_path_data(path));
 }
 
+#include "Log.hpp"
+
 void DrawingView::_draw() {
     View::_draw();
-    for (auto path : _paths)
-        ui::config::drawer()->draw_path_in_rect(path, _frame);
+    for (auto path : _paths) {
+        ui::config::drawer()->draw_path_in_rect(path, _absolute_frame, path->color());
+       // Info(path->path()->to_string());
+    }
 }

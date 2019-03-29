@@ -21,6 +21,8 @@ class DrawingView : public View {
 
 public:
 
+    using View::View;
+
     ~DrawingView() override;
 
     void add_path(gm::Path*);
