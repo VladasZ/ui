@@ -9,9 +9,11 @@
 #pragma once
 
 #include "Rect.hpp"
+#include "Path.hpp"
 #include "Mouse.hpp"
 #include "Color.hpp"
 #include "Image.hpp"
+#include "PathData.hpp"
 
 namespace ui {
 
@@ -23,8 +25,11 @@ public:
 
     virtual ~UIDrawer();
 
-    virtual void fill_rect(const gm::Rect&, const gm::Color&) = 0;
-    virtual void draw_image_in_rect(Image*, const gm::Rect&) = 0;
+    virtual void fill_rect(const gm::Rect&, const gm::Color&)  = 0;
+    virtual void draw_image_in_rect(Image*, const gm::Rect&)   = 0;
+    virtual void draw_path_in_rect(PathData*, const gm::Rect&) = 0;
+
+    virtual PathData* initialize_path_data(gm::Path*) = 0;
 
 #if DESKTOP_BUILD
     virtual void set_cursor_mode(Mouse::CursorMode) = 0;
