@@ -18,8 +18,14 @@ DrawingView::~DrawingView() {
         delete path;
 }
 
-void DrawingView::add_path(gm::Path* path) {
-    _paths.push_back(ui::config::drawer()->initialize_path_data(path));
+void DrawingView::add_path(gm::Path* path, const gm::Color& color) {
+    _paths.push_back(ui::config::drawer()->initialize_path_data(path, color));
+}
+
+void DrawingView::remove_all_paths() {
+    for (auto path : _paths)
+        delete path;
+    _paths.clear();
 }
 
 #include "Log.hpp"
@@ -27,7 +33,7 @@ void DrawingView::add_path(gm::Path* path) {
 void DrawingView::_draw() {
     View::_draw();
     for (auto path : _paths) {
-        ui::config::drawer()->draw_path_in_rect(path, _absolute_frame, path->color());
+        ui::config::drawer()->draw_path_in_rect(path, _absolute_frame);
        // Info(path->path()->to_string());
     }
 }

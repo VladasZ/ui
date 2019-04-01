@@ -25,7 +25,9 @@ public:
 
     ~DrawingView() override;
 
-    void add_path(gm::Path*);
+    void add_path(gm::Path*, const gm::Color&);
+
+    void remove_all_paths();
 
 protected:
 
