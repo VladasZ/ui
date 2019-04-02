@@ -105,8 +105,12 @@ void View::_draw() {
 		_needs_layout = false;
 	}
 
-    if (!_frame.size.is_negative())
+    if (!_frame.size.is_negative()) {
         ui::config::drawer()->fill_rect(_absolute_frame, color);
+#ifdef DRAW_DEBUG_FRAMES
+        ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
+#endif
+    }
 
     _draw_subviews();
 }

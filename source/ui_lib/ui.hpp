@@ -8,6 +8,8 @@
 
 #pragma once
 
+#define DRAW_DEBUG_FRAMES
+
 namespace ui {
 
 class Font;

@@ -26,6 +26,7 @@ public:
     virtual ~UIDrawer();
 
     virtual void fill_rect(const gm::Rect&, const gm::Color&)  = 0;
+    virtual void draw_rect(const gm::Rect&, const gm::Color&)  = 0;
     virtual void draw_image_in_rect(Image*, const gm::Rect&)   = 0;
     virtual void draw_path_in_rect(ui::PathData*, const gm::Rect&) = 0;
 
