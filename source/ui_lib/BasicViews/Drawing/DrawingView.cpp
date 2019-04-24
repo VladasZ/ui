@@ -28,12 +28,9 @@ void DrawingView::remove_all_paths() {
     _paths.clear();
 }
 
-#include "Log.hpp"
-
 void DrawingView::_draw() {
     View::_draw();
     for (auto path : _paths) {
         ui::config::drawer()->draw_path_in_rect(path, _absolute_frame);
-       // Info(path->path()->to_string());
     }
 }

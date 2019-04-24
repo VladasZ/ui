@@ -6,6 +6,8 @@
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
+#include "ui.hpp"
+#include "UIDrawer.hpp"
 #include "PathData.hpp"
 
 using namespace ui;
@@ -13,6 +15,11 @@ using namespace gm;
 
 PathData::PathData(Path* path, void* data, const Color& color) : _path(path), _color(color), _data(data) {
 
+}
+
+PathData::~PathData() {
+    ui::config::drawer()->free_path_data(this);
+    //delete _path;
 }
 
 const Path* PathData::path() const {

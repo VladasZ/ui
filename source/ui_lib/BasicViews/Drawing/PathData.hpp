@@ -22,6 +22,7 @@ class PathData {
 public:
 
     PathData(gm::Path*, void*, const gm::Color& = gm::Color::green);
+    ~PathData();
 
     const gm::Path* path() const;
 
