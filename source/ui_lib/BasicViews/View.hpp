@@ -38,7 +38,7 @@ protected:
 
 public:
 
-    gm::Color color;
+    gm::Color background_color;
 
     View(const gm::Rect& = { });
     virtual ~View();

@@ -18,6 +18,10 @@ DrawingView::~DrawingView() {
         delete path;
 }
 
+const DrawingView::Paths& DrawingView::paths() const {
+    return _paths;
+}
+
 void DrawingView::add_path(gm::Path* path, const gm::Color& color) {
     _paths.push_back(ui::config::drawer()->initialize_path_data(path, color));
 }

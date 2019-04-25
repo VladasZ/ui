@@ -19,7 +19,6 @@ PathData::PathData(Path* path, void* data, const Color& color) : _path(path), _c
 
 PathData::~PathData() {
     ui::config::drawer()->free_path_data(this);
-    //delete _path;
 }
 
 const Path* PathData::path() const {

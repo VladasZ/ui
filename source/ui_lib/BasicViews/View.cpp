@@ -106,7 +106,7 @@ void View::_draw() {
 	}
 
     if (!_frame.size.is_negative()) {
-        ui::config::drawer()->fill_rect(_absolute_frame, color);
+        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
 #ifdef DRAW_DEBUG_FRAMES
         ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
 #endif
@@ -175,7 +175,7 @@ void View::disable_user_interaction() {
 
 View* View::dummy(const Rect& frame) {
     auto view = new View(frame);
-    view->color = Color::random();
+    view->background_color = Color::random();
     return view;
 }
 

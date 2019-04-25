@@ -17,7 +17,13 @@ class PathData;
 
 class DrawingView : public View {
 
-    std::vector<PathData*> _paths;
+public:
+
+    using Paths = std::vector<PathData*>;
+
+private:
+
+    Paths _paths;
 
 public:
 
@@ -25,6 +31,7 @@ public:
 
     ~DrawingView() override;
 
+    const Paths& paths() const;
     void add_path(gm::Path*, const gm::Color&);
 
     void remove_all_paths();

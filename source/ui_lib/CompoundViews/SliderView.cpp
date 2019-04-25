@@ -36,12 +36,12 @@ void SliderView::set_value(float value) {
 }
 
 void SliderView::set_buttons_color(const Color& color) {
-    _increase_button->color = color;
-    _decrease_button->color = color;
+    _increase_button->background_color = color;
+    _decrease_button->background_color = color;
 }
 
 void SliderView::set_slider_color(const Color& color) {
-    _slider_view->color = color;
+    _slider_view->background_color = color;
 }
 
 void SliderView::_setup() {

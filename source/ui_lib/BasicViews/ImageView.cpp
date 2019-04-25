@@ -43,7 +43,7 @@ void ImageView::_draw() {
     }
 
     if (!_frame.size.is_negative())
-        ui::config::drawer()->fill_rect(_absolute_frame, color);
+        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
 
     if (_image)
         ui::config::drawer()->draw_image_in_rect(_image, reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
