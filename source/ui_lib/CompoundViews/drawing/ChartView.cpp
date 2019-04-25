@@ -18,10 +18,37 @@ void ChartView::set_size(size_t size) {
     remove_all_subviews();
     _graphs.clear();
     for (size_t i = 0; i < size; i++) {
-        auto graph = new DrawingView();
+        auto graph = new GraphView();
         _graphs.push_back(graph);
         add_subview(graph);
     }
+}
+
+void ChartView::add_values(const std::initializer_list<float>& values) {
+    size_t i = 0;
+    for (auto value : values)
+        _graphs[i++]->add_point(value);
+}
+
+void ChartView::set_colors(const std::initializer_list<gm::Color>& colors) {
+    size_t i = 0;
+    for (auto color : colors)
+        _graphs[i++]->color = color;
+}
+
+void ChartView::set_points_size(size_t size) {
+    for (auto graph : _graphs)
+        graph->set_points_size(size);
+}
+
+void ChartView::set_multiplier(float multiplier) {
+    for (auto graph : _graphs)
+        graph->set_multiplier(multiplier);
+}
+
+void ChartView::reset() {
+    for (auto graph : _graphs)
+        graph->reset();
 }
 
 void ChartView::_setup() {
