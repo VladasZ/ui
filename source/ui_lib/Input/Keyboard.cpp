@@ -11,6 +11,5 @@
 using namespace ui;
 
 void Keyboard::add_key_event(Key key, Event event) {
-#warning TEST
-    //on_key_event(key, event);
+    on_key_event(key, event);
 }

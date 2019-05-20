@@ -26,14 +26,20 @@ void ChartView::set_size(size_t size) {
 
 void ChartView::add_values(const std::initializer_list<float>& values) {
     size_t i = 0;
-    for (auto value : values)
+    for (auto value : values) {
         _graphs[i++]->add_point(value);
+        if (i == _graphs.size())
+            return;
+    }
 }
 
 void ChartView::set_colors(const std::initializer_list<gm::Color>& colors) {
     size_t i = 0;
-    for (auto color : colors)
+    for (auto color : colors) {
         _graphs[i++]->color = color;
+        if (i == _graphs.size())
+            return;
+    }
 }
 
 void ChartView::set_points_size(size_t size) {
