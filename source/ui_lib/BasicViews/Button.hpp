@@ -12,10 +12,13 @@
 
 #include "View.hpp"
 #include "Event.hpp"
+#include "Label.hpp"
 
 namespace ui {
 
 class Button : public View {
+
+    Label* _caption_label;
 
 public:
 
@@ -23,7 +26,14 @@ public:
 
     Button(const gm::Rect& = { });
 
+    void set_caption(const std::string&);
+
     void touch_event(Touch*) override;
+
+private:
+
+    void _layout() override;
+
 };
 
 }
