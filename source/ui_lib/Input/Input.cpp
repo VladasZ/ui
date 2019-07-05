@@ -19,8 +19,6 @@
 using namespace ui;
 using namespace gm;
 
-static std::function<void(Touch*)> _on_touch_event_proc;
-
 #if DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
     auto int_value = static_cast<int>(edge);
@@ -50,10 +48,9 @@ void Input::_unsubscribe_window(Window* view) {
     _windows.erase(iter);
 }
 
-void Input::touch_event(Touch* touch) {
+void Input::process_touch_event(Touch* touch) {
 
-    if (_on_touch_event_proc)
-        _on_touch_event_proc(touch);
+    on_touch(touch);
 
     for (auto view : _subscribed_views) {
         if (view->_absolute_frame.contains(touch->location)) {
@@ -78,10 +75,6 @@ void Input::touch_event(Touch* touch) {
             return;
         }
     }
-}
-
-void Input::on_touch_event(std::function<void(Touch*)> proc) {
-    _on_touch_event_proc = proc;
 }
 
 #if DESKTOP_BUILD

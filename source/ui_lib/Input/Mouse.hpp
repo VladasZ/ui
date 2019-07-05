@@ -10,9 +10,12 @@
 
 #if DESKTOP_BUILD
 
+#define MOUSE
+
 #include <map>
 
 #include "Point.hpp"
+#include "Event.hpp"
 
 namespace ui {
 
@@ -21,37 +24,37 @@ class Mouse final {
 public:
 
     enum class Button {
-        Left  ,
-        Right ,
-        Middle,
+        Left,
+        Right,
+        Middle
     };
 
     enum class ButtonState {
-        Up  ,
-        Down,
+        Up,
+        Down
     };
 
     enum class CursorMode {
-        Arrow  ,
-        Text   ,
-        Drag   ,
+        Arrow,
+        Text,
+        Drag,
         HResize,
-        VResize,
+        VResize
     };
 
-    static std::map<Button     , std::string>       button_to_string;
+    static std::map<Button, std::string>      button_to_string;
     static std::map<ButtonState, std::string> button_state_to_string;
-    static std::map<CursorMode , std::string>  cursor_mode_to_string;
+    static std::map<CursorMode, std::string>  cursor_mode_to_string;
 
-private:
+	static inline gm::Point position;
+	static inline Button button = Button::Left;
+	static inline ButtonState button_state = ButtonState::Up;
 
-    gm::Point   _position                      ;
-    Button      _button       = Button::Left   ;
-    ButtonState _button_state = ButtonState::Up;
+	static inline gm::Point frame_shift;
 
-public:
+	static inline Event<gm::Point> on_moved;
 
-    void set_position(const gm::Point&)       ;
+    void set_position(const gm::Point&);
     void set_button_state(Button, ButtonState);
 
     const char* state_string() const;

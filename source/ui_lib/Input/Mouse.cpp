@@ -38,30 +38,33 @@ std::map<Mouse::CursorMode,  std::string> Mouse::cursor_mode_to_string = {
 static Touch* mouse_touch = new Touch(1, { }, Touch::Event::Ended, Mouse::Button::Left);
 
 void Mouse::set_position(const Point& position) {
-   _position = position;
-   if (_button_state == ButtonState::Up) {
+	frame_shift = Mouse::position - position;
+	Mouse::position = position;
+	on_moved(position);
+   if (button_state == ButtonState::Up) {
        Input::hover_moved(position);
    } else {
        mouse_touch->location = position;
        mouse_touch->event = Touch::Event::Moved;
-       Input::touch_event(mouse_touch);
+       Input::process_touch_event(mouse_touch);
    }
 }
 
 void Mouse::set_button_state(Button button, ButtonState state) {
-    _button_state = state;
+    button_state = state;
     mouse_touch->event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
-    mouse_touch->location = _position;
+    mouse_touch->location = position;
     mouse_touch->button = button;
-    Input::touch_event(mouse_touch);
+
+    Input::process_touch_event(mouse_touch);
 }
 
 const char* Mouse::state_string() const {
     static std::string result;
     result = std::string() +
-            "Button: "    + Mouse::button_to_string      [_button      ] +
-            " State: "    + Mouse::button_state_to_string[_button_state] +
-            " Position: " + _position.to_string();
+            "Button: "    + Mouse::button_to_string      [button      ] +
+            " State: "    + Mouse::button_state_to_string[button_state] +
+            " Position: " + position.to_string();
     return result.c_str();
 }
 

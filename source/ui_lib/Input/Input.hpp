@@ -11,10 +11,10 @@
 #include "stdint.h"
 
 #include <list>
-#include <functional>
 
 #include "Point.hpp"
 #include "Touch.hpp"
+#include "Event.hpp"
 
 namespace ui {
 
@@ -38,8 +38,9 @@ class Input final {
 
 public:
 
-    static void    touch_event(Touch*)                     ;
-    static void on_touch_event(std::function<void(Touch*)>);
+    static void process_touch_event(Touch*);
+
+    static inline Event<Touch*> on_touch;
 
 #if DESKTOP_BUILD
     static void hover_moved(const gm::Point& position);
