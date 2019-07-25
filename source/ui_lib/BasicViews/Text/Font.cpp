@@ -1,6 +1,6 @@
 //
 //  Font.cpp
-//  TestEngine
+//  ui
 //
 //  Created by Vladas Zakrevskis on 9/26/17.
 //  Copyright © 2017 VladasZ. All rights reserved.
@@ -30,25 +30,26 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
 
     FT_UInt glyphIndex = FT_Get_Char_Index(face, static_cast<FT_ULong>(ch));
 
-    FT_Load_Glyph(face,
-                  glyphIndex,
-                  FT_LOAD_RENDER);
+    FT_Load_Glyph(face, glyphIndex, FT_LOAD_RENDER);
 
-    FT_BitmapGlyph bitmap_glyhp;
-    FT_Get_Glyph(face->glyph, reinterpret_cast<FT_Glyph*>(&bitmap_glyhp));
+	FT_Glyph ft_glyph;
+    FT_Get_Glyph(face->glyph, &ft_glyph);
 
-    Size size = { static_cast<float>(bitmap_glyhp->bitmap.width),
-                  static_cast<float>(bitmap_glyhp->bitmap.rows) };
+	auto bitmap_glyph = reinterpret_cast<FT_BitmapGlyph>(ft_glyph);
 
-    auto image = new Image(bitmap_glyhp->bitmap.buffer, size.width, size.height, 1);
+	Size size = { bitmap_glyph->bitmap.width, bitmap_glyph->bitmap.rows };
 
-    Point bearing = { static_cast<float>(face->glyph->metrics.horiBearingX / 64),
-                      static_cast<float>(face->glyph->metrics.horiBearingY / 64) };
+    Point bearing = { face->glyph->metrics.horiBearingX / 64,
+                      face->glyph->metrics.horiBearingY / 64 };
 
-    return new Glyph(ch,
-                     image,
-                     static_cast<int>(face->glyph->metrics.horiAdvance / 64),
-                     bearing);
+	auto glyph = new Glyph(ch,
+		                   new Image(bitmap_glyph->bitmap.buffer, size.width, size.height, 1),
+						   static_cast<int>(face->glyph->metrics.horiAdvance / 64),
+						   bearing);
+	
+	FT_Done_Glyph(ft_glyph);
+
+    return glyph;
 }
 
 Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
@@ -73,9 +74,7 @@ Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
                        0,
                        &face);
 
-    FT_Set_Pixel_Sizes(face,
-                       0,
-                       size);
+    FT_Set_Pixel_Sizes(face, 0, size);
 
     float y_max = 0;
     float y_min = 0;

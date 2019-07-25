@@ -10,13 +10,11 @@
 
 #define DRAW_DEBUG_FRAMES
 
-namespace ui {
+#include "Font.hpp"
+#include "Mouse.hpp"
+#include "UIDrawer.hpp"
 
-class Font;
-#if DESKTOP_BUILD
-class Mouse;
-#endif
-class UIDrawer;
+namespace ui {
 
 struct config {
     static UIDrawer* drawer();
