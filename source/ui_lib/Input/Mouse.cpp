@@ -6,7 +6,7 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
 
 #include <iostream>
 

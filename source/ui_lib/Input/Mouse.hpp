@@ -8,7 +8,7 @@
 
 #pragma once
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
 
 #define MOUSE
 
