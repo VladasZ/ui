@@ -24,7 +24,7 @@ static UIDrawer* _drawer;
 
 UIDrawer* config::drawer() {
     if (_drawer == nullptr) {
-        Error("Accessign nullptr ui::Drawer");
+        _Error("Accessign nullptr ui::Drawer");
         throw std::string() + "Accessign nullptr ui::Drawer";
     }
     return _drawer;
