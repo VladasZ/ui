@@ -27,7 +27,9 @@ std::string Label::text() const {
 void Label::set_text(const std::string& text) {
     _text = text;
     _needs_layout = true;
+#ifdef NO_FREETYPE
     _set_glyphs();
+#endif
 }
 
 void Label::set_aligment(Alignment aligment){

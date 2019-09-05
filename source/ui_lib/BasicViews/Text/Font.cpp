@@ -6,9 +6,13 @@
 //  Copyright © 2017 VladasZ. All rights reserved.
 //
 
+#ifdef NO_FREETYPE
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
+
+#endif
 
 #include <cmath>
 
@@ -19,6 +23,7 @@
 using namespace ui;
 using namespace gm;
 
+#ifdef NO_FREETYPE
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;
     if (_library == nullptr)
@@ -51,8 +56,11 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
 
     return glyph;
 }
+#endif
+
 
 Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
+#ifdef NO_FREETYPE
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
@@ -96,6 +104,7 @@ Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
     float baseline_position = std::fabs(y_min);
 
     _baseline_shift = _height / 2 - baseline_position;
+#endif
 }
 
 Font::~Font() {
