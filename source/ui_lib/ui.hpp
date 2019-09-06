@@ -8,11 +8,16 @@
 
 #pragma once
 
-#define DRAW_DEBUG_FRAMES
-
 #include "Font.hpp"
 #include "Mouse.hpp"
+#include "System.hpp"
 #include "UIDrawer.hpp"
+
+#define DRAW_DEBUG_FRAMES
+
+#ifdef IOS_DEVICE
+#define NO_FREETYPE
+#endif
 
 namespace ui {
 
