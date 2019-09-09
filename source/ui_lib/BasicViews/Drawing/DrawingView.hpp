@@ -8,12 +8,10 @@
 
 #pragma once
 
-#include "Path.hpp"
 #include "View.hpp"
+#include "PathData.hpp"
 
 namespace ui {
-
-class PathData;
 
 class DrawingView : public View {
 
@@ -32,7 +30,7 @@ public:
     ~DrawingView() override;
 
     const Paths& paths() const;
-    void add_path(gm::Path*, const gm::Color&);
+    void add_path(gm::Path*, const gm::Color&, PathData::DrawMode draw_mode = PathData::DrawMode::Fill);
 
     void remove_all_paths();
 

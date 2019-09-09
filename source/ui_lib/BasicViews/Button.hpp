@@ -30,10 +30,6 @@ public:
 
     void touch_event(Touch*) override;
 
-private:
-
-    void _layout() override;
-
 };
 
 }

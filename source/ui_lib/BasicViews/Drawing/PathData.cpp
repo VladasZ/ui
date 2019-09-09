@@ -13,7 +13,8 @@
 using namespace ui;
 using namespace gm;
 
-PathData::PathData(Path* path, void* data, const Color& color) : _path(path), _color(color), _data(data) {
+PathData::PathData(Path* path, void* data, const Color& color, DrawMode draw_mode)
+: _path(path), _color(color), _data(data), draw_mode(draw_mode) {
 
 }
 

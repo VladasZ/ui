@@ -21,7 +21,16 @@ class PathData {
 
 public:
 
-    PathData(gm::Path*, void*, const gm::Color& = gm::Color::green);
+    enum class DrawMode {
+        Outline,
+        Fill
+    };
+
+public:
+
+    DrawMode draw_mode;
+
+    PathData(gm::Path*, void*, const gm::Color& = gm::Color::green, DrawMode drawMode = DrawMode::Outline);
     ~PathData();
 
     const gm::Path* path() const;

@@ -17,13 +17,10 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Touch.hpp"
-#include "Layout.hpp"
 
 namespace ui {
 
 class View {
-
-    friend Layout;
 
 protected:
 
@@ -31,10 +28,6 @@ protected:
     gm::Rect _frame;
     View* _superview = nullptr;
     std::vector<View*> _subviews;
-
-    std::vector<Layout> _layouts;
-    bool _constrained_width  = false;
-    bool _constrained_height = false;
 
 public:
 
@@ -55,11 +48,6 @@ public:
 
 public:
 
-    void add_layout(Layout);
-    void add_layout(std::initializer_list<Layout>);
-
-public:
-
     gm::Rect frame() const;
     View* superview() const;
 
@@ -75,9 +63,13 @@ public:
     gm::Point global_point_lo_local(const gm::Point&) const;
     bool contains_global_point(const gm::Point&) const;
 
-protected:
+public:
 
     virtual void _draw();
+
+protected:
+
+    void _draw_rect();
     void _draw_subviews();
 
 protected:
@@ -85,7 +77,6 @@ protected:
     gm::Rect _absolute_frame;
     virtual void _layout();
     void _calculate_absolute_frame();
-    void _layout_constraints();
     void _layout_subviews();
 
 protected:

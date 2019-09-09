@@ -14,14 +14,12 @@ namespace ui {
 
 class StackView : public View {
 
-    Alignment _alignment = Alignment::Center;
     float _margin = 0;
 
 public:
 
     using View::View;
 
-    void set_alignment(Alignment);
     void set_margin(float);
 
 protected:

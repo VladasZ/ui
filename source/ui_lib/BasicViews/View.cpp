@@ -11,7 +11,6 @@
 #include "ui.hpp"
 #include "View.hpp"
 #include "Input.hpp"
-#include "Layout.hpp"
 #include "UIDrawer.hpp"
 
 using namespace ui;
@@ -24,13 +23,13 @@ View::View(const Rect& rect) : _frame(rect) {
 View::~View() {
     if (_user_interaction_enabled)
         Input::_unsubscribe_view(this);
-	for (auto view : _subviews)
-		delete view;
+    for (auto view : _subviews)
+        delete view;
 }
 
 void View::add_subview(View* view) {
-	view->_superview = this;
-	_subviews.push_back(view);
+    view->_superview = this;
+    _subviews.push_back(view);
     view->_setup();
 }
 
@@ -45,23 +44,6 @@ void View::remove_all_subviews() {
     _subviews.clear();
 }
 
-void View::add_layout(Layout layout) {
-    _layouts.push_back(layout);
-
-    if (layout.has_width())
-        _constrained_width = true;
-
-    if (layout.has_height())
-        _constrained_height = true;
-
-    _needs_layout = true;
-}
-
-void View::add_layout(std::initializer_list<Layout> layouts) {
-    for (auto layout : layouts)
-        add_layout(layout);
-}
-
 Rect View::frame() const {
     return _frame;
 }
@@ -71,8 +53,8 @@ View* View::superview() const {
 }
 
 void View::set_frame(const Rect& frame) {
-	_frame = frame;
-	_needs_layout = true;
+    _frame = frame;
+    _needs_layout = true;
 }
 
 void View::edit_frame(std::function<void(Rect&)> edit) {
@@ -81,13 +63,13 @@ void View::edit_frame(std::function<void(Rect&)> edit) {
 }
 
 void View::set_origin(const Point& origin) {
-	_frame.origin = origin;
-	_needs_layout = true;
+    _frame.origin = origin;
+    _needs_layout = true;
 }
 
 void View::set_center(const Point& center) {
     _frame.set_center(center);
-	_needs_layout = true;
+    _needs_layout = true;
 }
 
 Point View::global_point_lo_local(const Point& point) const {
@@ -99,20 +81,16 @@ bool View::contains_global_point(const Point& point) const {
 }
 
 void View::_draw() {
-
-	if (_needs_layout) {
-		_layout();
-		_needs_layout = false;
-	}
-
-    if (!_frame.size.is_negative()) {
-        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
-#ifdef DRAW_DEBUG_FRAMES
-        ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
-#endif
-    }
-
+    _layout();
+    _draw_rect();
     _draw_subviews();
+}
+
+void View::_draw_rect() {
+    ui::config::drawer()->fill_rect(_absolute_frame, background_color);
+#ifdef DRAW_DEBUG_FRAMES
+    ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
+#endif
 }
 
 void View::_draw_subviews() {
@@ -121,20 +99,18 @@ void View::_draw_subviews() {
 }
 
 void View::_layout() {
+    if (!_needs_layout) {
+        return;
+    }
     _calculate_absolute_frame();
-    _layout_constraints();
     _layout_subviews();
+    _needs_layout = false;
 }
 
 void View::_calculate_absolute_frame() {
     _absolute_frame = _frame;
     if (_superview)
         _absolute_frame.origin += _superview->_absolute_frame.origin;
-}
-
-void View::_layout_constraints() {
-    for (auto layout : _layouts)
-        layout._layout_view(this);
 }
 
 void View::_layout_subviews() {
@@ -144,17 +120,17 @@ void View::_layout_subviews() {
 
 void View::touch_event(Touch *touch) {
     switch (touch->event) {
-    case Touch::Event::Began:
-        _touches.push_back(touch);
-        break;
-    case Touch::Event::Moved:
-        break;
-    case Touch::Event::Ended:
-        auto iter = std::find(_touches.begin(), _touches.end(), touch);
-        if (iter == _touches.end())
-            return;
-        _touches.erase(iter);
-        break;
+        case Touch::Event::Began:
+            _touches.push_back(touch);
+            break;
+        case Touch::Event::Moved:
+            break;
+        case Touch::Event::Ended:
+            auto iter = std::find(_touches.begin(), _touches.end(), touch);
+            if (iter == _touches.end())
+                return;
+            _touches.erase(iter);
+            break;
     }
     on_touch(touch);
 }

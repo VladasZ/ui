@@ -15,7 +15,6 @@ namespace ui {
 
 class Label : public View {
 
-    Alignment _aligment = Alignment::Left;
     std::string _text;
     View* _content_view;
     Font* _font;
@@ -28,7 +27,6 @@ public:
 
     std::string text() const;
     void set_text(const std::string&);
-    void set_aligment(Alignment);
     void set_font(Font*);
 
     void resize_to_fit_text();

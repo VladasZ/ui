@@ -36,17 +36,16 @@ void ImageView::set_content_mode(ContentMode mode) {
 }
 
 void ImageView::_draw() {
+    _layout();
+    _draw_rect();
 
-    if (_needs_layout) {
-        _layout();
-        _needs_layout = false;
+    if (_image) {
+        ui::config::drawer()->
+                draw_image_in_rect(
+                _image,
+                reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame
+        );
     }
-
-    if (!_frame.size.is_negative())
-        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
-
-    if (_image)
-        ui::config::drawer()->draw_image_in_rect(_image, reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame);
 
     _draw_subviews();
 }
@@ -55,13 +54,13 @@ void ImageView::_layout() {
     View::_layout();
 
     switch (_content_mode) {
-    case ContentMode::Fill:
-        _content_view->set_frame({ _frame.size });
-        break;
-    case ContentMode::AspectFit:
-        _content_view->set_frame(_frame.fit_size({ _image->width(), _image->height() }));
-        _content_view->set_center(_frame.center());
-        break;
+        case ContentMode::Fill:
+            _content_view->set_frame({ _frame.size });
+            break;
+        case ContentMode::AspectFit:
+            _content_view->set_frame(_frame.fit_size({ _image->width(), _image->height() }));
+            _content_view->set_center(_frame.center());
+            break;
     }
 
     reinterpret_cast<decltype(this)>(_content_view)->_layout();

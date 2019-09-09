@@ -38,26 +38,25 @@ void AnalogStickView::on_touch_moved(const Point& touch) {
 }
 
 void AnalogStickView::_setup() {
-    add_path(
-            Path::circle_with(_frame.size.center(), _frame.size.width),
-            Color::black);
 
-    add_path(
-            Path::circle_with(_frame.size.center(), _frame.size.width - OUTLINE_WIDTH),
-            Color::white);
+    add_path(Path::circle_with(_frame.size.center(), _frame.size.width),
+             Color::black);
+
+    add_path(Path::circle_with(_frame.size.center(), _frame.size.width - OUTLINE_WIDTH),
+             Color::white);
 
     direction_stick = new DrawingView({ STICK_VIEW_SIZE, STICK_VIEW_SIZE });
     direction_stick->set_center(_frame.size.center());
     add_subview(direction_stick);
 
-    direction_stick->background_color = Color::green;
-    
+    auto stick_center = direction_stick->frame().size.center();
+
     direction_stick->add_path(
-            Path::circle_with(_frame.size.center(), STICK_VIEW_SIZE),
+            Path::circle_with(stick_center, STICK_VIEW_SIZE),
             Color::black);
 
     direction_stick->add_path(
-            Path::circle_with(_frame.size.center(), STICK_VIEW_SIZE - OUTLINE_WIDTH),
+            Path::circle_with(stick_center, STICK_VIEW_SIZE - OUTLINE_WIDTH),
             Color::light_gray);
 
     Input::on_touch.subscribe([&](Touch* touch) {

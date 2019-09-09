@@ -94,8 +94,6 @@ void SliderView::_layout() {
                                     });
 
     _set_slider_position();
-
-    _layout_constraints();
 }
 
 void SliderView::_set_slider_position() {

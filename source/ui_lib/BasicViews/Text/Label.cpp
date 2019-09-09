@@ -32,11 +32,6 @@ void Label::set_text(const std::string& text) {
 #endif
 }
 
-void Label::set_aligment(Alignment aligment){
-    _aligment = aligment;
-    _needs_layout = true;
-}
-
 void Label::set_font(Font* font) {
     _font = font;
     _needs_layout = true;

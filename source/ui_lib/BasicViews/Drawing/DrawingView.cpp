@@ -22,8 +22,8 @@ const DrawingView::Paths& DrawingView::paths() const {
     return _paths;
 }
 
-void DrawingView::add_path(gm::Path* path, const gm::Color& color) {
-    _paths.push_back(ui::config::drawer()->initialize_path_data(path, color));
+void DrawingView::add_path(gm::Path* path, const gm::Color& color, PathData::DrawMode draw_mode) {
+    _paths.push_back(ui::config::drawer()->initialize_path_data(path, color, draw_mode));
 }
 
 void DrawingView::remove_all_paths() {
@@ -33,8 +33,10 @@ void DrawingView::remove_all_paths() {
 }
 
 void DrawingView::_draw() {
-    View::_draw();
+    View::_layout();
+    View::_draw_rect();
     for (auto path : _paths) {
         ui::config::drawer()->draw_path_in_rect(path, _absolute_frame);
     }
+    View::_draw_subviews();
 }

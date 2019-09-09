@@ -23,9 +23,6 @@ void LabeledSliderView::_setup() {
     _reset_button  = new Button();
     slider_view    = new SliderView();
 
-    _caption_label->set_aligment(Alignment::Center);
-    _value_label  ->set_aligment(Alignment::Center);
-
     _value_label->set_text("0.00");
 
     slider_view->on_value_changed.subscribe([&](float value) {
@@ -44,7 +41,6 @@ void LabeledSliderView::_setup() {
 
 void LabeledSliderView::_layout() {
     _calculate_absolute_frame();
-    _layout_constraints();
 
     static const float label_height = 28.0f;
     static const float slider_width = 28.0f;
@@ -72,6 +68,4 @@ void LabeledSliderView::_layout() {
 
     _reset_button->set_frame(_caption_label->frame());
 
-
-    //_layout_subviews();
 }
