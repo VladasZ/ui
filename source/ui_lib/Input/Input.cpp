@@ -8,8 +8,7 @@
 
 #include <algorithm>
 
-#include "ui.hpp"
-
+#include "Log.hpp"
 #include "Touch.hpp"
 #include "Mouse.hpp"
 #include "Input.hpp"
@@ -51,7 +50,7 @@ void Input::_unsubscribe_window(Window* view) {
 void Input::process_touch_event(Touch* touch) {
 
     on_touch(touch);
-    
+        
     if (touch->is_moved()) {
         for (auto view : _subscribed_views) {
             if (view->_touch_id == touch->id) {
@@ -80,6 +79,7 @@ void Input::process_touch_event(Touch* touch) {
                 break;
             }
         }
+        delete touch;
     }
     
     return;

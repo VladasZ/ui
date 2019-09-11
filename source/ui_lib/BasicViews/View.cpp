@@ -99,12 +99,8 @@ void View::_draw_subviews() {
 }
 
 void View::_layout() {
-    if (!_needs_layout) {
-        return;
-    }
     _calculate_absolute_frame();
     _layout_subviews();
-    _needs_layout = false;
 }
 
 void View::_calculate_absolute_frame() {

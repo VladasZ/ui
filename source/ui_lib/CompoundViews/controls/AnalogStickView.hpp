@@ -28,6 +28,5 @@ namespace ui {
     private:
 
         void _setup() override;
-
     };
 }
