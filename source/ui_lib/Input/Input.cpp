@@ -8,6 +8,8 @@
 
 #include <algorithm>
 
+#include "ui.hpp"
+
 #include "Log.hpp"
 #include "Touch.hpp"
 #include "Mouse.hpp"
