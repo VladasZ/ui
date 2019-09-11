@@ -45,8 +45,6 @@ private:
 
     gm::Point _initial_touch;
 
-    void touch_event(Touch* touch) override;
-
 private:
 
     EdgeInfo _edge_info;

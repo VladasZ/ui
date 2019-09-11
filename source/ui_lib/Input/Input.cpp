@@ -51,27 +51,53 @@ void Input::_unsubscribe_window(Window* view) {
 void Input::process_touch_event(Touch* touch) {
 
     on_touch(touch);
-
-    for (auto view : _subscribed_views) {
-        if (view->_absolute_frame.contains(touch->location)) {
-            touch->location -= view->_absolute_frame.origin;
-            view->touch_event(touch);
-            return;
+    
+    if (touch->is_moved()) {
+        for (auto view : _subscribed_views) {
+            if (view->_touch_id == touch->id) {
+                touch->location -= view->_absolute_frame.origin;
+                view->on_touch(touch);
+                break;
+            }
         }
     }
-
+    else if (touch->is_began()) {
+        for (auto view : _subscribed_views) {
+            if (view->_absolute_frame.contains(touch->location)) {
+                touch->location -= view->_absolute_frame.origin;
+                view->_touch_id = touch->id;
+                view->on_touch(touch);
+                break;
+            }
+        }
+    }
+    else /*if (touch->is_ended())*/ {
+        for (auto view : _subscribed_views) {
+            if (view->_touch_id == touch->id) {
+                touch->location -= view->_absolute_frame.origin;
+                view->_touch_id = 0;
+                view->on_touch(touch);
+                break;
+            }
+        }
+    }
+    
+    return;
+    
+    //TODO: Check if works
+    
     if (_resizing_window) {
         if (touch->is_ended()) {
             _resizing_window = nullptr;
             return;
         }
-        _resizing_window->touch_event(touch);
+        _resizing_window->on_touch(touch);
     }
 
     for (auto window : _windows) {
         if (window->_absolute_frame.contains_with_edge(touch->location, Window::EdgeInfo::width)) {
             _resizing_window = window;
-            window->touch_event(touch);
+            window->on_touch(touch);
             return;
         }
     }

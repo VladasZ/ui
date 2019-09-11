@@ -16,27 +16,27 @@ using namespace gm;
 
 Window::Window(const Rect& rect) : View(rect) {
     Input::_windows.push_back(this);
+    
+    on_touch.subscribe([&](Touch* touch){
+        if (touch->is_began()) {
+            _initial_touch = touch->location;
+            return;
+        }
+        
+        if (_current_edge == Edge::None) {
+            _frame.origin += touch->location - _initial_touch;
+        } else {
+            _frame.set_edge(_current_edge, touch->location);
+        }
+        
+        _needs_layout = true;
+        _initial_touch = touch->location;
+    });
+    
 }
 
 Window::~Window() {
     Input::_unsubscribe_window(this);
-}
-
-void Window::touch_event(Touch* touch) {
-
-    if (touch->is_began()) {
-        _initial_touch = touch->location;
-        return;
-    }
-
-    if (_current_edge == Edge::None) {
-        _frame.origin += touch->location - _initial_touch;
-    } else {
-        _frame.set_edge(_current_edge, touch->location);
-    }
-
-    _needs_layout = true;
-    _initial_touch = touch->location;
 }
 
 Edge Window::get_edge(const Point& point) {

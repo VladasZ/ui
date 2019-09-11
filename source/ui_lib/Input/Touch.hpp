@@ -21,7 +21,7 @@ namespace ui {
 class Touch {
 public:
 
-    using ID = int64_t;
+    using ID = uint64_t;
 
     enum Event {
         Began,

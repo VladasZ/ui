@@ -28,8 +28,6 @@ public:
 
     void set_caption(const std::string&);
 
-    void touch_event(Touch*) override;
-
 };
 
 }

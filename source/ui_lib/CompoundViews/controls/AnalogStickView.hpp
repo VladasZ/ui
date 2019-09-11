@@ -24,7 +24,7 @@ namespace ui {
         AnalogStickView();
 
         Event<const gm::Point&> on_direction_change;
-
+        
     private:
 
         void _setup() override;

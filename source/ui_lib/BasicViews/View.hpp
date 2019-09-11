@@ -23,11 +23,15 @@ namespace ui {
 class View {
 
 protected:
+    
+    Touch::ID _touch_id = 0;
 
-    bool _needs_layout = true;
     gm::Rect _frame;
     View* _superview = nullptr;
+    
     std::vector<View*> _subviews;
+    
+    bool _needs_layout = true;
 
 public:
 
@@ -82,9 +86,6 @@ protected:
 protected:
 
     friend Input;
-
-    std::vector<Touch*> _touches;
-    virtual void touch_event(Touch*);
 
 public:
 

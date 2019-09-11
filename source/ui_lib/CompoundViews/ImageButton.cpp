@@ -13,10 +13,8 @@ using namespace gm;
 
 ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, image) {
     enable_user_interaction();
-}
-
-void ImageButton::touch_event(Touch* touch) {
-    View::touch_event(touch);
-    if (touch->is_began())
-        on_press();
+    on_touch.subscribe([&](Touch* touch) {
+        if (touch->is_began())
+            on_press();
+    });
 }

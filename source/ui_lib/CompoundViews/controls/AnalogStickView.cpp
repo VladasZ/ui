@@ -6,6 +6,7 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include "Log.hpp"
 #include "Event.hpp"
 #include "AnalogStickView.hpp"
 
@@ -22,23 +23,19 @@ AnalogStickView::AnalogStickView() : DrawingView({ SIZE, SIZE }) {
 }
 
 void AnalogStickView::on_touch_moved(const Point& touch) {
-
-    const float max_lenght = _frame.size.height / 2;
-
-    Point touch_position = global_point_lo_local(touch);
-    Point vector = touch_position - _frame.size.center();
-
-    if (vector.length() > max_lenght) {
-        vector.set_length(max_lenght);
-        touch_position = _frame.size.center() + vector;
-    }
-
-    direction_stick->set_center(touch_position);
+    const auto max_lenght = _frame.size.height / 2;
+    const auto center = _frame.size.center();
+    
+    Point vector = (touch - center).trimmed(max_lenght);
+    
+    direction_stick->set_center(vector + _frame.size.center());
     on_direction_change(vector * 0.1f);
 }
 
 void AnalogStickView::_setup() {
-
+    
+    enable_user_interaction();
+    
     add_path(Path::circle_with(_frame.size.center(), _frame.size.width),
              Color::black);
 
@@ -58,8 +55,11 @@ void AnalogStickView::_setup() {
     direction_stick->add_path(
             Path::circle_with(stick_center, STICK_VIEW_SIZE - OUTLINE_WIDTH),
             Color::light_gray);
-
-    Input::on_touch.subscribe([&](Touch* touch) {
+    
+    on_touch.subscribe([&](Touch* touch) {
+        
+        Log(touch->location.to_string());
+        
         if (touch->is_moved()) {
             on_touch_moved(touch->location);
             return;

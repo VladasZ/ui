@@ -20,8 +20,7 @@ public:
     Event<> on_press;
 
     ImageButton(const gm::Rect& frame = { }, Image* image = nullptr);
-
-    void touch_event(Touch*) override;
+    
 };
 
 }

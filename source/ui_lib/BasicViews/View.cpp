@@ -118,23 +118,6 @@ void View::_layout_subviews() {
         subview->_layout();
 }
 
-void View::touch_event(Touch *touch) {
-    switch (touch->event) {
-        case Touch::Event::Began:
-            _touches.push_back(touch);
-            break;
-        case Touch::Event::Moved:
-            break;
-        case Touch::Event::Ended:
-            auto iter = std::find(_touches.begin(), _touches.end(), touch);
-            if (iter == _touches.end())
-                return;
-            _touches.erase(iter);
-            break;
-    }
-    on_touch(touch);
-}
-
 void View::enable_user_interaction() {
     if (_user_interaction_enabled)
         return;
