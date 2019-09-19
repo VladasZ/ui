@@ -81,7 +81,9 @@ void Input::process_touch_event(Touch* touch) {
                 break;
             }
         }
+#ifndef MOUSE
         delete touch;
+#endif
     }
     
     return;
