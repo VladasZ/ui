@@ -15,10 +15,6 @@
 
 //#define DRAW_DEBUG_FRAMES
 
-#ifdef IOS_DEVICE
-#define NO_FREETYPE
-#endif
-
 namespace ui {
 
 struct config {
