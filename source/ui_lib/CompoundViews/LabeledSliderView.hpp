@@ -30,6 +30,7 @@ public:
     SliderView* slider_view = nullptr;
 
     void set_caption(const std::string&);
+    void set_slider_color(const gm::Color&);
 
 private:
 

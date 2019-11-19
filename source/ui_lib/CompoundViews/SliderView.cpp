@@ -50,7 +50,7 @@ void SliderView::_setup() {
     _slider_content_view = new View();
     _slider_view         = new View();
 
-    set_buttons_color(Color::blue);
+    set_buttons_color(Color::gray);
     set_slider_color(Color::green);
 
     add_subview(_increase_button);

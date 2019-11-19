@@ -17,6 +17,10 @@ void LabeledSliderView::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
 
+void LabeledSliderView::set_slider_color(const gm::Color& color) {
+    slider_view->set_slider_color(color);
+}
+
 void LabeledSliderView::_setup() {
     _caption_label = new Label();
     _value_label   = new Label();

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "View.hpp"
+#include "SliderView.hpp"
 
 namespace ui {
 
@@ -36,7 +37,7 @@ public:
     void set_value(float);
 
     void set_buttons_color(const gm::Color&);
-    void  set_slider_color(const gm::Color&);
+    void set_slider_color(const gm::Color&);
 
 private:
 
