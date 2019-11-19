@@ -20,7 +20,9 @@ if(${IOS})
 	add_definitions(-DIOS=1)
 endif()
 
+if(${NEEDS_CONAN})
 conan_basic_setup()
+endif()
 
 if(${DESKTOP_BUILD})
 	add_subdirectory(source/ui)
