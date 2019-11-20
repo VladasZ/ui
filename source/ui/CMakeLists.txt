@@ -1,16 +1,9 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(ui)
-
-add_catalog_recursive(${PROJECT_SOURCE_DIR} /source SOURCE)
-add_executable(${PROJECT_NAME} ${SOURCE})
+setup_exe(ui)
 
 link_project(ui_lib)
 
 link_project_at_path(image     ${image_path}    )
 link_project_at_path(geometry  ${geometry_path} )
 link_project_at_path(cpp_utils ${cpp_utils_path})
-
-if(${NEEDS_CONAN})
-conan_target_link_libraries(${PROJECT_NAME})
-endif()
