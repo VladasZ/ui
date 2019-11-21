@@ -6,8 +6,3 @@ endif()
 
 setup_project(ui)
 
-add_subdirectory(source/ui)
-
-if(${DESKTOP_BUILD})
-	add_subdirectory(source/ui_test)
-endif()
