@@ -4,13 +4,10 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 	include(build/build_tools_generated.cmake)
 endif()
 
-project(ui)
+setup_project(ui)
 
-setup_conan_if_needed()
-setup_deps()
-
-add_subdirectory(source/ui_lib)
+add_subdirectory(source/ui)
 
 if(${DESKTOP_BUILD})
-	add_subdirectory(source/ui)
+	add_subdirectory(source/ui_test)
 endif()
