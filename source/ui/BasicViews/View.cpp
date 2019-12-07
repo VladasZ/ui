@@ -83,7 +83,9 @@ bool View::contains_global_point(const Point& point) const {
 void View::_draw() {
     _layout();
     _draw_rect();
-    _draw_subviews();
+    if (!_subviews.empty()) {
+        _draw_subviews();
+    }
 }
 
 void View::_draw_rect() {
