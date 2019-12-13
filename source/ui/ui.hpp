@@ -13,7 +13,7 @@
 #include "System.hpp"
 #include "UIDrawer.hpp"
 
-//#define DRAW_DEBUG_FRAMES
+#define DRAW_DEBUG_FRAMES
 
 namespace ui {
 
