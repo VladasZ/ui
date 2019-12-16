@@ -45,8 +45,8 @@ public:
     bool is_moved() const;
     bool is_ended() const;
 
-    const char* event_string() const;
-    const char* to_string() const;
+    std::string event_string() const;
+    std::string to_string() const;
 };
 
 }

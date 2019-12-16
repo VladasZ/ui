@@ -47,7 +47,7 @@ protected:
 public:
 
     void add_subview(View*);
-    void add_subview(std::initializer_list<View*>);
+    void add_subviews(std::initializer_list<View*>);
     void remove_all_subviews();
 
 public:

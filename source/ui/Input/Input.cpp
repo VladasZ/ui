@@ -52,6 +52,10 @@ void Input::_unsubscribe_window(Window* view) {
 void Input::process_touch_event(Touch* touch) {
 
     on_touch(touch);
+
+#ifdef LOG_TOUCHES
+    Log(touch->to_string());
+#endif
         
     if (touch->is_moved()) {
         for (auto view : _subscribed_views) {

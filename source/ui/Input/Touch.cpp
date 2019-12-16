@@ -14,7 +14,6 @@ using namespace ui;
 using namespace gm;
 
 #if DESKTOP_BUILD
-
 Touch::Touch(ID id, const Point& location, Event event, Mouse::Button button)
     : id(id), location(location), event(event), button(button) { }
 #else
@@ -34,23 +33,12 @@ bool Touch::is_ended() const {
     return event == Event::Ended;
 }
 
-const char* Touch::event_string() const {
-    static std::string result;
-
-    if (is_began())
-        result = "Began";
-
-    if (is_moved())
-        result = "Moved";
-
-    if (is_ended())
-        result = "Ended";
-
-    return result.c_str();
+std::string Touch::event_string() const {
+    if (is_began()) return "Began";
+    if (is_moved()) return "Moved";
+    if (is_ended()) return "Ended";
 }
 
-const char* Touch::to_string() const {
-    static std::string result;
-    result = std::string() + location.to_string() + " " + event_string();
-    return result.c_str();
+std::string Touch::to_string() const {
+    return location.to_string() + " " + event_string() + " id: " + std::to_string(id);
 }
