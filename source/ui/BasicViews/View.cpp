@@ -89,7 +89,9 @@ void View::_draw() {
 }
 
 void View::_draw_rect() {
-    ui::config::drawer()->fill_rect(_absolute_frame, background_color);
+    if (!background_color.is_clear()) {
+        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
+    }
 #ifdef DRAW_DEBUG_FRAMES
     ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
 #endif
