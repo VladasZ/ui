@@ -99,34 +99,7 @@ void View::_draw_rect() {
 }
 
 void View::_draw_subviews() {
-
     for (auto view : _subviews) {
-
-#ifdef ANDROID_BUILD
-
-        if (view == reinterpret_cast<View*>(0x00000070)) {
-            Log("0x00000070");
-            return;
-        }
-
-
-        if (view == reinterpret_cast<View*>(0x74732068)) {
-            Log("0x74732068");
-            return;
-        }
-
-        if (view == reinterpret_cast<View*>(-1)) {
-            Log("-1");
-            return;
-        }
-
-        if (view == nullptr) {
-            Log("nullprt");
-            return;
-        }
-
-#endif
-
         view->_draw();
     }
 }

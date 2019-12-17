@@ -14,7 +14,6 @@
 #include "UIDrawer.hpp"
 
 #define DRAW_DEBUG_FRAMES
-#define DRAW_TOUCHES
 //#define LOG_TOUCHES
 
 namespace ui {
