@@ -8,6 +8,7 @@
 
 #include <string>
 
+#include "Log.hpp"
 #include "Touch.hpp"
 
 using namespace ui;
@@ -37,6 +38,7 @@ std::string Touch::event_string() const {
     if (is_began()) return "Began";
     if (is_moved()) return "Moved";
     if (is_ended()) return "Ended";
+    Fatal("Invalid touch type");
 }
 
 std::string Touch::to_string() const {
