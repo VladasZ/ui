@@ -13,6 +13,7 @@
 #include "View.hpp"
 #include "Input.hpp"
 #include "UIDrawer.hpp"
+#include "ArrayUtils.hpp"
 
 using namespace ui;
 using namespace gm;
@@ -22,10 +23,12 @@ View::View(const Rect& rect) : _frame(rect) {
 }
 
 View::~View() {
-    if (_user_interaction_enabled)
+    if (_user_interaction_enabled) {
         Input::_unsubscribe_view(this);
-    for (auto view : _subviews)
+    }
+    for (auto view : _subviews) {
         delete view;
+    }
 }
 
 void View::add_subview(View* view) {
@@ -35,14 +38,21 @@ void View::add_subview(View* view) {
 }
 
 void View::add_subviews(std::initializer_list<View*> views) {
-    for (auto view : views)
+    for (auto view : views) {
         add_subview(view);
+    }
 }
 
 void View::remove_all_subviews() {
-    for (auto view : _subviews)
+    for (auto view : _subviews) {
         delete view;
+    }
     _subviews.clear();
+}
+
+void View::remove_from_superview() {
+    cu::array::remove(_superview->_subviews, this);
+    delete this;
 }
 
 Rect View::frame() const {
@@ -111,25 +121,29 @@ void View::_layout() {
 
 void View::_calculate_absolute_frame() {
     _absolute_frame = _frame;
-    if (_superview)
+    if (_superview) {
         _absolute_frame.origin += _superview->_absolute_frame.origin;
+    }
 }
 
 void View::_layout_subviews() {
-    for (auto subview : _subviews)
+    for (auto subview : _subviews) {
         subview->_layout();
+    }
 }
 
 void View::enable_user_interaction() {
-    if (_user_interaction_enabled)
+    if (_user_interaction_enabled) {
         return;
+    }
     _user_interaction_enabled = true;
     Input::_subscribed_views.push_back(this);
 }
 
 void View::disable_user_interaction() {
-    if (!_user_interaction_enabled)
+    if (!_user_interaction_enabled) {
         return;
+    }
     _user_interaction_enabled = false;
     Input::_unsubscribe_view(this);
 }
@@ -139,4 +153,3 @@ View* View::dummy(const Rect& frame) {
     view->background_color = Color::random();
     return view;
 }
-

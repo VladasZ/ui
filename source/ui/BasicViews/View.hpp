@@ -22,14 +22,18 @@ namespace ui {
 
 class View {
 
+public:
+
+    using Array = std::vector<View*>;
+
 protected:
     
     Touch::ID _touch_id = 0;
 
     gm::Rect _frame;
     View* _superview = nullptr;
-    
-    std::vector<View*> _subviews;
+
+    View::Array _subviews;
     
     bool _needs_layout = true;
 
@@ -48,7 +52,9 @@ public:
 
     void add_subview(View*);
     void add_subviews(std::initializer_list<View*>);
+
     void remove_all_subviews();
+    void remove_from_superview();
 
 public:
 
