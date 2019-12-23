@@ -16,6 +16,8 @@
 using namespace ui;
 using namespace gm;
 
+static Touch* mouse_touch = new Touch(1, { }, Touch::Event::Ended, Mouse::Button::Left);
+
 std::map<Mouse::Button, std::string> Mouse::button_to_string = {
     { Mouse::Button::Left,   "Left"   },
     { Mouse::Button::Right,  "Right"  },
@@ -35,10 +37,8 @@ std::map<Mouse::CursorMode,  std::string> Mouse::cursor_mode_to_string = {
     { Mouse::CursorMode::VResize, "VResize" }
 };
 
-static Touch* mouse_touch = new Touch(1, { }, Touch::Event::Ended, Mouse::Button::Left);
-
 void Mouse::set_position(const Point& position) {
-	frame_shift = Mouse::position - position;
+	frame_shift = position - Mouse::position;
 	Mouse::position = position;
 	on_moved(position);
    if (button_state == ButtonState::Up) {
@@ -52,7 +52,15 @@ void Mouse::set_position(const Point& position) {
 
 void Mouse::set_button_state(Button button, ButtonState state) {
     button_state = state;
-    mouse_touch->event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
+
+    auto event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
+
+    if (event == Touch::Event::Began) {
+        static Touch::ID id = 0;
+        mouse_touch->id = id++;
+    }
+
+    mouse_touch->event = event;
     mouse_touch->location = position;
     mouse_touch->button = button;
 
