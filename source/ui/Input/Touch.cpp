@@ -22,6 +22,20 @@ Touch::Touch(ID id, const Point& location, Touch::Event event)
     : id(id), location(location), event(event) { }
 #endif
 
+#if DESKTOP_BUILD
+bool Touch::is_left_click() const {
+    return button == Mouse::Button::Left;
+}
+
+bool Touch::is_middle_click() const {
+    return button == Mouse::Button::Middle;
+}
+
+bool Touch::is_right_click() const {
+    return button == Mouse::Button::Right;
+}
+#endif
+
 bool Touch::is_began() const {
     return event == Event::Began;
 }

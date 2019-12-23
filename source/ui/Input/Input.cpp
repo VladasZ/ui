@@ -57,6 +57,12 @@ void Input::process_touch_event(Touch* touch) {
     Log(touch->to_string());
 #endif
         
+#ifdef MOUSE
+    if (touch->is_moved() && touch->is_right_click()) {
+        on_right_button_drag(touch);
+    }
+#endif
+
     if (touch->is_moved()) {
         for (auto view : _subscribed_views) {
             if (view->_touch_id == touch->id) {

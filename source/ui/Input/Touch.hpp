@@ -41,6 +41,12 @@ public:
     Touch(ID id, const gm::Point& location, Event event);
 #endif
 
+#if DESKTOP_BUILD
+    bool is_left_click() const;
+    bool is_middle_click() const;
+    bool is_right_click() const;
+#endif
+
     bool is_began() const;
     bool is_moved() const;
     bool is_ended() const;

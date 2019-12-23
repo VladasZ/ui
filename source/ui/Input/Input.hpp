@@ -43,6 +43,7 @@ public:
     static inline Event<Touch*> on_touch;
 
 #if DESKTOP_BUILD
+    static inline Event<Touch*> on_right_button_drag;
     static void hover_moved(const gm::Point& position);
 #endif
 
