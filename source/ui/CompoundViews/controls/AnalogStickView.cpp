@@ -6,6 +6,8 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#ifndef DESKTOP_BUILD
+
 #include "Log.hpp"
 #include "Event.hpp"
 #include "AnalogStickView.hpp"
@@ -66,3 +68,5 @@ void AnalogStickView::_setup() {
         }
     });
 }
+
+#endif
