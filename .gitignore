@@ -7,3 +7,4 @@
 /dep_build
 .idea/
 cmake-build-debug/
+conanfile.txt
