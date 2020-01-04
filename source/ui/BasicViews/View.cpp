@@ -83,6 +83,11 @@ void View::set_center(const Point& center) {
     _needs_layout = true;
 }
 
+void View::set_size(const gm::Size& size) {
+    _frame.size = size;
+    _needs_layout = true;
+}
+
 Point View::global_point_lo_local(const Point& point) const {
     return point - _absolute_frame.origin;
 }

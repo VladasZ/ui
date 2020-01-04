@@ -67,6 +67,7 @@ public:
     void edit_frame(std::function<void(gm::Rect&)>);
     void set_origin(const gm::Point&);
     void set_center(const gm::Point&);
+    void set_size(const gm::Size&);
 
 public:
 
