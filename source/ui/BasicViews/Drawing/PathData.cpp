@@ -13,7 +13,7 @@
 using namespace ui;
 using namespace gm;
 
-PathData::PathData(Path* path, void* data, const Color& color, DrawMode draw_mode)
+PathData::PathData(PointsPath* path, void* data, const Color& color, DrawMode draw_mode)
 : _path(path), _color(color), _data(data), draw_mode(draw_mode) {
 
 }
@@ -22,7 +22,7 @@ PathData::~PathData() {
     ui::config::drawer()->free_path_data(this);
 }
 
-const Path* PathData::path() const {
+const PointsPath* PathData::path() const {
     return _path;
 }
 

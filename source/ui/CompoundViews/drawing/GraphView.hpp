@@ -14,7 +14,7 @@ namespace ui {
 
 class GraphView : public View {
 
-    gm::Path* _path = nullptr;
+    gm::PointsPath* _path = nullptr;
 
     std::vector<float> _points;
 

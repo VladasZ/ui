@@ -22,7 +22,7 @@ const DrawingView::Paths& DrawingView::paths() const {
     return _paths;
 }
 
-void DrawingView::add_path(gm::Path* path, const gm::Color& color, PathData::DrawMode draw_mode) {
+void DrawingView::add_path(gm::PointsPath* path, const gm::Color& color, PathData::DrawMode draw_mode) {
     _paths.push_back(ui::config::drawer()->initialize_path_data(path, color, draw_mode));
 }
 

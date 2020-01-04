@@ -30,7 +30,7 @@ public:
     ~DrawingView() override;
 
     const Paths& paths() const;
-    void add_path(gm::Path*, const gm::Color&, PathData::DrawMode draw_mode = PathData::DrawMode::Fill);
+    void add_path(gm::PointsPath*, const gm::Color&, PathData::DrawMode draw_mode = PathData::DrawMode::Fill);
 
     void remove_all_paths();
 

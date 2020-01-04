@@ -52,7 +52,7 @@ float GraphView::_delta() const {
 }
 
 void GraphView::_setup() {
-    _path = new gm::Path();
+    _path = new gm::PointsPath();
     add_subview(_drawing_view = new DrawingView());
 }
 
