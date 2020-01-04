@@ -38,10 +38,10 @@ void AnalogStickView::_setup() {
     
     enable_user_interaction();
     
-    add_path(Path::circle_with(_frame.size.center(), _frame.size.width),
+    add_path(PointsPath::circle_with(_frame.size.center(), _frame.size.width),
              Color::black);
 
-    add_path(Path::circle_with(_frame.size.center(), _frame.size.width - OUTLINE_WIDTH),
+    add_path(PointsPath::circle_with(_frame.size.center(), _frame.size.width - OUTLINE_WIDTH),
              Color::white);
 
     direction_stick = new DrawingView({ STICK_VIEW_SIZE, STICK_VIEW_SIZE });
@@ -51,11 +51,11 @@ void AnalogStickView::_setup() {
     auto stick_center = direction_stick->frame().size.center();
 
     direction_stick->add_path(
-            Path::circle_with(stick_center, STICK_VIEW_SIZE),
+            PointsPath::circle_with(stick_center, STICK_VIEW_SIZE),
             Color::black);
 
     direction_stick->add_path(
-            Path::circle_with(stick_center, STICK_VIEW_SIZE - OUTLINE_WIDTH),
+            PointsPath::circle_with(stick_center, STICK_VIEW_SIZE - OUTLINE_WIDTH),
             Color::light_gray);
     
     on_touch.subscribe([&](Touch* touch) {
