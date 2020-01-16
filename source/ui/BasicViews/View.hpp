@@ -26,7 +26,7 @@ public:
 
     using Array = std::vector<View*>;
 
-protected:
+public:
     
     Touch::ID _touch_id = 0;
 
