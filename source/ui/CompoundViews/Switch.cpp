@@ -27,6 +27,8 @@ void Switch::_setup() {
 
 void Switch::_layout() {
 
+    _calculate_absolute_frame();
+
     auto half_widht = _frame.size.width / 2;
 
     _switch->set_frame({
@@ -36,5 +38,5 @@ void Switch::_layout() {
        _frame.size.height
     });
 
-    View::_layout();
+    _layout_subviews();
 }
