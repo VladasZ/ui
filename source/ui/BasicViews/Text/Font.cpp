@@ -6,18 +6,15 @@
 //  Copyright © 2017 VladasZ. All rights reserved.
 //
 
-#include "ui.hpp"
-
 #ifndef NO_FREETYPE
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
-
 #endif
 
 #include <cmath>
 
+#include "Log.hpp"
 #include "Font.hpp"
 #include "Glyph.hpp"
 #include "Image.hpp"
@@ -26,10 +23,12 @@ using namespace ui;
 using namespace gm;
 
 #ifndef NO_FREETYPE
+
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;
-    if (_library == nullptr)
+    if (_library == nullptr) {
         FT_Init_FreeType(&_library);
+    }
     return _library;
 }
 
@@ -61,13 +60,14 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
 #endif
 
 
-Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
+Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _size(size) {
 #ifndef NO_FREETYPE
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
-    if (file == nullptr)
-        throw std::string() + "Failed to open font file: " + file_name;
+    if (file == nullptr) {
+        Fatal("Failed to open font file: " + file_name);
+    }
 
     fseek(file, 0, SEEK_END);
     auto _size = static_cast<size_t>(ftell(file));
@@ -110,16 +110,17 @@ Font::Font(const std::string& file_name, unsigned int size) : _file(file_name) {
 }
 
 Font::~Font() {
-    for (auto glyph : _glyphs)
+    for (auto glyph : _glyphs) {
         delete glyph;
-}
-
-float Font::baseline_shift() const {
-    return _baseline_shift;
+    }
 }
 
 float Font::height() const {
     return _height;
+}
+
+float Font::baseline_shift() const {
+    return _baseline_shift;
 }
 
 Glyph* Font::glyph_for_char(char ch) const {

@@ -14,8 +14,7 @@ using namespace gm;
 
 
 Glyph::Glyph(char ch, Image* image, int advance, const Point& bearing)
-: ch(ch), image(image), advance(advance / 2), bearing(bearing.x / 2, bearing.y / 2)
-{ }
+: ch(ch), image(image), advance(advance / 2), bearing(bearing.x / 2, bearing.y / 2) { }
 
 Glyph::~Glyph() {
     delete image;

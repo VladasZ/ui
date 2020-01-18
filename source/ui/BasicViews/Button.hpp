@@ -18,6 +18,8 @@ namespace ui {
 
 class Button : public View {
 
+protected:
+
     Label* _caption_label;
 
 public:
@@ -27,8 +29,6 @@ public:
     Button(const gm::Rect& = { });
 
     void set_caption(const std::string&);
-
-protected:
 
 };
 

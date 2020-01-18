@@ -17,20 +17,27 @@ class Glyph;
 
 class Font {
 
+private:
+
     std::string _file;
-    
+
+    unsigned _size;
+
     float _height;
     float _baseline_shift;
 
     std::vector<Glyph*> _glyphs;
   
 public:
-    
-    Font(const std::string& file_name, unsigned int size = 28 * 2);
+
+    Font() = default;
+    explicit Font(const std::string& file_name, unsigned size = 28 * 2);
     ~Font();
-    
-    float  baseline_shift()            const;
-    float  height()                    const;
+
+    float size() const;
+    float height() const;
+    float baseline_shift() const;
+
     ui::Glyph* glyph_for_char(char ch) const;
 
     Font* with_size(unsigned int) const;
