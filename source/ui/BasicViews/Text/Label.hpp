@@ -15,6 +15,8 @@ namespace ui {
 
 class Label : public View {
 
+private:
+
     std::string _text;
     View* _content_view;
     Font* _font;

@@ -26,7 +26,7 @@ public:
 
     using Array = std::vector<View*>;
 
-public:
+protected:
     
     Touch::ID _touch_id = 0;
 
@@ -95,11 +95,11 @@ protected:
 
     friend Input;
 
+    bool _user_interaction_enabled = false;
+
 public:
 
     Event<Touch*> on_touch;
-    
-    bool _user_interaction_enabled = false;
 
     void enable_user_interaction();
     void disable_user_interaction();

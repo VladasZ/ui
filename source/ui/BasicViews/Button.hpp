@@ -28,6 +28,8 @@ public:
 
     void set_caption(const std::string&);
 
+protected:
+
 };
 
 }
