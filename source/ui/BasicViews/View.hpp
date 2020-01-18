@@ -41,7 +41,8 @@ public:
 
     gm::Color background_color;
 
-    View(const gm::Rect& = { });
+    View() = default;
+    explicit View(const gm::Rect&);
     virtual ~View();
 
 protected:
