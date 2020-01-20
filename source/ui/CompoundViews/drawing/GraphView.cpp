@@ -33,12 +33,13 @@ void GraphView::set_multiplier(float multiplier) {
 }
 
 void GraphView::add_point(float point) {
-    if (_points.size() > _points_size)
+    if (_points.size() > _points_size) {
         reset();
-    _points.push_back(point);
-    _path->add_point({ _points.size() * _delta(), point * _multiplier });
+    }
+    _points.push_back(flip_data ? 1 - point : point);
+     _path->add_point({ _points.size() * _delta(), point * _multiplier });
     _drawing_view->remove_all_paths();
-    _drawing_view->add_path(_path, color);
+    _drawing_view->add_path(_path, graph_color, PathData::DrawMode::Outline);
 }
 
 void GraphView::reset() {
@@ -64,8 +65,9 @@ void GraphView::_layout() {
 
 void GraphView::_recalculate_graph() {
     _path->clear();
-    for (size_t i = 0; i < _points.size(); i++)
+    for (size_t i = 0; i < _points.size(); i++) {
         _path->add_point({ i * _delta(), _points[i] * _multiplier });
+    }
     _drawing_view->remove_all_paths();
-    _drawing_view->add_path(_path, color);
+    _drawing_view->add_path(_path, graph_color);
 }

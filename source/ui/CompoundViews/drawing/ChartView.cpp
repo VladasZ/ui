@@ -28,33 +28,38 @@ void ChartView::add_values(const std::initializer_list<float>& values) {
     size_t i = 0;
     for (auto value : values) {
         _graphs[i++]->add_point(value);
-        if (i == _graphs.size())
+        if (i == _graphs.size()) {
             return;
+        }
     }
 }
 
 void ChartView::set_colors(const std::initializer_list<gm::Color>& colors) {
     size_t i = 0;
     for (auto color : colors) {
-        _graphs[i++]->color = color;
-        if (i == _graphs.size())
+        _graphs[i++]->graph_color = color;
+        if (i == _graphs.size()) {
             return;
+        }
     }
 }
 
 void ChartView::set_points_size(size_t size) {
-    for (auto graph : _graphs)
+    for (auto graph : _graphs) {
         graph->set_points_size(size);
+    }
 }
 
 void ChartView::set_multiplier(float multiplier) {
-    for (auto graph : _graphs)
+    for (auto graph : _graphs) {
         graph->set_multiplier(multiplier);
+    }
 }
 
 void ChartView::reset() {
-    for (auto graph : _graphs)
+    for (auto graph : _graphs) {
         graph->reset();
+    }
 }
 
 void ChartView::_setup() {
@@ -63,6 +68,7 @@ void ChartView::_setup() {
 
 void ChartView::_layout() {
     View::_layout();
-    for (auto graph : _graphs)
+    for (auto graph : _graphs) {
         graph->set_frame(_frame.with_zero_origin());
+    }
 }

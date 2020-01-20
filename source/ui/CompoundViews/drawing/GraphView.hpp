@@ -27,7 +27,9 @@ public:
 
     using View::View;
 
-    gm::Color color;
+    bool flip_data = false;
+
+    gm::Color graph_color;
 
     ~GraphView() override;
 

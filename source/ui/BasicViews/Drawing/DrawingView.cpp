@@ -14,8 +14,9 @@ using namespace ui;
 
 
 DrawingView::~DrawingView() {
-    for (auto path : _paths)
+    for (auto path : _paths) {
         delete path;
+    }
 }
 
 const DrawingView::Paths& DrawingView::paths() const {
@@ -27,8 +28,9 @@ void DrawingView::add_path(gm::PointsPath* path, const gm::Color& color, PathDat
 }
 
 void DrawingView::remove_all_paths() {
-    for (auto path : _paths)
+    for (auto path : _paths) {
         delete path;
+    }
     _paths.clear();
 }
 
