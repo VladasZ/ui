@@ -32,7 +32,7 @@ void Slider::set_value(float value) {
     _value = value / multiplier;
     gm::math::clamp(_value);
     _needs_layout = true;
-    on_value_changed(value);
+    on_value_changed(_value);
 }
 
 void Slider::set_buttons_color(const Color& color) {

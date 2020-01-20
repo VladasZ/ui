@@ -33,7 +33,7 @@ void LabeledSliderView::_setup() {
         _value_label->set_text(std::to_string(value).substr(0, 4));
     });
 
-    _reset_button->on_press.subscribe([&]{
+    _reset_button->on_press.subscribe([&] {
         slider_view->set_value(0.5f);
     });
 
