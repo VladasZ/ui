@@ -25,7 +25,7 @@ void LabeledSliderView::_setup() {
     _caption_label = new Label();
     _value_label   = new Label();
     _reset_button  = new Button();
-    slider_view    = new SliderView();
+    slider_view    = new Slider();
 
     _value_label->set_text("0.00");
 

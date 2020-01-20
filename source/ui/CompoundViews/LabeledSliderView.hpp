@@ -9,7 +9,7 @@
 #pragma once
 
 #include "Label.hpp"
-#include "SliderView.hpp"
+#include "Slider.hpp"
 
 namespace ui {
 
@@ -27,7 +27,7 @@ public:
 
     using View::View;
 
-    SliderView* slider_view = nullptr;
+    Slider* slider_view = nullptr;
 
     void set_caption(const std::string&);
     void set_slider_color(const gm::Color&);

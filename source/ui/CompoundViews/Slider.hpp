@@ -1,5 +1,5 @@
 //
-//  SliderView.hpp
+//  Slider.hpp
 //  ui
 //
 //  Created by Vladas Zakrevskis on 1/28/19.
@@ -9,13 +9,13 @@
 #pragma once
 
 #include "View.hpp"
-#include "SliderView.hpp"
+#include "Slider.hpp"
 
 namespace ui {
 
 class ImageButton;
 
-class SliderView : public View {
+class Slider : public View {
 
     float _value = 0.0f;
 
@@ -30,8 +30,8 @@ public:
 
     Event<float> on_value_changed;
 
-    SliderView(const gm::Rect& = { });
-    ~SliderView() override;
+    Slider(const gm::Rect& = { });
+    ~Slider() override;
 
     float value() const;
     void set_value(float);

@@ -1,56 +1,56 @@
 //
-//  SliderView.cpp
+//  Slider.cpp
 //  ui
 //
 //  Created by Vladas Zakrevskis on 1/28/19.
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
+#include "GmMath.hpp"
+#include "Slider.hpp"
 #include "ImageButton.hpp"
-#include "SliderView.hpp"
 
 using namespace ui;
 using namespace gm;
 
-SliderView::SliderView(const Rect& frame) : View(frame) {
+Slider::Slider(const Rect& frame) : View(frame) {
 
 }
 
-SliderView::~SliderView() {
+Slider::~Slider() {
     delete _increase_button;
     delete _decrease_button;
     delete _slider_content_view;
     delete _slider_view;
 }
 
-float SliderView::value() const {
+float Slider::value() const {
     return  _value * multiplier;
 }
 
-void SliderView::set_value(float value) {
+void Slider::set_value(float value) {
     _value = value / multiplier;
-    if (_value < 0) _value = 0;
-    if (_value > 1) _value = 1;
+    gm::math::clamp(_value);
     _needs_layout = true;
     on_value_changed(value);
 }
 
-void SliderView::set_buttons_color(const Color& color) {
+void Slider::set_buttons_color(const Color& color) {
     _increase_button->background_color = color;
     _decrease_button->background_color = color;
 }
 
-void SliderView::set_slider_color(const Color& color) {
+void Slider::set_slider_color(const Color& color) {
     _slider_view->background_color = color;
 }
 
-void SliderView::_setup() {
+void Slider::_setup() {
     _increase_button     = new ImageButton();
     _decrease_button     = new ImageButton();
     _slider_content_view = new View();
     _slider_view         = new View();
 
-    set_buttons_color(Color::gray);
+    set_buttons_color(Color::blue);
     set_slider_color(Color::green);
 
     add_subview(_increase_button);
@@ -68,13 +68,14 @@ void SliderView::_setup() {
     
     _slider_content_view->enable_user_interaction();
     _slider_content_view->on_touch.subscribe([&](Touch* touch){
-        if (touch->is_ended())
+        if (touch->is_ended()) {
             return;
+        }
         set_value((1.0f - touch->location.y / _slider_content_view->frame().size.height) * multiplier);
     });
 }
 
-void SliderView::_layout() {
+void Slider::_layout() {
     _calculate_absolute_frame();
 
     _increase_button->set_frame({ _frame.size.width });
@@ -96,7 +97,7 @@ void SliderView::_layout() {
     _set_slider_position();
 }
 
-void SliderView::_set_slider_position() {
+void Slider::_set_slider_position() {
     _slider_view->set_frame({
                                 0,
                                 (_slider_content_view->frame().size.height - _frame.size.width / 4) * (1 - _value),
