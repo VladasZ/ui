@@ -88,6 +88,16 @@ void View::set_size(const gm::Size& size) {
     _needs_layout = true;
 }
 
+void View::set_x(float x) {
+    _frame.origin.x = x;
+    _needs_layout = true;
+}
+
+void View::set_y(float y) {
+    _frame.origin.y = y;
+    _needs_layout = true;
+}
+
 Point View::global_point_lo_local(const Point& point) const {
     return point - _absolute_frame.origin;
 }

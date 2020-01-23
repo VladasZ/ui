@@ -20,23 +20,37 @@ void Switch::_setup() {
         if (!touch->is_began()) {
             return;;
         }
-        is_selected = !is_selected;
-        on_value_changed(is_selected);
+        _is_selected = !_is_selected;
+        on_value_changed(_is_selected);
     });
+}
+
+bool Switch::is_selected() const {
+    return _is_selected;
 }
 
 void Switch::_layout() {
 
     _calculate_absolute_frame();
 
+
+    static constexpr float indent = 4.0f;
+
     auto half_widht = _frame.size.width / 2;
 
-    _switch->set_frame({
-       is_selected ? half_widht : 0,
-       0,
-       half_widht,
-       _frame.size.height
-    });
+    _switch->set_frame({indent,
+                        indent,
+                        half_widht - indent,
+                        _frame.size.height - indent * 2
+                       });
+
+    if (_is_selected) {
+        _switch->edit_frame([&] (auto& frame) {
+            frame.origin.x += half_widht - indent;
+        });
+    }
+
+    background_color = _is_selected ? Color::green : Color::clear;
 
     _layout_subviews();
 }

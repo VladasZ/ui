@@ -14,13 +14,17 @@ namespace ui {
 
 class Switch : public View {
 
+protected:
+
+    bool _is_selected = false;
+
     View* _switch;
 
 public:
 
     using View::View;
 
-    bool is_selected = false;
+    bool is_selected() const;
 
     Event<bool> on_value_changed;
 

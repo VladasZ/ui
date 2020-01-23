@@ -10,12 +10,13 @@
 
 #include "View.hpp"
 #include "Slider.hpp"
+#include "ImageButton.hpp"
 
 namespace ui {
 
-class ImageButton;
-
 class Slider : public View {
+
+protected:
 
     float _value = 0.0f;
 
@@ -39,7 +40,7 @@ public:
     void set_buttons_color(const gm::Color&);
     void set_slider_color(const gm::Color&);
 
-private:
+protected:
 
     void _setup() override;
 
