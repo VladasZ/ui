@@ -14,9 +14,11 @@
 using namespace ui;
 using namespace gm;
 
-ImageView::ImageView(Image* image) : ImageView({ }, image) {
+ImageView::ImageView() : ImageView({ }, nullptr) { }
 
-}
+ImageView::ImageView(Image* image) : ImageView({ }, image) { }
+
+ImageView::ImageView(const gm::Rect& rect) : ImageView(rect, nullptr) { }
 
 ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
     _content_view = new View();

@@ -9,8 +9,7 @@
 #pragma once
 
 #include "View.hpp"
-
-class Image;
+#include "Image.hpp"
 
 namespace ui {
 
@@ -31,8 +30,10 @@ private:
 
 public:
 
-    ImageView(Image* = nullptr);
-    ImageView(const gm::Rect& = { }, Image* = nullptr);
+    ImageView();
+    ImageView(Image*);
+    ImageView(const gm::Rect&);
+    ImageView(const gm::Rect&, Image*);
 
     const Image* image() const;
     void set_image(Image*);
