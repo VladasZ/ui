@@ -42,7 +42,7 @@ public:
     void add_point(float);
     void reset();
 
-private:
+protected:
 
     float _delta() const;
     void _setup() override;
