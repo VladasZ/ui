@@ -6,7 +6,7 @@
 //  Copyright © 2017 VladasZ. All rights reserved.
 //
 
-#ifndef NO_FREETYPE
+#ifdef USING_FREETYPE
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
@@ -22,7 +22,7 @@
 using namespace ui;
 using namespace gm;
 
-#ifndef NO_FREETYPE
+#ifdef USING_FREETYPE
 
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;
@@ -61,7 +61,7 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
 
 
 Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _size(size) {
-#ifndef NO_FREETYPE
+#ifdef USING_FREETYPE
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
