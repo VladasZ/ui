@@ -49,27 +49,27 @@ void LabeledSliderView::_layout() {
     static const float label_height = 28.0f;
     static const float slider_width = 28.0f;
 
-    _value_label->frame =
+    _value_label->edit_frame() =
             { 0,
               0,
               _frame.size.width,
               label_height,
             };
 
-    slider_view->frame =
+    slider_view->edit_frame() =
             { _frame.size.width / 2 - slider_width / 2,
               label_height,
               slider_width,
               _frame.size.height - label_height * 2
             };
 
-    _caption_label->frame =
+    _caption_label->edit_frame() =
             { 0,
               _frame.size.height - label_height,
               _frame.size.width,
               label_height
             };
 
-    _reset_button->frame = _caption_label->frame();
+    _reset_button->edit_frame() = _caption_label->frame();
 
 }

@@ -78,30 +78,30 @@ void Slider::_setup() {
 void Slider::_layout() {
     _calculate_absolute_frame();
 
-    _increase_button->frame = { _frame.size.width };
+    _increase_button->edit_frame() = {_frame.size.width };
 
-    _decrease_button->frame = {
-            0,
-            _frame.size.height - _frame.size.width,
-            _frame.size.width,
-            _frame.size.width
-    };
+    _decrease_button->edit_frame() =
+            { 0,
+              _frame.size.height - _frame.size.width,
+              _frame.size.width,
+              _frame.size.width
+            };
 
-    _slider_content_view->frame = {
-            0,
-            _frame.size.width,
-            _frame.size.width,
-            _frame.size.height - _frame.size.width * 2
-    };
+    _slider_content_view->edit_frame() =
+            { 0,
+              _frame.size.width,
+              _frame.size.width,
+              _frame.size.height - _frame.size.width * 2
+            };
 
     _set_slider_position();
 }
 
 void Slider::_set_slider_position() {
-    _slider_view->frame = {
-            0,
-            (_slider_content_view->frame().size.height - _frame.size.width / 4) * (1 - _value),
-            _frame.size.width,
-            _frame.size.width / 4
-    };
+    _slider_view->edit_frame() =
+            { 0,
+              (_slider_content_view->frame().size.height - _frame.size.width / 4) * (1 - _value),
+              _frame.size.width,
+              _frame.size.width / 4
+            };
 }

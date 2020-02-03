@@ -26,7 +26,7 @@ void StackView::_layout() {
     float y_position = delta;
 
     for (size_t i = 0; i < _subviews.size(); i++) {
-        _subviews[i]->set_origin({ _margin, -_subviews[i]->frame().size.height / 2 + y_position });
+        _subviews[i]->edit_frame().origin = {_margin, -_subviews[i]->frame().size.height / 2 + y_position };
         y_position += delta * 2;
     }
 }

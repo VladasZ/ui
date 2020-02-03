@@ -17,7 +17,6 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Touch.hpp"
-#include "Property.hpp"
 
 namespace ui {
 
@@ -65,13 +64,10 @@ public:
 
 public:
 
-    cu::Property<gm::Rect> frame;
+    gm::Rect frame() const;
+    gm::Rect& edit_frame();
 
-    void set_origin(const gm::Point&);
     void set_center(const gm::Point&);
-    void set_size(const gm::Size&);
-    void set_x(float);
-    void set_y(float);
 
 public:
 

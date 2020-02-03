@@ -38,16 +38,14 @@ void Switch::_layout() {
 
     auto half_widht = _frame.size.width / 2;
 
-    _switch->frame = { indent,
-                       indent,
-                       half_widht - indent,
-                       _frame.size.height - indent * 2
+    _switch->edit_frame() = {indent,
+                             indent,
+                              half_widht - indent,
+                              _frame.size.height - indent * 2
     };
 
     if (_is_selected) {
-        _switch->frame = [&] (auto& frame) {
-            frame.origin.x += half_widht - indent;
-        };
+        _switch->edit_frame().origin.x += half_widht - indent;
     }
 
     background_color = _is_selected ? Color::green : Color::clear;

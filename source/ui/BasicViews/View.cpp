@@ -18,8 +18,8 @@
 using namespace ui;
 using namespace gm;
 
-View::View() : frame({ _frame }) {
-    frame.did_set = [&] { _needs_layout = true; };
+View::View() {
+
 }
 
 View::View(const Rect& rect) : View() {
@@ -63,28 +63,17 @@ View* View::superview() const {
     return _superview;
 }
 
-void View::set_origin(const Point& origin) {
-    _frame.origin = origin;
+gm::Rect View::frame() const {
+    return _frame;
+}
+
+gm::Rect& View::edit_frame() {
     _needs_layout = true;
+    return _frame;
 }
 
 void View::set_center(const Point& center) {
     _frame.set_center(center);
-    _needs_layout = true;
-}
-
-void View::set_size(const gm::Size& size) {
-    _frame.size = size;
-    _needs_layout = true;
-}
-
-void View::set_x(float x) {
-    _frame.origin.x = x;
-    _needs_layout = true;
-}
-
-void View::set_y(float y) {
-    _frame.origin.y = y;
     _needs_layout = true;
 }
 

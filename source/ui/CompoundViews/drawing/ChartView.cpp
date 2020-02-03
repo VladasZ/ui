@@ -69,6 +69,6 @@ void ChartView::_setup() {
 void ChartView::_layout() {
     View::_layout();
     for (auto graph : _graphs) {
-        graph->frame = _frame.with_zero_origin();
+        graph->edit_frame() = _frame.with_zero_origin();
     }
 }
