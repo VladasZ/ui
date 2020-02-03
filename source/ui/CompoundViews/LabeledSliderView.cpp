@@ -29,13 +29,13 @@ void LabeledSliderView::_setup() {
 
     _value_label->set_text("0.00");
 
-    slider_view->on_value_changed.subscribe([&](float value) {
+    slider_view->on_value_changed = [&](float value) {
         _value_label->set_text(std::to_string(value).substr(0, 4));
-    });
+    };
 
-    _reset_button->on_press.subscribe([&] {
+    _reset_button->on_press = [&] {
         slider_view->set_value(0.5f);
-    });
+    };
 
     add_subview(_caption_label);
     add_subview(_value_label);

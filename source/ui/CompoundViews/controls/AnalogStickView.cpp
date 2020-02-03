@@ -58,7 +58,7 @@ void AnalogStickView::_setup() {
             PointsPath::circle_with(stick_center, STICK_VIEW_SIZE - OUTLINE_WIDTH),
             Color::light_gray);
     
-    on_touch.subscribe([&](Touch* touch) {
+    on_touch = [&](Touch* touch) {
         if (!touch->is_ended()) {
             on_touch_moved(touch->location);
         }
@@ -66,7 +66,7 @@ void AnalogStickView::_setup() {
             direction_stick->set_center(_frame.size.center());
             on_direction_change({ });
         }
-    });
+    };
 }
 
 #endif

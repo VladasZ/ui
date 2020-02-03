@@ -16,13 +16,13 @@ void Switch::_setup() {
     _switch->background_color = Color::blue;
     add_subview(_switch);
     enable_user_interaction();
-    on_touch.subscribe([&](Touch* touch) {
+    on_touch = [&](Touch* touch) {
         if (!touch->is_began()) {
             return;;
         }
         _is_selected = !_is_selected;
         on_value_changed(_is_selected);
-    });
+    };
 }
 
 bool Switch::is_selected() const {

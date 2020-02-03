@@ -58,21 +58,21 @@ void Slider::_setup() {
     add_subview(_slider_content_view);
     _slider_content_view->add_subview(_slider_view);
 
-    _increase_button->on_press.subscribe([&] {
+    _increase_button->on_press = [&] {
         set_value((this->_value + 0.005f) * multiplier);
-    });
+    };
 
-    _decrease_button->on_press.subscribe([&] {
+    _decrease_button->on_press = [&] {
         set_value((this->_value - 0.005f) * multiplier);
-    });
+    };
 
     _slider_content_view->enable_user_interaction();
-    _slider_content_view->on_touch.subscribe([&](Touch* touch){
+    _slider_content_view->on_touch = [&](Touch* touch) {
         if (touch->is_ended()) {
             return;
         }
         set_value((1.0f - touch->location.y / _slider_content_view->frame().size.height) * multiplier);
-    });
+    };
 }
 
 void Slider::_layout() {

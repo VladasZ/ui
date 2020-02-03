@@ -15,11 +15,11 @@ Button::Button(const Rect& frame) : View(frame) {
     enable_user_interaction();
     add_subview(_caption_label = new Label());
     
-    on_touch.subscribe([&](Touch* touch){
+    on_touch = [&](Touch* touch) {
         if (touch->is_began()) {
             on_press();
         }
-    });
+    };
     
 }
 

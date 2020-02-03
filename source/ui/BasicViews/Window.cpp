@@ -17,7 +17,7 @@ using namespace gm;
 Window::Window(const Rect& rect) : View(rect) {
     Input::_windows.push_back(this);
     
-    on_touch.subscribe([&](Touch* touch){
+    on_touch = [&](Touch* touch) {
         if (touch->is_began()) {
             _initial_touch = touch->location;
             return;
@@ -31,7 +31,7 @@ Window::Window(const Rect& rect) : View(rect) {
         
         _needs_layout = true;
         _initial_touch = touch->location;
-    });
+    };
     
 }
 
