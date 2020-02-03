@@ -17,6 +17,7 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Touch.hpp"
+#include "Property.hpp"
 
 namespace ui {
 
@@ -42,7 +43,7 @@ public:
     bool draw_debug_frame = true;
     gm::Color background_color;
 
-    View() = default;
+    explicit View();
     explicit View(const gm::Rect&);
     virtual ~View();
 
@@ -60,13 +61,12 @@ public:
 
 public:
 
-    gm::Rect frame() const;
     View* superview() const;
 
 public:
 
-    void set_frame(const gm::Rect&);
-    void edit_frame(std::function<void(gm::Rect&)>);
+    cu::Property<gm::Rect> frame;
+
     void set_origin(const gm::Point&);
     void set_center(const gm::Point&);
     void set_size(const gm::Size&);

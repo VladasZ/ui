@@ -18,8 +18,12 @@
 using namespace ui;
 using namespace gm;
 
-View::View(const Rect& rect) : _frame(rect) {
+View::View() : frame({ _frame }) {
+    frame.did_set = [&] { _needs_layout = true; };
+}
 
+View::View(const Rect& rect) : View() {
+    _frame = rect;
 }
 
 View::~View() {
@@ -55,22 +59,8 @@ void View::remove_from_superview() {
     delete this;
 }
 
-Rect View::frame() const {
-    return _frame;
-}
-
 View* View::superview() const {
     return _superview;
-}
-
-void View::set_frame(const Rect& frame) {
-    _frame = frame;
-    _needs_layout = true;
-}
-
-void View::edit_frame(std::function<void(Rect&)> edit) {
-    edit(_frame);
-    _needs_layout = true;
 }
 
 void View::set_origin(const Point& origin) {

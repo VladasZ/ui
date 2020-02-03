@@ -59,7 +59,7 @@ void GraphView::_setup() {
 
 void GraphView::_layout() {
     View::_layout();
-    _drawing_view->set_frame(_frame.with_zero_origin());
+    _drawing_view->frame = _frame.with_zero_origin();
     _recalculate_graph();
 }
 

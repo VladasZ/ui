@@ -58,10 +58,10 @@ void ImageView::_layout() {
 
     switch (_content_mode) {
         case ContentMode::Fill:
-            _content_view->set_frame({ _frame.size });
+            _content_view->frame = { _frame.size };
             break;
         case ContentMode::AspectFit:
-            _content_view->set_frame(_frame.fit_size({ _image->width(), _image->height() }));
+            _content_view->frame = _frame.fit_size({ _image->width(), _image->height() });
             _content_view->set_center(_frame.center());
             break;
     }
