@@ -22,6 +22,7 @@ ImageView::ImageView(const gm::Rect& rect) : ImageView(rect, nullptr) { }
 
 ImageView::ImageView(const Rect& rect, Image* image) : View(rect), _image(image) {
     _content_view = new View();
+    _content_view->draw_debug_frame = false;
     add_subview(_content_view);
 }
 
@@ -43,9 +44,9 @@ void ImageView::_draw() {
 
     if (_image) {
         ui::config::drawer()->
-                draw_image_in_rect(
-                _image,
-                reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame
+                draw_image_in_rect(_image,
+                                   reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame,
+                                   tint_color
         );
     }
 

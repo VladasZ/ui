@@ -30,6 +30,8 @@ private:
 
 public:
 
+    gm::Color tint_color = gm::Color::white;
+
     ImageView();
     ImageView(Image*);
     ImageView(const gm::Rect&);

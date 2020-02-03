@@ -17,6 +17,8 @@ using namespace gm;
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
     _content_view = new View(_frame.with_zero_origin());
+    draw_debug_frame = false;
+    _content_view->draw_debug_frame = false;
     add_subview(_content_view);
 }
 
@@ -47,8 +49,9 @@ void Label::_set_glyphs() {
 
     _content_view->remove_all_subviews();
 
-    if (_text.empty())
+    if (_text.empty()) {
         return;
+    }
 
     int advance = 0;
     float content_width = 0;
@@ -60,6 +63,8 @@ void Label::_set_glyphs() {
         auto glyph = _font->glyph_for_char(letter);
 
         auto glyph_view = new ImageView(glyph->size(), glyph->image);
+        glyph_view->tint_color = text_color;
+        glyph_view->draw_debug_frame = false;
 
         auto& glyph_view_frame = reinterpret_cast<decltype(this)>(glyph_view)->_frame;
 

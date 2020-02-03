@@ -39,6 +39,7 @@ protected:
 
 public:
 
+    bool draw_debug_frame = true;
     gm::Color background_color;
 
     View() = default;

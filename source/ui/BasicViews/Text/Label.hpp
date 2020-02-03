@@ -23,6 +23,8 @@ private:
 
 public:
 
+    gm::Color text_color = gm::Color::white;
+
     Label(const gm::Rect& = { });
 
 public:
