@@ -18,15 +18,24 @@ void StackView::set_margin(float margin) {
 void StackView::_layout() {
     _calculate_absolute_frame();
 
-    if (_subviews.size() == 0)
+    if (_subviews.empty()) return;
+
+    if (_subviews.size() == 1) {
+        _subviews.front()->edit_frame() = _frame.with_zero_origin();
         return;
+    }
 
-    auto delta = _frame.size.height / (_subviews.size() * 2);
+    const auto height = (_frame.size.height - _margin * (_subviews.size() - 1)) / _subviews.size();
 
-    float y_position = delta;
+    _subviews.front()->edit_frame() =
+            { 0,
+              0,
+              _frame.size.width,
+              height
+            };
 
-    for (size_t i = 0; i < _subviews.size(); i++) {
-        _subviews[i]->edit_frame().origin = {_margin, -_subviews[i]->frame().size.height / 2 + y_position };
-        y_position += delta * 2;
+    for (size_t i = 1; i < _subviews.size(); i++) {
+        _subviews[i]->edit_frame() = _subviews.front()->frame();
+        _subviews[i]->edit_frame().origin.y = (height + _margin) * i;
     }
 }
