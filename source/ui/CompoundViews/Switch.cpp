@@ -15,7 +15,7 @@ void Switch::_setup() {
     _switch = new View();
     _switch->background_color = Color::blue;
     add_subview(_switch);
-    enable_user_interaction();
+    enable_touch();
     on_touch = [&](Touch* touch) {
         if (!touch->is_began()) {
             return;;

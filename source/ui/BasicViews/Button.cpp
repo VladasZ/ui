@@ -12,7 +12,7 @@ using namespace ui;
 using namespace gm;
 
 Button::Button(const Rect& frame) : View(frame) {
-    enable_user_interaction();
+    enable_touch();
     add_subview(_caption_label = new Label());
     
     on_touch = [&](Touch* touch) {

@@ -12,7 +12,7 @@ using namespace ui;
 using namespace gm;
 
 ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, image) {
-    enable_user_interaction();
+    enable_touch();
     on_touch = [&](Touch* touch) {
         if (touch->is_began()) {
             on_press();

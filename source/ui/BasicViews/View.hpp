@@ -8,105 +8,112 @@
 
 #pragma once
 
-#include <stdint.h>
 #include <vector>
+#include <stdint.h>
 #include <functional>
 
 #include "Rect.hpp"
 #include "Event.hpp"
 #include "Color.hpp"
-#include "Input.hpp"
 #include "Touch.hpp"
+
 
 namespace ui {
 
-class View {
+    class Input;
+    class ViewResizer;
 
-public:
+    class View {
 
-    using Array = std::vector<View*>;
+    public:
 
-protected:
-    
-    Touch::ID _touch_id = 0;
+        using Array = std::vector<View*>;
 
-    gm::Rect _frame;
-    View* _superview = nullptr;
+    protected:
 
-    View::Array _subviews;
-    
-    bool _needs_layout = true;
+        Touch::ID _touch_id = 0;
 
-public:
+        gm::Rect _frame;
+        View* _superview = nullptr;
 
-    bool draw_debug_frame = true;
-    gm::Color background_color;
+        View::Array _subviews;
 
-    explicit View();
-    explicit View(const gm::Rect&);
-    virtual ~View();
+        bool _needs_layout = true;
 
-protected:
+    public:
 
-    virtual void _setup() { }
+        bool draw_debug_frame = true;
+        gm::Color background_color;
 
-public:
+    public:
 
-    void add_subview(View*);
-    void add_subviews(std::initializer_list<View*>);
+        explicit View(const gm::Rect& = { });
+        virtual ~View();
 
-    void remove_all_subviews();
-    void remove_from_superview();
+    public:
 
-public:
+        void add_subview(View*);
+        void add_subviews(std::initializer_list<View*>);
 
-    View* superview() const;
+        void remove_all_subviews();
+        void remove_from_superview();
 
-public:
+    public:
 
-    gm::Rect frame() const;
-    gm::Rect& edit_frame();
+        View* superview() const;
 
-    void set_center(const gm::Point&);
+    public:
 
-public:
+        gm::Rect frame() const;
+        gm::Rect& edit_frame();
 
-    gm::Point global_point_lo_local(const gm::Point&) const;
-    bool contains_global_point(const gm::Point&) const;
+        void set_center(const gm::Point&);
 
-public:
+    public:
 
-    virtual void _draw();
+        gm::Point global_point_lo_local(const gm::Point&) const;
+        bool contains_global_point(const gm::Point&) const;
 
-protected:
+    public:
 
-    void _draw_rect();
-    void _draw_subviews();
+        virtual void _draw();
 
-protected:
+    protected:
 
-    gm::Rect _absolute_frame;
-    virtual void _layout();
-    void _calculate_absolute_frame();
-    void _layout_subviews();
+        void _draw_rect();
+        void _draw_subviews();
 
-protected:
+    protected:
 
-    friend Input;
+        gm::Rect _absolute_frame;
+        virtual void _layout();
+        void _calculate_absolute_frame();
+        void _layout_subviews();
 
-    bool _user_interaction_enabled = false;
+        virtual void _setup() { }
 
-public:
+    protected:
 
-    Event<Touch*> on_touch;
+        friend Input;
 
-    void enable_user_interaction();
-    void disable_user_interaction();
+        ViewResizer* _resizer = nullptr;
+        bool _touch_enabled = false;
+        bool _resize_enabled = false;
 
-public:
+    public:
 
-    static View* dummy(const gm::Rect& = { 28, 28 });
+        Event<Touch*> on_touch;
 
-};
+        void enable_touch();
+        void disable_touch();
+
+        void enable_resize();
+        void disable_resize();
+
+    public:
+
+        static View* dummy(const gm::Rect& = { 28, 28 });
+
+    };
 
 }

@@ -47,7 +47,7 @@ void LabeledSliderView::_layout() {
     _calculate_absolute_frame();
 
     static const float label_height = 28.0f;
-    static const float slider_width = 28.0f;
+    const float slider_width = _frame.size.width - 20;
 
     _value_label->edit_frame() =
             { 0,

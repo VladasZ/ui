@@ -66,7 +66,7 @@ void Slider::_setup() {
         set_value((this->_value - 0.005f) * multiplier);
     };
 
-    _slider_content_view->enable_user_interaction();
+    _slider_content_view->enable_touch();
     _slider_content_view->on_touch = [&](Touch* touch) {
         if (touch->is_ended()) {
             return;

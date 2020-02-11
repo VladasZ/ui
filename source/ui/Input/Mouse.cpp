@@ -10,8 +10,9 @@
 
 #include <iostream>
 
-#include "Mouse.hpp"
 #include "Input.hpp"
+#include "Touch.hpp"
+#include "Mouse.hpp"
 
 using namespace ui;
 using namespace gm;

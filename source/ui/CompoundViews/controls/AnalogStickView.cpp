@@ -36,7 +36,7 @@ void AnalogStickView::on_touch_moved(const Point& touch) {
 
 void AnalogStickView::_setup() {
     
-    enable_user_interaction();
+    enable_touch();
     
     add_path(PointsPath::circle_with(_frame.size.center(), _frame.size.width),
              Color::black);

@@ -2,7 +2,7 @@
 //  Input.cpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 12/18/18.
+//  Created by Vladas Zakrevskis on 18/12/18.
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
@@ -11,42 +11,40 @@
 #include "ui.hpp"
 
 #include "Log.hpp"
+#include "View.hpp"
 #include "Touch.hpp"
 #include "Mouse.hpp"
 #include "Input.hpp"
-#include "Window.hpp"
 #include "UIDrawer.hpp"
+#include "ArrayUtils.hpp"
+#include "ViewResizer.hpp"
 
 using namespace ui;
 using namespace gm;
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
     auto int_value = static_cast<int>(edge);
 
-    if (int_value < static_cast<int>(Edge::Left))
+    if (int_value < static_cast<int>(Edge::Left)) {
         return Mouse::CursorMode::VResize;
+    }
 
     if (int_value == static_cast<int>(Edge::Left) ||
-        int_value == static_cast<int>(Edge::Right))
+        int_value == static_cast<int>(Edge::Right)) {
         return Mouse::CursorMode::HResize;
+    }
 
     return Mouse::CursorMode::Drag;
 }
 #endif
 
 void Input::_unsubscribe_view(View* view) {
-    auto iter = std::find(_subscribed_views.begin(), _subscribed_views.end(), view);
-    if (iter == _subscribed_views.end())
-        return;
-    _subscribed_views.erase(iter);
+    cu::array::remove(_subscribed_views, view);
 }
 
-void Input::_unsubscribe_window(Window* view) {
-    auto iter = std::find(_windows.begin(), _windows.end(), view);
-    if (iter == _windows.end())
-        return;
-    _windows.erase(iter);
+void Input::_unsubscribe_resizable(View* view) {
+    cu::array::remove(_resizable, view);
 }
 
 void Input::process_touch_event(Touch* touch) {
@@ -56,7 +54,7 @@ void Input::process_touch_event(Touch* touch) {
 #ifdef LOG_TOUCHES
     Log(touch->to_string());
 #endif
-        
+
 #ifdef MOUSE
     if (touch->is_moved() && touch->is_right_click()) {
         on_right_button_drag(touch);
@@ -95,33 +93,29 @@ void Input::process_touch_event(Touch* touch) {
         delete touch;
 #endif
     }
-    
-    return;
-    
-    //TODO: Check if works
-    
-    if (_resizing_window) {
+
+    if (_resizing_view) {
         if (touch->is_ended()) {
-            _resizing_window = nullptr;
+            _resizing_view = nullptr;
             return;
         }
-        _resizing_window->on_touch(touch);
+        _resizing_view->_resizer->on_touch(touch);
     }
 
-    for (auto window : _windows) {
-        if (window->_absolute_frame.contains_with_edge(touch->location, Window::EdgeInfo::width)) {
-            _resizing_window = window;
-            window->on_touch(touch);
+    for (auto window : _resizable) {
+        if (window->_absolute_frame.contains_with_edge(touch->location, ViewResizer::EdgeInfo::width)) {
+            _resizing_view = window;
+            window->_resizer->on_touch(touch);
             return;
         }
     }
 }
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
 void Input::hover_moved(const Point& position) {
 
-    for (auto window : _windows) {
-        auto edge = window->get_edge(position);
+    for (auto view : _resizable) {
+        auto edge = view->_resizer->get_edge(position);
         if (edge != Edge::None) {
             ui::config::drawer()->set_cursor_mode(window_edge_to_mouse_cursor_mode(edge));
             return;

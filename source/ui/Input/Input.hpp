@@ -2,39 +2,36 @@
 //  Input.hpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 12/18/18.
+//  Created by Vladas Zakrevskis on 18/12/18.
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
 #pragma once
 
-#include "stdint.h"
-
 #include <list>
+#include <stdint.h>
 
 #include "Point.hpp"
-#include "Touch.hpp"
 #include "Event.hpp"
+
 
 namespace ui {
 
 class View;
 class Touch;
-class Window;
 
 class Input final {
 
-    friend View  ;
-    friend Window;
+    friend View;
 
-    static inline Window* _resizing_window = nullptr;
+    static inline View* _resizing_view = nullptr;
 
-    static inline std::list<View  *> _subscribed_views;
-    static inline std::list<Window*>          _windows;
-    static inline std::list<Touch *>          _touches;
+    static inline std::list<View*> _subscribed_views;
+    static inline std::list<View*> _resizable;
+    static inline std::list<Touch *> _touches;
 
-    static void _unsubscribe_view    (View*);
-    static void _unsubscribe_window(Window*);
+    static void _unsubscribe_view(View*);
+    static void _unsubscribe_resizable(View*);
 
 public:
 
@@ -42,7 +39,7 @@ public:
 
     static inline Event<Touch*> on_touch;
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
     static inline Event<Touch*> on_right_button_drag;
     static void hover_moved(const gm::Point& position);
 #endif
