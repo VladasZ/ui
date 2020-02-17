@@ -30,7 +30,6 @@ public:
     void set_colors(const std::initializer_list<gm::Color>&);
 
     void set_points_size(size_t);
-    void set_multiplier(float);
 
     void reset();
 

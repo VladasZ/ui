@@ -6,6 +6,7 @@
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
+#include "Log.hpp"
 #include "GraphView.hpp"
 
 using namespace ui;
@@ -23,21 +24,23 @@ void GraphView::set_points_size(size_t size) {
     _recalculate_graph();
 }
 
-float GraphView::multiplier() const {
-    return _multiplier;
-}
-
-void GraphView::set_multiplier(float multiplier) {
-    _multiplier = multiplier;
-    _recalculate_graph();
-}
-
 void GraphView::add_point(float point) {
-    if (_points.size() > _points_size) {
-        reset();
+    if (_points.size() > _points_size) reset();
+
+    _points.push_back(point);
+
+    if (point > _range.maximum) {
+        _range.maximum = point;
+        _recalculate_graph();
+        return;
     }
-    _points.push_back(flip_data ? 1 - point : point);
-     _path->add_point({ _points.size() * _delta(), point * _multiplier });
+    else if (point < _range.minimum) {
+        _range.minimum = point;
+        _recalculate_graph();
+        return;
+    }
+
+     _path->add_point({ _points.size() * _delta(), _range.convert(point) });
     _drawing_view->remove_all_paths();
     _drawing_view->add_path(_path, graph_color, PathData::DrawMode::Outline);
 }
@@ -46,6 +49,12 @@ void GraphView::reset() {
     _path->clear();
     _points.clear();
     _drawing_view->remove_all_paths();
+}
+
+void GraphView::reset_ranges() {
+    reset();
+    _range.minimum = std::numeric_limits<float>::max();
+    _range.maximum = std::numeric_limits<float>::min();
 }
 
 float GraphView::_delta() const {
@@ -60,13 +69,14 @@ void GraphView::_setup() {
 void GraphView::_layout() {
     View::_layout();
     _drawing_view->edit_frame() = _frame.with_zero_origin();
+    _range.converted_maximum = _frame.size.height;
     _recalculate_graph();
 }
 
 void GraphView::_recalculate_graph() {
     _path->clear();
     for (size_t i = 0; i < _points.size(); i++) {
-        _path->add_point({ i * _delta(), _points[i] * _multiplier });
+        _path->add_point({ i * _delta(), _range.convert(_points[i]) });
     }
     _drawing_view->remove_all_paths();
     _drawing_view->add_path(_path, graph_color);

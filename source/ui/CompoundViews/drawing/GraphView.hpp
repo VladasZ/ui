@@ -9,6 +9,7 @@
 #pragma once
 
 #include "DrawingView.hpp"
+#include "RangeConversion.hpp"
 
 namespace ui {
 
@@ -20,14 +21,13 @@ class GraphView : public View {
 
     DrawingView* _drawing_view = nullptr;
 
+    cu::RangeConversion _range;
+
     size_t _points_size = 1000;
-    float _multiplier   = 1.0f;
 
 public:
 
     using View::View;
-
-    bool flip_data = false;
 
     gm::Color graph_color;
 
@@ -36,11 +36,9 @@ public:
     size_t points_size() const;
     void set_points_size(size_t);
 
-    float multiplier() const;
-    void set_multiplier(float);
-
     void add_point(float);
     void reset();
+    void reset_ranges();
 
 protected:
 

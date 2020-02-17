@@ -50,12 +50,6 @@ void ChartView::set_points_size(size_t size) {
     }
 }
 
-void ChartView::set_multiplier(float multiplier) {
-    for (auto graph : _graphs) {
-        graph->set_multiplier(multiplier);
-    }
-}
-
 void ChartView::reset() {
     for (auto graph : _graphs) {
         graph->reset();
