@@ -9,8 +9,8 @@
 #pragma once
 
 #include "View.hpp"
-#include "Slider.hpp"
 #include "ImageButton.hpp"
+#include "RangeConversion.hpp"
 
 namespace ui {
 
@@ -27,7 +27,7 @@ protected:
 
 public:
 
-    float multiplier = 1.0f;
+    cu::RangeConversion conversion;
 
     Event<float> on_value_changed;
 

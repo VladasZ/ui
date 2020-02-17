@@ -25,14 +25,14 @@ Slider::~Slider() {
 }
 
 float Slider::value() const {
-    return  _value * multiplier;
+    return conversion.convert(_value);
 }
 
 void Slider::set_value(float value) {
-    _value = value / multiplier;
+    _value = value;
     gm::math::clamp(_value);
     _needs_layout = true;
-    on_value_changed(_value);
+    on_value_changed(this->value());
 }
 
 void Slider::set_buttons_color(const Color& color) {
@@ -59,11 +59,11 @@ void Slider::_setup() {
     _slider_content_view->add_subview(_slider_view);
 
     _increase_button->on_press = [&] {
-        set_value((this->_value + 0.005f) * multiplier);
+        set_value(_value + 0.005f);
     };
 
     _decrease_button->on_press = [&] {
-        set_value((this->_value - 0.005f) * multiplier);
+        set_value(_value - 0.005f);
     };
 
     _slider_content_view->enable_touch();
@@ -71,7 +71,7 @@ void Slider::_setup() {
         if (touch->is_ended()) {
             return;
         }
-        set_value((1.0f - touch->location.y / _slider_content_view->frame().size.height) * multiplier);
+        set_value(1.0f - touch->location.y / _slider_content_view->frame().size.height);
     };
 }
 
@@ -95,6 +95,8 @@ void Slider::_layout() {
             };
 
     _set_slider_position();
+
+    _layout_subviews();
 }
 
 void Slider::_set_slider_position() {

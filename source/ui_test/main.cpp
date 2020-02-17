@@ -12,7 +12,7 @@
 int main() {
 
     auto view = new ui::View({ 10, 10, 10, 10 });
-    Log(view->frame().to_string());
+    Log(view->frame());
  
 	return 0;
 }
