@@ -38,6 +38,8 @@ public:
     static void process_touch_event(Touch*);
 
     static inline Event<Touch*> on_touch;
+    static inline Event<Touch*> on_free_touch;
+    static inline Event<const gm::Point&> on_hover_moved;
 
 #ifdef DESKTOP_BUILD
     static inline Event<Touch*> on_right_button_drag;

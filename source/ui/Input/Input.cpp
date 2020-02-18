@@ -55,45 +55,6 @@ void Input::process_touch_event(Touch* touch) {
     Log(touch->to_string());
 #endif
 
-#ifdef MOUSE
-    if (touch->is_moved() && touch->is_right_click()) {
-        on_right_button_drag(touch);
-    }
-#endif
-
-    if (touch->is_moved()) {
-        for (auto view : _subscribed_views) {
-            if (view->_touch_id == touch->id) {
-                touch->location -= view->_absolute_frame.origin;
-                view->on_touch(touch);
-                break;
-            }
-        }
-    }
-    else if (touch->is_began()) {
-        for (auto view : _subscribed_views) {
-            if (view->_absolute_frame.contains(touch->location)) {
-                touch->location -= view->_absolute_frame.origin;
-                view->_touch_id = touch->id;
-                view->on_touch(touch);
-                break;
-            }
-        }
-    }
-    else /*if (touch->is_ended())*/ {
-        for (auto view : _subscribed_views) {
-            if (view->_touch_id == touch->id) {
-                touch->location -= view->_absolute_frame.origin;
-                view->_touch_id = 0;
-                view->on_touch(touch);
-                break;
-            }
-        }
-#ifndef MOUSE
-        delete touch;
-#endif
-    }
-
     if (_resizing_view) {
         if (touch->is_ended()) {
             _resizing_view = nullptr;
@@ -109,6 +70,47 @@ void Input::process_touch_event(Touch* touch) {
             return;
         }
     }
+
+#ifdef MOUSE
+    if (touch->is_moved() && touch->is_right_click()) {
+        on_right_button_drag(touch);
+    }
+#endif
+
+    if (touch->is_moved()) {
+        for (auto view : _subscribed_views) {
+            if (view->_touch_id == touch->id) {
+                touch->location -= view->_absolute_frame.origin;
+                view->on_touch(touch);
+                return;
+            }
+        }
+    }
+
+    if (touch->is_began()) {
+        for (auto view : _subscribed_views) {
+            if (view->_absolute_frame.contains(touch->location)) {
+                touch->location -= view->_absolute_frame.origin;
+                view->_touch_id = touch->id;
+                view->on_touch(touch);
+                return;
+            }
+        }
+    }
+
+    /*if (touch->is_ended())*/
+    for (auto view : _subscribed_views) {
+        if (view->_touch_id == touch->id) {
+            touch->location -= view->_absolute_frame.origin;
+            view->_touch_id = 0;
+            view->on_touch(touch);
+#ifndef MOUSE
+            delete touch;
+#endif
+            return;
+        }
+    }
+
 }
 
 #ifdef DESKTOP_BUILD
@@ -122,6 +124,7 @@ void Input::hover_moved(const Point& position) {
         }
     }
 
+    on_hover_moved(position);
     ui::config::drawer()->set_cursor_mode(Mouse::CursorMode::Arrow);
 }
 #endif
