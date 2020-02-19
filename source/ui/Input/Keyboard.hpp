@@ -24,7 +24,7 @@ public:
         Repeat = 2
     };
 
-    static inline ::Event<Key, Keyboard::Event> on_key_event;
+    static inline cu::Event<Key, Keyboard::Event> on_key_event;
 
     static void add_key_event(Key, Event);
 

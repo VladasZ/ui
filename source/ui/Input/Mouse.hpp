@@ -52,7 +52,7 @@ public:
 
 	static inline gm::Point frame_shift;
 
-	static inline Event<gm::Point> on_moved;
+	static inline cu::Event<gm::Point> on_moved;
 
     void set_position(const gm::Point&);
     void set_button_state(Button, ButtonState);

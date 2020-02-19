@@ -17,7 +17,7 @@ class ImageButton : public ImageView {
 
 public:
 
-    Event<> on_press;
+    cu::Event<> on_press;
 
     ImageButton(const gm::Rect& frame = { }, Image* image = nullptr);
     

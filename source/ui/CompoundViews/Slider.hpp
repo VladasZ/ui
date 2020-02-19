@@ -29,7 +29,7 @@ public:
 
     cu::RangeConversion conversion;
 
-    Event<float> on_value_changed;
+    cu::Event<float> on_value_changed;
 
     Slider(const gm::Rect& = { });
     ~Slider() override;

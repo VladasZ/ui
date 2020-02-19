@@ -11,12 +11,13 @@
 using namespace ui;
 using namespace gm;
 
+
 Button::Button(const Rect& frame) : View(frame) {
     enable_touch();
     add_subview(_caption_label = new Label());
-    
+
     on_touch = [&](Touch* touch) {
-        if (is_hidden) return;
+        if (!is_visible()) return;
         if (touch->is_began()) {
             on_press();
         }

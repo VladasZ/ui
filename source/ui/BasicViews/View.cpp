@@ -113,6 +113,20 @@ bool View::contains_global_point(const Point& point) const {
     return _absolute_frame.contains(point);
 }
 
+bool View::is_visible() const {
+    if (is_hidden) return false;
+    if (_superview == nullptr) return true;
+
+    auto super = _superview;
+
+    while (super) {
+        if (super->is_hidden) return false;
+        super = super->superview();
+    }
+
+    return true;
+}
+
 void View::_draw() {
     if (is_hidden) return;
     _layout();
@@ -182,6 +196,7 @@ void View::disable_resize() {
     _resize_enabled = false;
     delete _resizer;
     _resizer = nullptr;
+    Input::_unsubscribe_resizable(this);
 }
 
 View* View::dummy(const Rect& frame) {

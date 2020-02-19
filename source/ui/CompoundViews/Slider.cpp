@@ -18,10 +18,7 @@ Slider::Slider(const Rect& frame) : View(frame) {
 }
 
 Slider::~Slider() {
-    delete _increase_button;
-    delete _decrease_button;
-    delete _slider_content_view;
-    delete _slider_view;
+
 }
 
 float Slider::value() const {

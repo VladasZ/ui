@@ -22,6 +22,8 @@
 using namespace ui;
 using namespace gm;
 
+//#define LOG_TOUCHES
+
 #ifdef DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
     auto int_value = static_cast<int>(edge);

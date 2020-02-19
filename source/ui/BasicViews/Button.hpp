@@ -24,7 +24,7 @@ protected:
 
 public:
 
-    Event<> on_press;
+    cu::Event<> on_press;
 
     Button(const gm::Rect& = { });
 

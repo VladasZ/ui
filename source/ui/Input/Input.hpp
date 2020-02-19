@@ -13,6 +13,7 @@
 
 #include "Point.hpp"
 #include "Event.hpp"
+#include "Mouse.hpp"
 
 
 namespace ui {
@@ -37,12 +38,15 @@ public:
 
     static void process_touch_event(Touch*);
 
-    static inline Event<Touch*> on_touch;
-    static inline Event<Touch*> on_free_touch;
-    static inline Event<const gm::Point&> on_hover_moved;
+    static inline cu::Event<Touch*> on_touch;
+    static inline cu::Event<Touch*> on_free_touch;
+
+#ifdef MOUSE
+    static inline cu::Event<const gm::Point&> on_hover_moved;
+#endif
 
 #ifdef DESKTOP_BUILD
-    static inline Event<Touch*> on_right_button_drag;
+    static inline cu::Event<Touch*> on_right_button_drag;
     static void hover_moved(const gm::Point& position);
 #endif
 

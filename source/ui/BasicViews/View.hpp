@@ -83,6 +83,8 @@ namespace ui {
         gm::Point global_point_lo_local(const gm::Point&) const;
         bool contains_global_point(const gm::Point&) const;
 
+        bool is_visible() const;
+
     public:
 
         virtual void _draw();
@@ -111,7 +113,7 @@ namespace ui {
 
     public:
 
-        Event<Touch*> on_touch;
+        cu::Event<Touch*> on_touch;
 
         void enable_touch();
         void disable_touch();

@@ -26,6 +26,8 @@ namespace ui {
 
         using View::View;
 
+        ~PopupView();
+
         void set_caption(const std::string&);
         void add_action(const std::string& caption, std::function<void()> action);
 

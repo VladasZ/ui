@@ -12,6 +12,12 @@
 using namespace ui;
 using namespace gm;
 
+PopupView::~PopupView() {
+#ifdef MOUSE
+    Input::on_hover_moved.unsubscribe(this);
+#endif
+}
+
 void PopupView::set_caption(const std::string& caption) {
     _main_button->set_caption(caption);
 }
@@ -25,11 +31,15 @@ void ui::PopupView::add_action(const std::string& caption, std::function<void()>
 }
 
 void ui::PopupView::_setup() {
+
     add_subview(_main_button);
     add_subview(_stack_view = new StackView());
     _stack_view->is_hidden = true;
 
-    Input::on_hover_moved = [&](const Point& location) {
+
+#ifdef MOUSE
+
+    Input::on_hover_moved.subscribe(this) = [&](const Point& location) {
 
         if (!_stack_view->is_hidden) {
             bool visible = _absolute_frame.contains(location) || _stack_view->contains_global_point(location);
@@ -39,6 +49,14 @@ void ui::PopupView::_setup() {
 
         _stack_view->is_hidden = !_absolute_frame.contains(location);
     };
+
+#else
+
+    _main_button->on_press = [&] {
+        _stack_view->is_hidden = !_stack_view->is_hidden;
+    };
+
+#endif
 
 }
 

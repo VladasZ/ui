@@ -26,7 +26,7 @@ public:
 
     bool is_selected() const;
 
-    Event<bool> on_value_changed;
+    cu::Event<bool> on_value_changed;
 
 protected:
 
