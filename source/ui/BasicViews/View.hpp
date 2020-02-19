@@ -72,11 +72,15 @@ namespace ui {
 
         void set_center(const gm::Point&);
 
-        void place_b(float);
+        void place_at_center();
 
-        void place_br(const gm::Size&);
-        void place_bl(const gm::Size&);
-        void place_tr(const gm::Size&);
+        void place_at_bottom(float margin = 0);
+
+        void place_br(const gm::Size&, float margin = 0);
+        void place_bl(float margin = 0);
+        void place_tr(float margin = 0);
+
+        void stick_to(View* view, gm::Edge edge, float margin = 0);
 
     public:
 

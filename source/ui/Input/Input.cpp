@@ -100,18 +100,21 @@ void Input::process_touch_event(Touch* touch) {
         }
     }
 
-    /*if (touch->is_ended())*/
-    for (auto view : _subscribed_views) {
-        if (view->_touch_id == touch->id) {
-            touch->location -= view->_absolute_frame.origin;
-            view->_touch_id = 0;
-            view->on_touch(touch);
+    if (touch->is_ended()) {
+        for (auto view : _subscribed_views) {
+            if (view->_touch_id == touch->id) {
+                touch->location -= view->_absolute_frame.origin;
+                view->_touch_id = 0;
+                view->on_touch(touch);
 #ifndef MOUSE
-            delete touch;
+                delete touch;
 #endif
-            return;
+                return;
+            }
         }
     }
+
+    on_free_touch(touch);
 
 }
 

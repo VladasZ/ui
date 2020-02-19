@@ -69,40 +69,57 @@ void View::set_center(const Point& center) {
     _needs_layout = true;
 }
 
-void View::place_b(float height) {
-    edit_frame() =
-            { 0,
-              _superview->frame().size.height - height,
-              _superview->frame().size.width,
-              height
-            };
+void View::place_at_center() {
+    _frame.origin.x = _superview->frame().size.width  / 2 - _frame.size.width  / 2;
+    _frame.origin.y = _superview->frame().size.height / 2 - _frame.size.height / 2;
 }
 
-void View::place_br(const Size& size) {
+void View::place_at_bottom(float margin) {
+    _frame.set_center(_superview->frame().center());
+    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _needs_layout = true;
+}
+
+void View::place_br(const Size& size, float margin) {
     edit_frame() =
-            { _superview->frame().size.width - size.width,
-              _superview->frame().size.height - size.height,
+            { _superview->frame().size.width - size.width - margin,
+              _superview->frame().size.height - size.height - margin,
               size.width,
               size.height
             };
 }
 
-void View::place_bl(const Size& size) {
-    edit_frame() =
-            { 0,
-              _superview->frame().size.height - size.height,
-              size.width,
-              size.height
-            };
+void View::place_bl(float margin) {
+    _frame.origin.x = margin;
+    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _needs_layout = true;
 }
 
-void View::place_tr(const Size& size) {
-    edit_frame() =
-            { _superview->frame().size.width - size.width,
-              0,
-              size.width,
-              size.height
-            };
+void View::place_tr(float margin) {
+    _frame.origin.x = _superview->frame().size.width  - _frame.size.width - margin;
+    _frame.origin.y = margin;
+    _needs_layout = true;
+}
+
+void View::stick_to(View* view, Edge edge, float margin) {
+
+    _frame.set_center(view->frame().center());
+
+    if (edge == Edge::Right) {
+        _frame.origin.x = view->frame().max_x() + margin;
+    }
+    else if (edge == gm::Edge::Left) {
+        _frame.origin.x = view->frame().min_x() - margin - _frame.size.width;
+    }
+    else if (edge == gm::Edge::Top) {
+        _frame.origin.y = view->frame().min_y() - margin - _frame.size.height;
+    }
+    else if (edge == gm::Edge::Bottom) {
+        _frame.origin.y = view->frame().max_y() + margin;
+    }
+
+    _needs_layout = true;
+
 }
 
 Point View::global_point_lo_local(const Point& point) const {
