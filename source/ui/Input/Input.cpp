@@ -89,7 +89,7 @@ void Input::process_touch_event(Touch* touch) {
 
     if (touch->is_began()) {
         for (auto view : _subscribed_views) {
-            if (view->_absolute_frame.contains(touch->location)) {
+            if (view->_absolute_frame.contains(touch->location) && !view->is_hidden) {
                 touch->location -= view->_absolute_frame.origin;
                 view->_touch_id = touch->id;
                 view->on_touch(touch);

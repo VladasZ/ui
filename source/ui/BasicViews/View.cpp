@@ -51,18 +51,58 @@ View* View::superview() const {
     return _superview;
 }
 
-gm::Rect View::frame() const {
+const Rect& View::frame() const {
     return _frame;
 }
 
-gm::Rect& View::edit_frame() {
+Rect& View::edit_frame() {
     _needs_layout = true;
     return _frame;
+}
+
+const Rect& View::absolute_frame() const {
+    return _absolute_frame;
 }
 
 void View::set_center(const Point& center) {
     _frame.set_center(center);
     _needs_layout = true;
+}
+
+void View::place_b(float height) {
+    edit_frame() =
+            { 0,
+              _superview->frame().size.height - height,
+              _superview->frame().size.width,
+              height
+            };
+}
+
+void View::place_br(const Size& size) {
+    edit_frame() =
+            { _superview->frame().size.width - size.width,
+              _superview->frame().size.height - size.height,
+              size.width,
+              size.height
+            };
+}
+
+void View::place_bl(const Size& size) {
+    edit_frame() =
+            { 0,
+              _superview->frame().size.height - size.height,
+              size.width,
+              size.height
+            };
+}
+
+void View::place_tr(const Size& size) {
+    edit_frame() =
+            { _superview->frame().size.width - size.width,
+              0,
+              size.width,
+              size.height
+            };
 }
 
 Point View::global_point_lo_local(const Point& point) const {
@@ -74,6 +114,7 @@ bool View::contains_global_point(const Point& point) const {
 }
 
 void View::_draw() {
+    if (is_hidden) return;
     _layout();
     _draw_rect();
     if (!_subviews.empty()) {
@@ -87,7 +128,7 @@ void View::_draw_rect() {
     }
 #ifdef DRAW_DEBUG_FRAMES
     if (draw_debug_frame) {
-        ui::config::drawer()->draw_rect(_absolute_frame, gm::Color::turquoise);
+        ui::config::drawer()->draw_rect(_absolute_frame, Color::turquoise);
     }
 #endif
 }

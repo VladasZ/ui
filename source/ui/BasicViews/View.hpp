@@ -42,6 +42,7 @@ namespace ui {
 
     public:
 
+        bool is_hidden = false;
         bool draw_debug_frame = true;
         gm::Color background_color;
 
@@ -64,10 +65,18 @@ namespace ui {
 
     public:
 
-        gm::Rect frame() const;
+        const gm::Rect& frame() const;
         gm::Rect& edit_frame();
 
+        const gm::Rect& absolute_frame() const;
+
         void set_center(const gm::Point&);
+
+        void place_b(float);
+
+        void place_br(const gm::Size&);
+        void place_bl(const gm::Size&);
+        void place_tr(const gm::Size&);
 
     public:
 

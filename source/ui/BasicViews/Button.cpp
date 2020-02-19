@@ -16,6 +16,7 @@ Button::Button(const Rect& frame) : View(frame) {
     add_subview(_caption_label = new Label());
     
     on_touch = [&](Touch* touch) {
+        if (is_hidden) return;
         if (touch->is_began()) {
             on_press();
         }
