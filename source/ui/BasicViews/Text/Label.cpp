@@ -17,7 +17,7 @@ using namespace gm;
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
     _content_view = new View(_frame.with_zero_origin());
-    draw_debug_frame = false;
+    //draw_debug_frame = false;
     _content_view->draw_debug_frame = false;
     add_subview(_content_view);
 }

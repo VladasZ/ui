@@ -71,32 +71,40 @@ void View::set_center(const Point& center) {
 }
 
 void View::place_at_center() {
-    _frame.origin.x = _superview->frame().size.width  / 2 - _frame.size.width  / 2;
-    _frame.origin.y = _superview->frame().size.height / 2 - _frame.size.height / 2;
+    _frame.origin.x = _superview->content_width() / 2 - _frame.size.width  / 2;
+    _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;
 }
 
 void View::place_at_bottom(float margin) {
     _frame.set_center(_superview->frame().center());
-    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _needs_layout = true;
 }
 
 void View::place_br(float margin) {
     _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
-    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _needs_layout = true;
 }
 
 void View::place_bl(float margin) {
     _frame.origin.x = margin;
-    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _needs_layout = true;
 }
 
 void View::place_tr(float margin) {
-    _frame.origin.x = _superview->frame().size.width  - _frame.size.width - margin;
+    _frame.origin.x = _superview->content_width() - _frame.size.width - margin;
     _frame.origin.y = margin;
     _needs_layout = true;
+}
+
+float View::content_width() const {
+    return std::max(_frame.size.width, content_size.width);
+}
+
+float View::content_height() const {
+    return std::max(_frame.size.height, content_size.height);
 }
 
 void View::stick_to(View* view, Edge edge, float margin) {

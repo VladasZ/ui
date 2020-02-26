@@ -44,6 +44,7 @@ namespace ui {
 
         bool clips = false;
         gm::Point content_offset;
+        gm::Size content_size;
 
         bool is_hidden = false;
         bool draw_debug_frame = true;
@@ -82,6 +83,9 @@ namespace ui {
         void place_br(float margin = 0);
         void place_bl(float margin = 0);
         void place_tr(float margin = 0);
+
+        float content_width() const;
+        float content_height() const;
 
         void stick_to(View* view, gm::Edge edge, float margin = 0);
 

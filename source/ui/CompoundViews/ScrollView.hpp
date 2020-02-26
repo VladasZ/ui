@@ -27,8 +27,6 @@ namespace ui {
 
         using View::View;
 
-        gm::Size content_size;
-
     protected:
 
         void _setup() override;
