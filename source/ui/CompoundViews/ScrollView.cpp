@@ -14,18 +14,18 @@ using namespace ui;
 
 void ScrollView::_setup() {
     init_view(_vertical_slider);
-    
+
+    _conversion.flip = true;
+
     _vertical_slider->on_value_changed = [&](float value) {
-        Logvar(value);
-        content_offset.y = _conversion.convert(value);
-        Logvar(content_offset.y);
+        content_offset.y = -_conversion.convert(value);
     };
 }
 
 void ScrollView::_layout() {
     _calculate_absolute_frame();
 
-    _vertical_slider->edit_frame()   = { 10, _frame.size.height };
+    _vertical_slider->edit_frame()   = { 20, _frame.size.height };
     _vertical_slider->place_tr();
     _vertical_slider->edit_frame().origin -= content_offset;
 
