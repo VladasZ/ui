@@ -12,6 +12,7 @@
 #include "Log.hpp"
 #include "View.hpp"
 #include "Input.hpp"
+#include "GLWrapper.hpp"
 #include "ArrayUtils.hpp"
 #include "ViewResizer.hpp"
 
@@ -80,13 +81,10 @@ void View::place_at_bottom(float margin) {
     _needs_layout = true;
 }
 
-void View::place_br(const Size& size, float margin) {
-    edit_frame() =
-            { _superview->frame().size.width - size.width - margin,
-              _superview->frame().size.height - size.height - margin,
-              size.width,
-              size.height
-            };
+void View::place_br(float margin) {
+    _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
+    _frame.origin.y = _superview->frame().size.height - _frame.size.height - margin;
+    _needs_layout = true;
 }
 
 void View::place_bl(float margin) {
@@ -148,8 +146,14 @@ void View::_draw() {
     if (is_hidden) return;
     _layout();
     _draw_rect();
+    if (clips) {
+        GL::scissor_begin(_absolute_frame);
+    }
     if (!_subviews.empty()) {
         _draw_subviews();
+    }
+    if (clips) {
+        GL::scissor_end();
     }
 }
 
@@ -178,7 +182,7 @@ void View::_layout() {
 void View::_calculate_absolute_frame() {
     _absolute_frame = _frame;
     if (_superview) {
-        _absolute_frame.origin += _superview->_absolute_frame.origin;
+        _absolute_frame.origin += _superview->_absolute_frame.origin + _superview->content_offset;
     }
     if (_resize_enabled) {
         _resizer->update_edge_info();

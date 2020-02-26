@@ -42,6 +42,9 @@ namespace ui {
 
     public:
 
+        bool clips = false;
+        gm::Point content_offset;
+
         bool is_hidden = false;
         bool draw_debug_frame = true;
         gm::Color background_color;
@@ -76,7 +79,7 @@ namespace ui {
 
         void place_at_bottom(float margin = 0);
 
-        void place_br(const gm::Size&, float margin = 0);
+        void place_br(float margin = 0);
         void place_bl(float margin = 0);
         void place_tr(float margin = 0);
 
@@ -128,6 +131,14 @@ namespace ui {
     public:
 
         static View* dummy(const gm::Rect& = { 28, 28 });
+
+
+    public:
+
+        template <class T>
+        void init_view(T*& view, const gm::Rect& frame = { }) {
+            add_subview(view = new T(frame));
+        }
 
     };
 
