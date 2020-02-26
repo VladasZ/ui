@@ -17,14 +17,16 @@ class FoldableView : public View {
 
 public:
 
-    using View::View;
+    cu::Event<bool> on_folded;
 
-    View* main_view;
-    View* hidden_view;
+    FoldableView(View* main, View* folded);
 
     void set_folded(bool);
 
 protected:
+
+    View* _main_view;
+    View* _hidden_view;
 
     Button* _unfold_button;
 

@@ -18,6 +18,7 @@ void ScrollView::_setup() {
     _conversion.flip = true;
 
     _vertical_slider->on_value_changed = [&](float value) {
+        if (content_size.height < _frame.size.height) return;
         content_offset.y = -_conversion.convert(value);
     };
 }
