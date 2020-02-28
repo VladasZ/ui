@@ -20,7 +20,7 @@ public:
     cu::Event<> on_press;
 
     ImageButton(const gm::Rect& frame = { }, Image* image = nullptr);
-    
+
 };
 
 }

@@ -22,7 +22,7 @@
 using namespace ui;
 using namespace gm;
 
-//#define LOG_TOUCHES
+#define LOG_TOUCHES
 
 #ifdef DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
@@ -41,21 +41,38 @@ static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
 }
 #endif
 
-void Input::_unsubscribe_view(View* view) {
-    cu::array::remove(_subscribed_views, view);
-}
-
-void Input::_unsubscribe_resizable(View* view) {
-    cu::array::remove(_resizable, view);
-}
-
 void Input::process_touch_event(Touch* touch) {
+
+    if (!_views_to_subscribe.empty()) {
+        cu::array::append(_subscribed_views, _views_to_subscribe);
+        _views_to_subscribe.clear();
+    }
+
+    if (!_resizable_to_subscribe.empty()) {
+        cu::array::append(_resizable, _resizable_to_subscribe);
+        _resizable_to_subscribe.clear();
+    }
+
+    if (!_views_to_unsubscribe.empty()) {
+        cu::array::remove_from(_subscribed_views, _views_to_unsubscribe);
+        _views_to_unsubscribe.clear();
+    }
+
+    if (!_resizable_to_unsubscribe.empty()) {
+        cu::array::remove_from(_resizable, _resizable_to_unsubscribe);
+        _resizable_to_unsubscribe.clear();
+    }
 
     on_touch(touch);
 
 #ifdef LOG_TOUCHES
+    Separator;
+    Log(touch);
     Log(touch->to_string());
 #endif
+
+    //on_touch(touch);
+    Log("lageza");
 
     if (_resizing_view) {
         if (touch->is_ended()) {
@@ -91,14 +108,10 @@ void Input::process_touch_event(Touch* touch) {
 
     if (touch->is_began()) {
         for (auto view : _subscribed_views) {
-            if (view->_absolute_frame.contains(touch->location) && !view->is_hidden) {
-                if (view->superview()) {
-                    if (!view->superview()->absolute_frame().contains(touch->location)) {
-                        continue;
-                    }
-                }
+            if (view->_absolute_frame.contains(touch->location) && view->is_visible()) {
                 touch->location -= view->_absolute_frame.origin;
                 view->_touch_id = touch->id;
+                Log("Inputovka");
                 view->on_touch(touch);
                 return;
             }
@@ -123,6 +136,22 @@ void Input::process_touch_event(Touch* touch) {
 
 }
 
+void Input::subscribe_view(View* view) {
+    _views_to_subscribe.push_back(view);
+}
+
+void Input::subscribe_resizable(View* view) {
+    _resizable_to_subscribe.push_back(view);
+}
+
+void Input::unsubscribe_view(View* view) {
+    _views_to_unsubscribe.push_back(view);
+}
+
+void Input::unsubscribe_resizable(View* view) {
+    _resizable_to_unsubscribe.push_back(view);
+}
+
 #ifdef DESKTOP_BUILD
 void Input::hover_moved(const Point& position) {
 
@@ -137,4 +166,5 @@ void Input::hover_moved(const Point& position) {
     on_hover_moved(position);
     ui::config::drawer()->set_cursor_mode(Mouse::CursorMode::Arrow);
 }
+
 #endif

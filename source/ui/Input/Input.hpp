@@ -23,7 +23,7 @@ class Touch;
 
 class Input final {
 
-    friend View;
+private:
 
     static inline View* _resizing_view = nullptr;
 
@@ -31,8 +31,11 @@ class Input final {
     static inline std::list<View*> _resizable;
     static inline std::list<Touch *> _touches;
 
-    static void _unsubscribe_view(View*);
-    static void _unsubscribe_resizable(View*);
+    static inline std::vector<View*> _views_to_subscribe;
+    static inline std::vector<View*> _resizable_to_subscribe;
+
+    static inline std::vector<View*> _views_to_unsubscribe;
+    static inline std::vector<View*> _resizable_to_unsubscribe;
 
 public:
 
@@ -40,6 +43,12 @@ public:
 
     static inline cu::Event<Touch*> on_touch;
     static inline cu::Event<Touch*> on_free_touch;
+
+    static void subscribe_view(View*);
+    static void subscribe_resizable(View*);
+
+    static void unsubscribe_view(View*);
+    static void unsubscribe_resizable(View*);
 
 #ifdef MOUSE
     static inline cu::Event<const gm::Point&> on_hover_moved;

@@ -204,20 +204,21 @@ void View::_layout_subviews() {
 void View::enable_touch() {
     if (_touch_enabled) return;
     _touch_enabled = true;
-    Input::_subscribed_views.push_back(this);
+    Input::subscribe_view(this);
 }
 
 void View::disable_touch() {
     if (!_touch_enabled) return;
+    Log(this);
     _touch_enabled = false;
-    Input::_unsubscribe_view(this);
+    Input::unsubscribe_view(this);
 }
 
 void View::enable_resize() {
     if (_resize_enabled) return;
     _resize_enabled = true;
     _resizer = new ViewResizer(_frame, _absolute_frame, _needs_layout);
-    Input::_resizable.push_back(this);
+    Input::subscribe_resizable(this);
 }
 
 void View::disable_resize() {
@@ -225,7 +226,7 @@ void View::disable_resize() {
     _resize_enabled = false;
     delete _resizer;
     _resizer = nullptr;
-    Input::_unsubscribe_resizable(this);
+    Input::unsubscribe_resizable(this);
 }
 
 View* View::dummy(const Rect& frame) {

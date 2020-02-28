@@ -16,20 +16,21 @@
 
 namespace ui {
 
-class Button : public View {
+    class Button : public View {
 
-protected:
+    protected:
 
-    Label* _caption_label;
+        Label* _caption_label;
 
-public:
+    public:
 
-    cu::Event<> on_press;
+        cu::Event<> on_press;
 
-    Button(const gm::Rect& = { });
+        ~Button();
+        Button(const gm::Rect& = { });
 
-    void set_caption(const std::string&);
+        void set_caption(const std::string&);
 
-};
+    };
 
 }

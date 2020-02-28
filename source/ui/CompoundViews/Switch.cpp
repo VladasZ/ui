@@ -17,9 +17,7 @@ void Switch::_setup() {
     add_subview(_switch);
     enable_touch();
     on_touch = [&](Touch* touch) {
-        if (!touch->is_began()) {
-            return;;
-        }
+        if (!touch->is_began()) return;
         _is_selected = !_is_selected;
         on_value_changed(_is_selected);
     };

@@ -12,28 +12,28 @@
 
 namespace ui {
 
-class Switch : public View {
+    class Switch : public View {
 
-protected:
+    protected:
 
-    bool _is_selected = false;
+        bool _is_selected = false;
 
-    View* _switch;
+        View* _switch;
 
-public:
+    public:
 
-    using View::View;
+        using View::View;
 
-    bool is_selected() const;
+        bool is_selected() const;
 
-    cu::Event<bool> on_value_changed;
+        cu::Event<bool> on_value_changed;
 
-protected:
+    protected:
 
-    void _setup() override;
-    void _layout() override;
+        void _setup() override;
+        void _layout() override;
 
-};
+    };
 
 
 }
