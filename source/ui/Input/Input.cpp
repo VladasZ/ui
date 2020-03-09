@@ -22,7 +22,7 @@
 using namespace ui;
 using namespace gm;
 
-#define LOG_TOUCHES
+//#define LOG_TOUCHES
 
 #ifdef DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
@@ -69,10 +69,11 @@ void Input::process_touch_event(Touch* touch) {
     Separator;
     Log(touch);
     Log(touch->to_string());
-#endif
-
     //on_touch(touch);
     Log("lageza");
+#endif
+
+
 
     if (_resizing_view) {
         if (touch->is_ended()) {
