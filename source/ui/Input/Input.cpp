@@ -112,7 +112,6 @@ void Input::process_touch_event(Touch* touch) {
             if (view->_absolute_frame.contains(touch->location) && view->is_visible()) {
                 touch->location -= view->_absolute_frame.origin;
                 view->_touch_id = touch->id;
-                Log("Inputovka");
                 view->on_touch(touch);
                 return;
             }
