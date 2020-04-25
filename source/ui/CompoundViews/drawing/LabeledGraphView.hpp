@@ -19,6 +19,8 @@ class LabeledGraphView : public GraphView {
 
 public:
 
+    using GraphView::GraphView;
+
     void set_caption(const std::string&);
 
 protected:
