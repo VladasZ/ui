@@ -11,32 +11,31 @@
 #include "Label.hpp"
 #include "Slider.hpp"
 
+
 namespace ui {
 
-class Button;
+    class Button;
 
-class LabeledSliderView : public View {
+    class LabeledSliderView : public View {
 
+        Label*  _caption_label = nullptr;
+        Label*  _value_label   = nullptr;
+        Button* _reset_button  = nullptr;
 
-    Label*  _caption_label = nullptr;
-    Label*  _value_label   = nullptr;
-    Button* _reset_button  = nullptr;
+    public:
 
+        using View::View;
 
-public:
+        Slider* slider_view = nullptr;
 
-    using View::View;
+        void set_caption(const std::string&);
+        void set_slider_color(const gm::Color&);
 
-    Slider* slider_view = nullptr;
+    private:
 
-    void set_caption(const std::string&);
-    void set_slider_color(const gm::Color&);
+        void setup() override;
+        void layout_subviews() override;
 
-private:
-
-    void _setup() override;
-    void _layout() override;
-
-};
+    };
 
 }

@@ -39,32 +39,26 @@ void ImageView::set_content_mode(ContentMode mode) {
 }
 
 void ImageView::_draw() {
-    _layout();
-    _draw_rect();
-
+    View::_draw();
     if (_image) {
         ui::config::drawer()->
                 draw_image_in_rect(_image,
-                                   reinterpret_cast<decltype(this)>(_content_view)->_absolute_frame,
+                                   _content_view->absolute_frame(),
                                    tint_color
         );
     }
-
-    _draw_subviews();
 }
 
-void ImageView::_layout() {
-    View::_layout();
+void ImageView::layout_subviews() {
 
     switch (_content_mode) {
         case ContentMode::Fill:
             _content_view->edit_frame() = {_frame.size };
             break;
         case ContentMode::AspectFit:
-            _content_view->edit_frame() = _frame.fit_size({_image->width(), _image->height() });
+            _content_view->edit_frame() = _frame.fit_size({ _image->width(), _image->height() });
             _content_view->set_center(_frame.center());
             break;
     }
 
-    reinterpret_cast<decltype(this)>(_content_view)->_layout();
 }

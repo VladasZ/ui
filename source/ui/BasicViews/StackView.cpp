@@ -10,13 +10,12 @@
 
 using namespace ui;
 
+
 void StackView::set_margin(float margin) {
     _margin = margin;
-    _needs_layout = true;
 }
 
-void StackView::_layout() {
-    _calculate_absolute_frame();
+void StackView::layout_subviews() {
 
     if (_subviews.empty()) return;
 
@@ -38,4 +37,5 @@ void StackView::_layout() {
         _subviews[i]->edit_frame() = _subviews.front()->frame();
         _subviews[i]->edit_frame().origin.y = (height + _margin) * i;
     }
+
 }

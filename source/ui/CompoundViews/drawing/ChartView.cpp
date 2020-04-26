@@ -56,12 +56,11 @@ void ChartView::reset() {
     }
 }
 
-void ChartView::_setup() {
+void ChartView::setup() {
     set_size(1);
 }
 
-void ChartView::_layout() {
-    View::_layout();
+void ChartView::layout_subviews() {
     for (auto graph : _graphs) {
         graph->edit_frame() = _frame.with_zero_origin();
     }

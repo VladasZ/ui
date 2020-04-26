@@ -29,8 +29,8 @@ namespace ui {
 
     protected:
 
-        void _setup() override;
-        void _layout() override;
+        void setup() override;
+        void layout_subviews() override;
 
     };
 

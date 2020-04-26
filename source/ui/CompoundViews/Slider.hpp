@@ -42,9 +42,9 @@ public:
 
 protected:
 
-    void _setup() override;
+    void setup() override;
 
-    void _layout() override;
+    void layout_subviews() override;
 
     void _set_slider_position();
 };

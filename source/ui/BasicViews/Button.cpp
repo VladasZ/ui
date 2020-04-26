@@ -13,9 +13,7 @@ using namespace ui;
 using namespace gm;
 
 
-Button::~Button() {
-    Log(this);
-}
+Button::~Button() { }
 
 Button::Button(const Rect& frame) : View(frame) {
     enable_touch();
@@ -29,5 +27,4 @@ Button::Button(const Rect& frame) : View(frame) {
 
 void Button::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
-    _needs_layout = true;
 }

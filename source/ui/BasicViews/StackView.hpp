@@ -24,7 +24,7 @@ public:
 
 protected:
 
-    void _layout() override;
+    void layout_subviews() override;
 };
 
 }

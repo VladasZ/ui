@@ -10,7 +10,7 @@
 #include "PopupView.hpp"
 
 using namespace ui;
-using namespace gm;
+
 
 PopupView::~PopupView() {
 #ifdef MOUSE
@@ -30,7 +30,7 @@ void ui::PopupView::add_action(const std::string& caption, std::function<void()>
     _buttons.push_back(button);
 }
 
-void ui::PopupView::_setup() {
+void ui::PopupView::setup() {
 
     add_subview(_main_button);
     add_subview(_stack_view = new StackView());
@@ -42,12 +42,12 @@ void ui::PopupView::_setup() {
     Input::on_hover_moved.subscribe(this) = [&](const Point& location) {
 
         if (!_stack_view->is_hidden) {
-            bool visible = _absolute_frame.contains(location) || _stack_view->contains_global_point(location);
+            bool visible = absolute_frame().contains(location) || _stack_view->contains_global_point(location);
             _stack_view->is_hidden = !visible;
             return;
         }
 
-        _stack_view->is_hidden = !_absolute_frame.contains(location);
+        _stack_view->is_hidden = !absolute_frame().contains(location);
     };
 
 #else
@@ -60,8 +60,7 @@ void ui::PopupView::_setup() {
 
 }
 
-void ui::PopupView::_layout() {
-    _calculate_absolute_frame();
+void ui::PopupView::layout_subviews() {
 
     _main_button->edit_frame() = _frame.with_zero_origin();
 
@@ -74,5 +73,4 @@ void ui::PopupView::_layout() {
               stack_height
             };
 
-    _layout_subviews();
 }

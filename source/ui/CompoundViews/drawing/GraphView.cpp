@@ -57,20 +57,19 @@ void GraphView::reset_ranges() {
     _range.maximum = std::numeric_limits<float>::min();
 }
 
-float GraphView::_delta() const {
-    return _frame.size.width / _points_size;
-}
-
-void GraphView::_setup() {
+void GraphView::setup() {
     _path = new gm::PointsPath();
     add_subview(_drawing_view = new DrawingView());
 }
 
-void GraphView::_layout() {
-    View::_layout();
+void GraphView::layout_subviews() {
     _drawing_view->edit_frame() = _frame.with_zero_origin();
     _range.converted_maximum = _frame.size.height;
     _recalculate_graph();
+}
+
+float GraphView::_delta() const {
+    return _frame.size.width / _points_size;
 }
 
 void GraphView::_recalculate_graph() {

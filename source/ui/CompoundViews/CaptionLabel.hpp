@@ -10,28 +10,28 @@
 
 #include "Label.hpp"
 
+
 namespace ui {
 
-class CaptionLabel : public View {
+    class CaptionLabel : public View {
 
-protected:
+    protected:
 
-    Label* _caption_label;
-    Label* _text_label;
+        Label* _caption_label;
+        Label* _text_label;
 
-public:
+    public:
 
-    using View::View;
+        using View::View;
 
-    void set_caption(const std::string&);
-    void set_text(const std::string&);
+        void set_caption(const std::string&);
+        void set_text(const std::string&);
 
-protected:
+    protected:
 
-    void _setup() override;
-    void _layout() override;
+        void setup() override;
+        void layout_subviews() override;
 
-};
-
+    };
 
 }

@@ -14,10 +14,10 @@
 using namespace ui;
 using namespace gm;
 
+
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
     _content_view = new View(_frame.with_zero_origin());
-    //draw_debug_frame = false;
     _content_view->draw_debug_frame = false;
     add_subview(_content_view);
 }
@@ -28,7 +28,6 @@ std::string Label::text() const {
 
 void Label::set_text(const std::string& text) {
     _text = text;
-    _needs_layout = true;
 #ifdef USING_FREETYPE
     _set_glyphs();
 #endif
@@ -36,13 +35,11 @@ void Label::set_text(const std::string& text) {
 
 void Label::set_font(Font* font) {
     _font = font;
-    _needs_layout = true;
     _set_glyphs();
 }
 
 void Label::resize_to_fit_text() {
-    _frame.size = static_cast<decltype(this)>(_content_view)->_frame.size;
-    _needs_layout = true;
+    _frame.size = _content_view->frame().size;
 }
 
 void Label::_set_glyphs() {
@@ -80,5 +77,4 @@ void Label::_set_glyphs() {
 
     content_size.width = content_width;
 
-    static_cast<decltype(this)>(_content_view)->_needs_layout = true;
 }

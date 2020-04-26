@@ -15,7 +15,7 @@ void LabeledGraphView::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
 
-void LabeledGraphView::_setup() {
-    GraphView::_setup();
+void LabeledGraphView::setup() {
+    GraphView::setup();
     add_subview(_caption_label = new Label());
 }

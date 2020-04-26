@@ -10,13 +10,13 @@
 
 using namespace ui;
 
+
 FoldableView::FoldableView(View* main, View* folded) {
     add_subview(_main_view = main);
     add_subview(_hidden_view = folded);
 }
 
 void FoldableView::set_folded(bool folded) {
-    _needs_layout = true;
     _folded = folded;
     _hidden_view->is_hidden = folded;
     if (folded) {
@@ -29,18 +29,16 @@ void FoldableView::set_folded(bool folded) {
     on_folded(folded);
 }
 
-void FoldableView::_setup() {
+void FoldableView::setup() {
     init_view(_unfold_button);
     _unfold_button->on_press = [&] {
         set_folded(!_folded);
     };
 }
 
-void FoldableView::_layout() {
-    _calculate_absolute_frame();
+void FoldableView::layout_subviews() {
     _hidden_view->edit_frame().origin.y = _main_view->frame().max_y();
     set_folded(_folded);
     _unfold_button->edit_frame() = _frame.with_zero_origin();
     _unfold_button->edit_frame().size.height = _main_view->frame().size.height;
-    _layout_subviews();
 }

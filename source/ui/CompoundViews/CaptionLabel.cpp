@@ -19,13 +19,12 @@ void CaptionLabel::set_text(const std::string& text) {
     _text_label->set_text(text);
 }
 
-void CaptionLabel::_setup() {
+void CaptionLabel::setup() {
     add_subview(_caption_label = new Label());
     add_subview(_text_label = new Label());
 }
 
-void CaptionLabel::_layout() {
-    _calculate_absolute_frame();
+void CaptionLabel::layout_subviews() {
 
     const auto width = _frame.size.width / 3;
     const auto height = _frame.size.height;
@@ -44,5 +43,4 @@ void CaptionLabel::_layout() {
               height
             };
 
-    _layout_subviews();
 }

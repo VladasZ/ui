@@ -13,6 +13,7 @@
 
 using namespace ui;
 
+
 void LabeledSliderView::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
@@ -21,7 +22,7 @@ void LabeledSliderView::set_slider_color(const gm::Color& color) {
     slider_view->set_slider_color(color);
 }
 
-void LabeledSliderView::_setup() {
+void LabeledSliderView::setup() {
     _caption_label = new Label();
     _value_label   = new Label();
     _reset_button  = new Button();
@@ -43,8 +44,7 @@ void LabeledSliderView::_setup() {
     add_subview(slider_view);
 }
 
-void LabeledSliderView::_layout() {
-    _calculate_absolute_frame();
+void LabeledSliderView::layout_subviews() {
 
     static const float label_height = 28.0f;
     const float slider_width = _frame.size.width - 20;

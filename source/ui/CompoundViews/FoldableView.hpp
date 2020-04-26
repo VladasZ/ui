@@ -11,31 +11,31 @@
 #include "View.hpp"
 #include "Button.hpp"
 
+
 namespace ui {
 
-class FoldableView : public View {
+    class FoldableView : public View {
 
-public:
+    public:
 
-    cu::Event<bool> on_folded;
+        cu::Event<bool> on_folded;
 
-    FoldableView(View* main, View* folded);
+        FoldableView(View* main, View* folded);
 
-    void set_folded(bool);
+        void set_folded(bool);
 
-protected:
+    protected:
 
-    View* _main_view;
-    View* _hidden_view;
+        View* _main_view;
+        View* _hidden_view;
 
-    Button* _unfold_button;
+        Button* _unfold_button;
 
-    bool _folded = true;
+        bool _folded = true;
 
-    void _setup() override;
-    void _layout() override;
+        void setup() override;
+        void layout_subviews() override;
 
-};
-
+    };
 
 }

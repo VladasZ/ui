@@ -28,7 +28,6 @@ float Slider::value() const {
 void Slider::set_value(float value) {
     _value = value;
     gm::math::clamp(_value);
-    _needs_layout = true;
     on_value_changed(this->value());
 }
 
@@ -41,7 +40,7 @@ void Slider::set_slider_color(const Color& color) {
     _slider_view->background_color = color;
 }
 
-void Slider::_setup() {
+void Slider::setup() {
     _increase_button     = new ImageButton();
     _decrease_button     = new ImageButton();
     _slider_content_view = new View();
@@ -72,8 +71,7 @@ void Slider::_setup() {
     };
 }
 
-void Slider::_layout() {
-    _calculate_absolute_frame();
+void Slider::layout_subviews() {
 
     _increase_button->edit_frame() = {_frame.size.width };
 
@@ -93,7 +91,6 @@ void Slider::_layout() {
 
     _set_slider_position();
 
-    _layout_subviews();
 }
 
 void Slider::_set_slider_position() {

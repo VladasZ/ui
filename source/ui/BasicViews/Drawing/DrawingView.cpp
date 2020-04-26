@@ -35,10 +35,8 @@ void DrawingView::remove_all_paths() {
 }
 
 void DrawingView::_draw() {
-    View::_layout();
-    View::_draw_rect();
+    View::_draw();
     for (auto path : _paths) {
-        ui::config::drawer()->draw_path_in_rect(path, _absolute_frame);
+        ui::config::drawer()->draw_path_in_rect(path, absolute_frame());
     }
-    View::_draw_subviews();
 }

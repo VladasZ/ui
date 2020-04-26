@@ -42,9 +42,10 @@ public:
 
 protected:
 
+    void setup() override;
+    void layout_subviews() override;
+
     float _delta() const;
-    void _setup() override;
-    void _layout() override;
     void _recalculate_graph();
 
 };

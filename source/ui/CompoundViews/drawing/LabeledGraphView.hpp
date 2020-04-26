@@ -11,22 +11,23 @@
 #include "Label.hpp"
 #include "GraphView.hpp"
 
+
 namespace ui {
 
-class LabeledGraphView : public GraphView {
+    class LabeledGraphView : public GraphView {
 
-    Label* _caption_label = nullptr;
+        Label* _caption_label = nullptr;
 
-public:
+    public:
 
-    using GraphView::GraphView;
+        using GraphView::GraphView;
 
-    void set_caption(const std::string&);
+        void set_caption(const std::string&);
 
-protected:
+    protected:
 
-    void _setup() override;
+        void setup() override;
 
-};
+    };
 
 }

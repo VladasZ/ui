@@ -12,7 +12,7 @@
 using namespace ui;
 
 
-void ScrollView::_setup() {
+void ScrollView::setup() {
     init_view(_vertical_slider);
 
     _conversion.flip = true;
@@ -24,10 +24,9 @@ void ScrollView::_setup() {
     clips = true;
 }
 
-void ScrollView::_layout() {
-    _calculate_absolute_frame();
+void ScrollView::layout_subviews() {
 
-    _vertical_slider->edit_frame()   = { 20, _frame.size.height };
+    _vertical_slider->edit_frame()  = { 20, _frame.size.height };
     _vertical_slider->place_tr();
     _vertical_slider->edit_frame().origin -= content_offset;
 
@@ -35,5 +34,4 @@ void ScrollView::_layout() {
 
     _vertical_slider->is_hidden = content_size.height < _frame.size.height;
 
-    _layout_subviews();
 }

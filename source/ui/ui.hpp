@@ -16,19 +16,19 @@
 #define DRAW_DEBUG_FRAMES
 //#define LOG_TOUCHES
 
+
 namespace ui {
 
-struct config {
-    static UIDrawer* drawer();
-    static void set_drawer(UIDrawer* drawer);
-    static inline Font* default_font = nullptr;
-};
+    struct config {
+        static UIDrawer* drawer();
+        static void set_drawer(UIDrawer* drawer);
+        static inline Font* default_font = nullptr;
+    };
 
 #if DESKTOP_BUILD
-struct input {
-    static Mouse* const mouse;
-};
+    struct input {
+        static Mouse* const mouse;
+    };
 #endif
 
 }
-

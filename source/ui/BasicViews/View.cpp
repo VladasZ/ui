@@ -17,7 +17,6 @@
 #include "ViewResizer.hpp"
 
 using namespace ui;
-using namespace gm;
 
 
 View::View(const Rect& rect) : _frame(rect) { }
@@ -28,14 +27,14 @@ View::~View() {
     disable_resize();
 }
 
+View* View::superview() const {
+    return _superview;
+}
+
 void View::add_subview(View* view) {
     view->_superview = this;
     _subviews.push_back(view);
-    view->_setup();
-}
-
-void View::add_subviews(std::initializer_list<View*> views) {
-    for (auto view : views) add_subview(view);
+    view->setup();
 }
 
 void View::remove_all_subviews() {
@@ -48,16 +47,11 @@ void View::remove_from_superview() {
     delete this;
 }
 
-View* View::superview() const {
-    return _superview;
-}
-
 const Rect& View::frame() const {
     return _frame;
 }
 
 Rect& View::edit_frame() {
-    _needs_layout = true;
     return _frame;
 }
 
@@ -65,9 +59,16 @@ const Rect& View::absolute_frame() const {
     return _absolute_frame;
 }
 
+Float View::content_width() const {
+    return std::max(_frame.size.width, content_size.width);
+}
+
+Float View::content_height() const {
+    return std::max(_frame.size.height, content_size.height);
+}
+
 void View::set_center(const Point& center) {
     _frame.set_center(center);
-    _needs_layout = true;
 }
 
 void View::place_at_center() {
@@ -75,61 +76,43 @@ void View::place_at_center() {
     _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;
 }
 
-void View::place_at_bottom(float margin) {
+void View::place_at_bottom(Float margin) {
     _frame.set_center(_superview->frame().center());
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
-    _needs_layout = true;
 }
 
-void View::place_br(float margin) {
+void View::place_br(Float margin) {
     _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
-    _needs_layout = true;
 }
 
-void View::place_bl(float margin) {
+void View::place_bl(Float margin) {
     _frame.origin.x = margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
-    _needs_layout = true;
 }
 
-void View::place_tr(float margin) {
+void View::place_tr(Float margin) {
     _frame.origin.x = _superview->content_width() - _frame.size.width - margin;
     _frame.origin.y = margin;
-    _needs_layout = true;
 }
 
-float View::content_width() const {
-    return std::max(_frame.size.width, content_size.width);
-}
-
-float View::content_height() const {
-    return std::max(_frame.size.height, content_size.height);
-}
-
-void View::stick_to(View* view, Edge edge, float margin) {
+void View::stick_to(View* view, Edge edge, Float margin) {
 
     _frame.set_center(view->frame().center());
 
     if (edge == Edge::Right) {
         _frame.origin.x = view->frame().max_x() + margin;
     }
-    else if (edge == gm::Edge::Left) {
+    else if (edge == Edge::Left) {
         _frame.origin.x = view->frame().min_x() - margin - _frame.size.width;
     }
-    else if (edge == gm::Edge::Top) {
+    else if (edge == Edge::Top) {
         _frame.origin.y = view->frame().min_y() - margin - _frame.size.height;
     }
-    else if (edge == gm::Edge::Bottom) {
+    else if (edge == Edge::Bottom) {
         _frame.origin.y = view->frame().max_y() + margin;
     }
 
-    _needs_layout = true;
-
-}
-
-Point View::global_point_lo_local(const Point& point) const {
-    return point - _absolute_frame.origin;
 }
 
 bool View::contains_global_point(const Point& point) const {
@@ -152,13 +135,14 @@ bool View::is_visible() const {
 
 void View::_draw() {
     if (is_hidden) return;
-    _layout();
-    _draw_rect();
+    if (_needs_reposition) _calculate_absolute_frame();
+    if (_needs_resize) layout_subviews();
     if (clips) {
         GL::scissor_begin(_absolute_frame);
     }
-    if (!_subviews.empty()) {
-        _draw_subviews();
+    _draw_rect();
+    for (auto view : _subviews) {
+        view->_draw();
     }
     if (clips) {
         GL::scissor_end();
@@ -176,17 +160,6 @@ void View::_draw_rect() {
 #endif
 }
 
-void View::_draw_subviews() {
-    for (auto view : _subviews) {
-        view->_draw();
-    }
-}
-
-void View::_layout() {
-    _calculate_absolute_frame();
-    _layout_subviews();
-}
-
 void View::_calculate_absolute_frame() {
     _absolute_frame = _frame;
     if (_superview) {
@@ -195,10 +168,6 @@ void View::_calculate_absolute_frame() {
     if (_resize_enabled) {
         _resizer->update_edge_info();
     }
-}
-
-void View::_layout_subviews() {
-    for (auto subview : _subviews) subview->_layout();
 }
 
 void View::enable_touch() {
@@ -217,7 +186,8 @@ void View::disable_touch() {
 void View::enable_resize() {
     if (_resize_enabled) return;
     _resize_enabled = true;
-    _resizer = new ViewResizer(_frame, _absolute_frame, _needs_layout);
+    static bool dummy = true;
+    _resizer = new ViewResizer(_frame, _absolute_frame, dummy);
     Input::subscribe_resizable(this);
 }
 

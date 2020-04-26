@@ -9,9 +9,13 @@
 #include "Switch.hpp"
 
 using namespace ui;
-using namespace gm;
 
-void Switch::_setup() {
+
+bool Switch::is_selected() const {
+    return _is_selected;
+}
+
+void Switch::setup() {
     _switch = new View();
     _switch->background_color = Color::blue;
     add_subview(_switch);
@@ -23,14 +27,7 @@ void Switch::_setup() {
     };
 }
 
-bool Switch::is_selected() const {
-    return _is_selected;
-}
-
-void Switch::_layout() {
-
-    _calculate_absolute_frame();
-
+void Switch::layout_subviews() {
 
     static constexpr float indent = 4.0f;
 
@@ -48,5 +45,4 @@ void Switch::_layout() {
 
     background_color = _is_selected ? Color::green : Color::clear;
 
-    _layout_subviews();
 }

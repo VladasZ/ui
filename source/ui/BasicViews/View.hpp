@@ -20,6 +20,13 @@
 
 namespace ui {
 
+    using Float = gm::Float;
+    using Point = gm::Point;
+    using Size  = gm::Size;
+    using Rect  = gm::Rect;
+    using Color = gm::Color;
+    using Edge  = gm::Edge;
+
     class Input;
     class ViewResizer;
 
@@ -33,66 +40,62 @@ namespace ui {
 
         Touch::ID _touch_id = 0;
 
-        gm::Rect _frame;
+        Rect _frame;
         View* _superview = nullptr;
 
-        View::Array _subviews;
-
-        bool _needs_layout = true;
+        Array _subviews;
 
     public:
 
         bool clips = false;
-        gm::Point content_offset;
-        gm::Size content_size;
+        Point content_offset;
+        Size content_size;
 
         bool is_hidden = false;
         bool draw_debug_frame = true;
-        gm::Color background_color;
+        Color background_color;
 
     public:
 
-        explicit View(const gm::Rect& = { });
+        explicit View(const Rect& = { });
         virtual ~View();
 
     public:
 
+        View* superview() const;
+
         void add_subview(View*);
-        void add_subviews(std::initializer_list<View*>);
 
         void remove_all_subviews();
         void remove_from_superview();
 
     public:
 
-        View* superview() const;
+        const Rect& frame() const;
+        virtual Rect& edit_frame();
+
+        const Rect& absolute_frame() const;
+
+        Float content_width() const;
+        Float content_height() const;
 
     public:
 
-        const gm::Rect& frame() const;
-        gm::Rect& edit_frame();
-
-        const gm::Rect& absolute_frame() const;
-
-        void set_center(const gm::Point&);
+        void set_center(const Point&);
 
         void place_at_center();
 
-        void place_at_bottom(float margin = 0);
+        void place_at_bottom(Float margin = 0);
 
-        void place_br(float margin = 0);
-        void place_bl(float margin = 0);
-        void place_tr(float margin = 0);
+        void place_br(Float margin = 0);
+        void place_bl(Float margin = 0);
+        void place_tr(Float margin = 0);
 
-        float content_width() const;
-        float content_height() const;
-
-        void stick_to(View* view, gm::Edge edge, float margin = 0);
+        void stick_to(View* view, Edge edge, Float margin = 0);
 
     public:
 
-        gm::Point global_point_lo_local(const gm::Point&) const;
-        bool contains_global_point(const gm::Point&) const;
+        bool contains_global_point(const Point&) const;
 
         bool is_visible() const;
 
@@ -100,19 +103,22 @@ namespace ui {
 
         virtual void _draw();
 
-    protected:
+    private:
+
+        bool _needs_resize = true;
+        bool _needs_reposition = true;
+
+        Rect _absolute_frame;
 
         void _draw_rect();
-        void _draw_subviews();
+
+        void _calculate_absolute_frame();
 
     protected:
 
-        gm::Rect _absolute_frame;
-        virtual void _layout();
-        void _calculate_absolute_frame();
-        void _layout_subviews();
+        virtual void setup() { }
 
-        virtual void _setup() { }
+        virtual void layout_subviews() { };
 
     protected:
 
@@ -134,13 +140,12 @@ namespace ui {
 
     public:
 
-        static View* dummy(const gm::Rect& = { 28, 28 });
-
+        static View* dummy(const Rect& = { 28, 28 });
 
     public:
 
         template <class T>
-        void init_view(T*& view, const gm::Rect& frame = { }) {
+        void init_view(T*& view, const Rect& frame = { }) {
             add_subview(view = new T(frame));
         }
 
