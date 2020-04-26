@@ -20,6 +20,7 @@ static const float SIZE = 140;
 static const float OUTLINE_WIDTH = 10;
 static const float STICK_VIEW_SIZE = SIZE / 2;
 
+
 AnalogStickView::AnalogStickView() : DrawingView({ SIZE, SIZE }) {
 
 }
@@ -34,7 +35,7 @@ void AnalogStickView::on_touch_moved(const Point& touch) {
     on_direction_change(vector * 0.1f);
 }
 
-void AnalogStickView::_setup() {
+void AnalogStickView::setup() {
     
     enable_touch();
     
