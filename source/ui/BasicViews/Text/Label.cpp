@@ -12,17 +12,14 @@
 #include "ImageView.hpp"
 
 using namespace ui;
-using namespace gm;
 
 
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
-    _content_view = new View(_frame.with_zero_origin());
-    _content_view->draw_debug_frame = false;
-    add_subview(_content_view);
+    init_view(_content_view);
 }
 
-std::string Label::text() const {
+const std::string& Label::text() const {
     return _text;
 }
 
@@ -38,21 +35,14 @@ void Label::set_font(Font* font) {
     _set_glyphs();
 }
 
-void Label::resize_to_fit_text() {
-    _frame.size = _content_view->frame().size;
-}
-
 void Label::_set_glyphs() {
 
     _content_view->remove_all_subviews();
 
-    if (_text.empty()) {
-        return;
-    }
+    if (_text.empty()) return;
 
     int advance = 0;
-    float content_width = 0;
-    auto& content_size = static_cast<decltype(this)>(_content_view)->_frame.size;
+    auto& content_size = _content_view->edit_frame().size;
 
     content_size.height = _font->height();
 
@@ -63,18 +53,21 @@ void Label::_set_glyphs() {
         glyph_view->tint_color = text_color;
         glyph_view->draw_debug_frame = false;
 
-        auto& glyph_view_frame = reinterpret_cast<decltype(this)>(glyph_view)->_frame;
-
-        glyph_view_frame.origin = {
+        glyph_view->edit_frame().origin = {
             advance + glyph->bearing.x,
-            content_size.height / 2 - glyph->bearing.y + _font->baseline_shift()
+            content_size.height - glyph->bearing.y + _font->baseline_shift()
         };
 
         _content_view->add_subview(glyph_view);
         advance += glyph->advance;
-        content_width = glyph_view_frame.max_x();
     }
 
-    content_size.width = content_width;
+    content_size.width = _content_view->subviews().back()->frame().max_x();
+
+}
+
+void Label::layout_subviews() {
+
+    _content_view->place_at_center_vertically();
 
 }

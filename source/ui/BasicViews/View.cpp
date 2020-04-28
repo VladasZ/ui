@@ -31,6 +31,10 @@ View* View::superview() const {
     return _superview;
 }
 
+const View::Array &View::subviews() const {
+    return _subviews;
+}
+
 void View::add_subview(View* view) {
     view->_superview = this;
     _subviews.push_back(view);
@@ -52,6 +56,11 @@ const Rect& View::frame() const {
 }
 
 Rect& View::edit_frame() {
+    _needs_reposition = true;
+    _needs_resize = true;
+    for (auto view : _subviews) {
+        view->_set_needs_reposition();
+    }
     return _frame;
 }
 
@@ -69,31 +78,42 @@ Float View::content_height() const {
 
 void View::set_center(const Point& center) {
     _frame.set_center(center);
+    _set_needs_reposition();
 }
 
 void View::place_at_center() {
     _frame.origin.x = _superview->content_width() / 2 - _frame.size.width  / 2;
     _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;
+    _set_needs_reposition();
+}
+
+void View::place_at_center_vertically() {
+    _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;
+    _set_needs_reposition();
 }
 
 void View::place_at_bottom(Float margin) {
     _frame.set_center(_superview->frame().center());
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
+    _set_needs_reposition();
 }
 
 void View::place_br(Float margin) {
     _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
+    _set_needs_reposition();
 }
 
 void View::place_bl(Float margin) {
     _frame.origin.x = margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
+    _set_needs_reposition();
 }
 
 void View::place_tr(Float margin) {
     _frame.origin.x = _superview->content_width() - _frame.size.width - margin;
     _frame.origin.y = margin;
+    _set_needs_reposition();
 }
 
 void View::stick_to(View* view, Edge edge, Float margin) {
@@ -112,6 +132,8 @@ void View::stick_to(View* view, Edge edge, Float margin) {
     else if (edge == Edge::Bottom) {
         _frame.origin.y = view->frame().max_y() + margin;
     }
+
+    _set_needs_reposition();
 
 }
 
@@ -146,6 +168,20 @@ void View::_draw() {
     }
     if (clips) {
         GL::scissor_end();
+    }
+}
+
+void View::_set_needs_resize() {
+    _needs_resize = true;
+    for (auto view : _subviews) {
+        view->_set_needs_reposition();
+    }
+}
+
+void View::_set_needs_reposition() {
+    _needs_reposition = true;
+    for (auto view : _subviews) {
+        view->_set_needs_reposition();
     }
 }
 

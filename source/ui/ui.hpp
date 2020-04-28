@@ -19,6 +19,13 @@
 
 namespace ui {
 
+    using Float = gm::Float;
+    using Point = gm::Point;
+    using Size  = gm::Size;
+    using Rect  = gm::Rect;
+    using Color = gm::Color;
+    using Edge  = gm::Edge;
+
     struct config {
         static UIDrawer* drawer();
         static void set_drawer(UIDrawer* drawer);

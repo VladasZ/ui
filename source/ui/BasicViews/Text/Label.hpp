@@ -11,33 +11,35 @@
 #include "View.hpp"
 #include "Font.hpp"
 
+
 namespace ui {
 
-class Label : public View {
+    class Label : public View {
 
-private:
+    private:
 
-    std::string _text;
-    View* _content_view;
-    Font* _font;
+        std::string _text;
+        View* _content_view;
+        Font* _font;
 
-public:
+    public:
 
-    gm::Color text_color = gm::Color::white;
+        gm::Color text_color = gm::Color::white;
 
-    Label(const gm::Rect& = { });
+        Label(const Rect& frame = { });
 
-public:
+    public:
 
-    std::string text() const;
-    void set_text(const std::string&);
-    void set_font(Font*);
+        const std::string& text() const;
+        void set_text(const std::string&);
+        void set_font(Font*);
 
-    void resize_to_fit_text();
+    private:
 
-private:
+        void _set_glyphs();
 
-    void _set_glyphs();
-};
+        void layout_subviews() override;
+
+    };
 
 }

@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <functional>
 
+#include "ui.hpp"
 #include "Rect.hpp"
 #include "Event.hpp"
 #include "Color.hpp"
@@ -19,13 +20,6 @@
 
 
 namespace ui {
-
-    using Float = gm::Float;
-    using Point = gm::Point;
-    using Size  = gm::Size;
-    using Rect  = gm::Rect;
-    using Color = gm::Color;
-    using Edge  = gm::Edge;
 
     class Input;
     class ViewResizer;
@@ -63,6 +57,7 @@ namespace ui {
     public:
 
         View* superview() const;
+        const View::Array& subviews() const;
 
         void add_subview(View*);
 
@@ -84,6 +79,7 @@ namespace ui {
         void set_center(const Point&);
 
         void place_at_center();
+        void place_at_center_vertically();
 
         void place_at_bottom(Float margin = 0);
 
@@ -107,6 +103,9 @@ namespace ui {
 
         bool _needs_resize = true;
         bool _needs_reposition = true;
+
+        void _set_needs_resize();
+        void _set_needs_reposition();
 
         Rect _absolute_frame;
 

@@ -10,21 +10,23 @@
 
 #include "View.hpp"
 
+
 namespace ui {
 
-class StackView : public View {
+    class StackView : public View {
 
-    float _margin = 0;
+        float _margin = 0;
 
-public:
+    public:
 
-    using View::View;
+        using View::View;
 
-    void set_margin(float);
+        void set_margin(float);
 
-protected:
+    protected:
 
-    void layout_subviews() override;
-};
+        void layout_subviews() override;
+
+    };
 
 }

@@ -9,38 +9,38 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <array>
+
 
 namespace ui {
 
-class Glyph;
+    class Glyph;
 
-class Font {
+    class Font {
 
-private:
+    private:
 
-    std::string _file;
+        std::string _file;
 
-    unsigned _size;
+        unsigned _size;
 
-    float _height;
-    float _baseline_shift;
+        float _height;
+        float _baseline_shift;
 
-    std::vector<Glyph*> _glyphs;
-  
-public:
+        std::array<Glyph*, 128> _glyphs;
 
-    Font() = default;
-    explicit Font(const std::string& file_name, unsigned size = 28 * 2);
-    ~Font();
+    public:
 
-    float size() const;
-    float height() const;
-    float baseline_shift() const;
+        Font() = default;
+        explicit Font(const std::string& file_name, unsigned size = 28 * 2);
+        ~Font();
 
-    ui::Glyph* glyph_for_char(char ch) const;
+        float height() const;
+        float baseline_shift() const;
 
-    Font* with_size(unsigned int) const;
-};
+        ui::Glyph* glyph_for_char(char ch) const;
+
+        Font* with_size(unsigned int) const;
+    };
 
 }

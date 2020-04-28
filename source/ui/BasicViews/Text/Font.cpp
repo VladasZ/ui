@@ -14,15 +14,16 @@
 
 #include <cmath>
 
+#include "ui.hpp"
 #include "Log.hpp"
 #include "Font.hpp"
 #include "Glyph.hpp"
 #include "Image.hpp"
 
 using namespace ui;
-using namespace gm;
 
 #ifdef USING_FREETYPE
+
 
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;
@@ -32,9 +33,9 @@ static FT_Library ft_library() {
     return _library;
 }
 
-static Glyph* render_glyph(const FT_Face& face, char ch) {
+static Glyph* render_glyph(const FT_Face face, char symbol) {
 
-    FT_UInt glyphIndex = FT_Get_Char_Index(face, static_cast<FT_ULong>(ch));
+    FT_UInt glyphIndex = FT_Get_Char_Index(face, static_cast<FT_ULong>(symbol));
 
     FT_Load_Glyph(face, glyphIndex, FT_LOAD_RENDER);
 
@@ -48,10 +49,10 @@ static Glyph* render_glyph(const FT_Face& face, char ch) {
     Point bearing = { face->glyph->metrics.horiBearingX / 64,
                       face->glyph->metrics.horiBearingY / 64 };
 
-	auto glyph = new Glyph(ch,
-		                   new Image(bitmap_glyph->bitmap.buffer, size.width, size.height, 1),
-						   static_cast<int>(face->glyph->metrics.horiAdvance / 64),
-						   bearing);
+	auto glyph = new Glyph(symbol,
+                           new Image(bitmap_glyph->bitmap.buffer, size.width, size.height, 1),
+                           static_cast<int>(face->glyph->metrics.horiAdvance / 64),
+                           bearing);
 	
 	FT_Done_Glyph(ft_glyph);
 
@@ -89,16 +90,18 @@ Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _siz
     float y_max = 0;
     float y_min = 0;
 
-    for (int i = 0; i < 128; i++) {
-      auto glyph = render_glyph(face, static_cast<char>(i));
+    for (char symbol = 0; symbol < 127; symbol++) {
+      auto glyph = render_glyph(face, symbol);
 
-      if (y_max < glyph->y_max())
+      if (y_max < glyph->y_max()) {
           y_max = glyph->y_max();
+      }
 
-      if (y_min > glyph->y_min())
+      if (y_min > glyph->y_min()) {
           y_min = glyph->y_min();
+      }
 
-      _glyphs.push_back(glyph);
+      _glyphs[symbol] = glyph;
     }
 
     _height = y_max - y_min;
@@ -116,7 +119,7 @@ Font::~Font() {
 }
 
 float Font::height() const {
-    return _height;
+    return _height / 2;
 }
 
 float Font::baseline_shift() const {
@@ -124,7 +127,7 @@ float Font::baseline_shift() const {
 }
 
 Glyph* Font::glyph_for_char(char ch) const {
-    return _glyphs[static_cast<size_t>(ch)];
+    return _glyphs[ch];
 }
 
 Font* Font::with_size(unsigned int size) const {
