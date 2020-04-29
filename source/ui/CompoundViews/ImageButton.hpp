@@ -2,7 +2,7 @@
 //  ImageButton.hpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 1/28/19.
+//  Created by Vladas Zakrevskis on 28/01/19.
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
@@ -11,16 +11,17 @@
 #include "Event.hpp"
 #include "ImageView.hpp"
 
+
 namespace ui {
 
-class ImageButton : public ImageView {
+    class ImageButton : public ImageView {
 
-public:
+    public:
 
-    cu::Event<> on_press;
+        cu::Event<> on_press;
 
-    ImageButton(const gm::Rect& frame = { }, Image* image = nullptr);
+        ImageButton(const gm::Rect& frame = { }, Image* image = nullptr);
 
-};
+    };
 
 }

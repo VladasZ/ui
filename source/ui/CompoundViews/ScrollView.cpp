@@ -6,7 +6,6 @@
 //  Copyright © 2020 VladasZ. All rights reserved.
 //
 
-#include "Log.hpp"
 #include "ScrollView.hpp"
 
 using namespace ui;

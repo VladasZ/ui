@@ -2,17 +2,16 @@
 //  Button.hpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 1/28/19.
+//  Created by Vladas Zakrevskis on 28/01/19.
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
 #pragma once
 
-#include <functional>
-
 #include "View.hpp"
 #include "Event.hpp"
 #include "Label.hpp"
+
 
 namespace ui {
 
@@ -26,7 +25,6 @@ namespace ui {
 
         cu::Event<> on_press;
 
-        ~Button();
         Button(const gm::Rect& = { });
 
         void set_caption(const std::string&);

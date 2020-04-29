@@ -2,14 +2,13 @@
 //  ImageButton.cpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 1/28/19.
+//  Created by Vladas Zakrevskis on 28/01/19.
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
 #include "ImageButton.hpp"
 
 using namespace ui;
-using namespace gm;
 
 
 ImageButton::ImageButton(const Rect& frame, Image* image) : ImageView(frame, image) {
