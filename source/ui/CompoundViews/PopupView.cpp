@@ -33,7 +33,7 @@ void ui::PopupView::add_action(const std::string& caption, std::function<void()>
 void ui::PopupView::setup() {
 
     add_subview(_main_button);
-    add_subview(_stack_view = new StackView());
+    init_view(_stack_view);
     _stack_view->is_hidden = true;
 
 

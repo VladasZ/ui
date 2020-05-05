@@ -29,6 +29,10 @@ namespace ui {
 
         void set_caption(const std::string&);
 
+    protected:
+
+        void layout_subviews() override;
+
     };
 
 }
