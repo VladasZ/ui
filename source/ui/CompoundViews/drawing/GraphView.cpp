@@ -29,18 +29,18 @@ void GraphView::add_point(float point) {
 
     _points.push_back(point);
 
-    if (point > _range.maximum) {
-        _range.maximum = point;
+    if (point > _range.max()) {
+        _range.set_max(point);
         _recalculate_graph();
         return;
     }
-    else if (point < _range.minimum) {
-        _range.minimum = point;
+    else if (point < _range.min()) {
+        _range.set_min(point);
         _recalculate_graph();
         return;
     }
 
-     _path->add_point({ _points.size() * _delta(), _range.convert(point) });
+     _path->add_point({ _points.size() * _delta(), _frame.size.height - _range.convert(point) });
     _drawing_view->remove_all_paths();
     _drawing_view->add_path(_path, graph_color, PathData::DrawMode::Outline);
 }
@@ -53,8 +53,8 @@ void GraphView::reset() {
 
 void GraphView::reset_ranges() {
     reset();
-    _range.minimum = std::numeric_limits<float>::max();
-    _range.maximum = std::numeric_limits<float>::min();
+    _range.set_min(std::numeric_limits<float>::max());
+    _range.set_max(std::numeric_limits<float>::min());
 }
 
 void GraphView::setup() {
@@ -64,7 +64,7 @@ void GraphView::setup() {
 
 void GraphView::layout_subviews() {
     _drawing_view->edit_frame() = _frame.with_zero_origin();
-    _range.converted_maximum = _frame.size.height;
+    _range.set_target_max(_frame.size.height);
     _recalculate_graph();
 }
 
@@ -75,7 +75,7 @@ float GraphView::_delta() const {
 void GraphView::_recalculate_graph() {
     _path->clear();
     for (size_t i = 0; i < _points.size(); i++) {
-        _path->add_point({ i * _delta(), _range.convert(_points[i]) });
+        _path->add_point({ i * _delta(), _frame.size.height - _range.convert(_points[i]) });
     }
     _drawing_view->remove_all_paths();
     _drawing_view->add_path(_path, graph_color);

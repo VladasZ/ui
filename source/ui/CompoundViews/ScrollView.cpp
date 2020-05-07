@@ -14,8 +14,6 @@ using namespace ui;
 void ScrollView::setup() {
     init_view(_vertical_slider);
 
-    _conversion.flip = true;
-
     _vertical_slider->on_value_changed = [&](float value) {
         content_offset.y = -_conversion.convert(value);
     };
@@ -29,7 +27,7 @@ void ScrollView::layout_subviews() {
     _vertical_slider->place_tr();
     _vertical_slider->edit_frame().origin -= content_offset;
 
-    _conversion.converted_maximum = content_size.height - _frame.size.height;
+    _conversion.set_target_max(content_size.height - _frame.size.height);
 
     _vertical_slider->is_hidden = content_size.height < _frame.size.height;
 
