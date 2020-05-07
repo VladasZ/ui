@@ -53,15 +53,15 @@ void Input::process_touch_event(Touch* touch) {
         _resizable_to_subscribe.clear();
     }
 
-    if (!_views_to_unsubscribe.empty()) {
-        cu::array::remove_from(_subscribed_views, _views_to_unsubscribe);
-        _views_to_unsubscribe.clear();
-    }
-
-    if (!_resizable_to_unsubscribe.empty()) {
-        cu::array::remove_from(_resizable, _resizable_to_unsubscribe);
-        _resizable_to_unsubscribe.clear();
-    }
+//    if (!_views_to_unsubscribe.empty()) {
+//        cu::array::remove_from(_subscribed_views, _views_to_unsubscribe);
+//        _views_to_unsubscribe.clear();
+//    }
+//
+//    if (!_resizable_to_unsubscribe.empty()) {
+//        cu::array::remove_from(_resizable, _resizable_to_unsubscribe);
+//        _resizable_to_unsubscribe.clear();
+//    }
 
     on_touch(touch);
 
@@ -69,10 +69,7 @@ void Input::process_touch_event(Touch* touch) {
     Separator;
     Log(touch);
     Log(touch->to_string());
-    //on_touch(touch);
-    Log("lageza");
 #endif
-
 
 
     if (_resizing_view) {
@@ -109,7 +106,7 @@ void Input::process_touch_event(Touch* touch) {
 
     if (touch->is_began()) {
         for (auto view : _subscribed_views) {
-            if (view->_absolute_frame.contains(touch->location) && view->is_visible()) {
+            if (view->_absolute_frame.contains(touch->location)) {
                 touch->location -= view->_absolute_frame.origin;
                 view->_touch_id = touch->id;
                 view->on_touch(touch);
