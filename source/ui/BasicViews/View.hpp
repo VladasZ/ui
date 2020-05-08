@@ -148,6 +148,11 @@ namespace ui {
             add_subview(view = new T(frame));
         }
 
+        template <class T, class ...Args>
+        void init_view(T*& view, const Args& ... args) {
+            add_subview(view = new T(args ...));
+        }
+
     };
 
 }

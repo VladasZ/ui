@@ -36,7 +36,7 @@ public:
     size_t points_size() const;
     void set_points_size(size_t);
 
-    void add_point(float);
+    virtual void add_point(float);
     void reset();
     void reset_ranges();
 

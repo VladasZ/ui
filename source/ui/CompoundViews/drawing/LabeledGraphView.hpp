@@ -24,6 +24,8 @@ namespace ui {
 
         void set_caption(const std::string&);
 
+        void add_point(float) override;
+
     protected:
 
         void setup() override;
