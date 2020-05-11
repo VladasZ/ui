@@ -81,6 +81,10 @@ void View::set_center(const Point& center) {
     _set_needs_reposition();
 }
 
+void View::place_as_background() {
+    edit_frame() = _superview->frame().with_zero_origin();
+}
+
 void View::place_at_center() {
     _frame.origin.x = _superview->content_width() / 2 - _frame.size.width  / 2;
     _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;

@@ -78,6 +78,8 @@ namespace ui {
 
         void set_center(const Point&);
 
+        void place_as_background();
+
         void place_at_center();
         void place_at_center_vertically();
 

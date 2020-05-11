@@ -14,6 +14,8 @@ using namespace ui;
 void ScrollView::setup() {
     init_view(_vertical_slider);
 
+    _conversion.flip = true;
+
     _vertical_slider->on_value_changed = [&](float value) {
         content_offset.y = -_conversion.convert(value);
     };
