@@ -11,6 +11,7 @@
 
 using namespace ui;
 
+
 GraphView::~GraphView() {
     delete _path;
 }

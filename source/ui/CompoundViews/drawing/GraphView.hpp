@@ -11,43 +11,44 @@
 #include "DrawingView.hpp"
 #include "RangeConversion.hpp"
 
+
 namespace ui {
 
-class GraphView : public View {
+    class GraphView : public View {
 
-    gm::PointsPath* _path = nullptr;
+        gm::PointsPath* _path = nullptr;
 
-    std::vector<float> _points;
+        std::vector<float> _points;
 
-    DrawingView* _drawing_view = nullptr;
+        DrawingView* _drawing_view = nullptr;
 
-    cu::RangeConversion _range;
+        cu::RangeConversion _range;
 
-    size_t _points_size = 1000;
+        size_t _points_size = 1000;
 
-public:
+    public:
 
-    using View::View;
+        using View::View;
 
-    gm::Color graph_color;
+        gm::Color graph_color;
 
-    ~GraphView() override;
+        ~GraphView() override;
 
-    size_t points_size() const;
-    void set_points_size(size_t);
+        size_t points_size() const;
+        void set_points_size(size_t);
 
-    virtual void add_point(float);
-    void reset();
-    void reset_ranges();
+        virtual void add_point(float);
+        void reset();
+        void reset_ranges();
 
-protected:
+    protected:
 
-    void setup() override;
-    void layout_subviews() override;
+        void setup() override;
+        void layout_subviews() override;
 
-    float _delta() const;
-    void _recalculate_graph();
+        float _delta() const;
+        void _recalculate_graph();
 
-};
+    };
 
 }
