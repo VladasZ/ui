@@ -17,7 +17,7 @@
 #include "Input.hpp"
 #include "UIDrawer.hpp"
 #include "ArrayUtils.hpp"
-#include "ViewResizer.hpp"
+#include "FrameResizer.hpp"
 
 using namespace ui;
 using namespace gm;
@@ -81,7 +81,7 @@ void Input::process_touch_event(Touch* touch) {
     }
 
     for (auto window : _resizable) {
-        if (window->_absolute_frame.contains_with_edge(touch->location, ViewResizer::EdgeInfo::width)) {
+        if (window->_absolute_frame.contains_with_edge(touch->location, FrameResizer::EdgeInfo::width)) {
             _resizing_view = window;
             window->_resizer->on_touch(touch);
             return;

@@ -17,14 +17,15 @@
 #include "Event.hpp"
 #include "Color.hpp"
 #include "Touch.hpp"
+#include "NonCopyable.hpp"
 
 
 namespace ui {
 
     class Input;
-    class ViewResizer;
+    class FrameResizer;
 
-    class View {
+    class View : cu::NonCopyable {
 
     public:
 
@@ -125,7 +126,7 @@ namespace ui {
 
         friend Input;
 
-        ViewResizer* _resizer = nullptr;
+        FrameResizer* _resizer = nullptr;
         bool _touch_enabled = false;
         bool _resize_enabled = false;
 
@@ -146,7 +147,7 @@ namespace ui {
     public:
 
         template <class T>
-        void init_view(T*& view, const Rect& frame = { }) {
+        void init_view(T*& view, const Rect& frame) {
             add_subview(view = new T(frame));
         }
 

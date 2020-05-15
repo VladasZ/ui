@@ -1,5 +1,5 @@
 //
-//  ViewResizer.hpp
+//  FrameResizer.hpp
 //  ui
 //
 //  Created by Vladas Zakrevskis on 12/19/18.
@@ -11,9 +11,10 @@
 #include "Rect.hpp"
 #include "Touch.hpp"
 
+
 namespace ui {
 
-    class ViewResizer {
+    class FrameResizer {
 
     public:
 
@@ -32,11 +33,12 @@ namespace ui {
 
             float bottom_min = 0;
             float bottom_max = 0;
+
         };
 
     public:
 
-        ViewResizer(gm::Rect& frame, gm::Rect& absolute_frame, bool& needs_layout);
+        FrameResizer(gm::Rect& frame, gm::Rect& absolute_frame, bool& needs_layout);
 
     public:
 

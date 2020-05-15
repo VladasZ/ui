@@ -14,7 +14,7 @@
 #include "Input.hpp"
 #include "GLWrapper.hpp"
 #include "ArrayUtils.hpp"
-#include "ViewResizer.hpp"
+#include "FrameResizer.hpp"
 
 using namespace ui;
 
@@ -227,7 +227,7 @@ void View::enable_resize() {
     if (_resize_enabled) return;
     _resize_enabled = true;
     static bool dummy = true;
-    _resizer = new ViewResizer(_frame, _absolute_frame, dummy);
+    _resizer = new FrameResizer(_frame, _absolute_frame, dummy);
     Input::subscribe_resizable(this);
 }
 

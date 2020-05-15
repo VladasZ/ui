@@ -1,5 +1,5 @@
 //
-//  ViewResizer.cpp
+//  FrameResizer.cpp
 //  ui
 //
 //  Created by Vladas Zakrevskis on 12/19/18.
@@ -8,15 +8,16 @@
 
 #include "Log.hpp"
 #include "Input.hpp"
-#include "ViewResizer.hpp"
+#include "FrameResizer.hpp"
 
 using namespace ui;
 using namespace gm;
 
-ViewResizer::ViewResizer(gm::Rect& frame, gm::Rect& absolute_frame, bool& needs_layout)
+
+FrameResizer::FrameResizer(gm::Rect& frame, gm::Rect& absolute_frame, bool& needs_layout)
 : _frame(frame), _absolute_frame(absolute_frame), _needs_layout(needs_layout) { }
 
-Edge ViewResizer::get_edge(const Point& point) {
+Edge FrameResizer::get_edge(const Point& point) {
 
     uint8_t edge = 0;
 
@@ -45,7 +46,7 @@ Edge ViewResizer::get_edge(const Point& point) {
     return _current_edge;
 }
 
-void ViewResizer::on_touch(ui::Touch* touch) {
+void FrameResizer::on_touch(ui::Touch* touch) {
 
     if (touch->is_began()) {
         _initial_touch = touch->location;
@@ -63,7 +64,7 @@ void ViewResizer::on_touch(ui::Touch* touch) {
 
 }
 
-void ViewResizer::update_edge_info() {
+void FrameResizer::update_edge_info() {
 
     _edge_info.left_min   = _absolute_frame.origin.x - EdgeInfo::width / 2;
     _edge_info.left_max   = _absolute_frame.origin.x + EdgeInfo::width / 2;
