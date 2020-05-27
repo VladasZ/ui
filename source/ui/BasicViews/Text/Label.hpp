@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "Log.hpp"
 #include "View.hpp"
 #include "Font.hpp"
 
@@ -33,6 +34,11 @@ namespace ui {
         const std::string& text() const;
         void set_text(const std::string&);
         void set_font(Font*);
+
+        template <class T>
+        void set_text(const T& value) {
+            set_text(cu::Log::to_string(value));
+        }
 
     private:
 
