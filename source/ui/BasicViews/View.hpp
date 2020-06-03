@@ -65,6 +65,8 @@ namespace ui {
         void remove_all_subviews();
         void remove_from_superview();
 
+        void remove_last_subview();
+
     public:
 
         const Rect& frame() const;

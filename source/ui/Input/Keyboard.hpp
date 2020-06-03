@@ -10,24 +10,34 @@
 
 #include "Event.hpp"
 
+
 namespace ui {
-
-class Keyboard {
-
-public:
 
     using Key = char;
 
-    enum class Event {
-        Up     = 0,
-        Down   = 1,
-        Repeat = 2
+    class Keyboard {
+
+    public:
+
+        enum Event {
+            Up     = 0,
+            Down   = 1,
+            Repeat = 2
+        };
+
+        enum Mod {
+            None    = 0,
+            Shift   = 1,
+            Control = 2,
+            Alt     = 8
+        };
+
+        static inline cu::Event<Key, Event> on_key_event;
+        static inline cu::Event<Key> on_key_pressed;
+        static inline cu::Event<> on_backspace;
+
+        static void add_key_event(Key, Mod, Event);
+
     };
-
-    static inline cu::Event<Key, Keyboard::Event> on_key_event;
-
-    static void add_key_event(Key, Event);
-
-};
 
 }

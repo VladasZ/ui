@@ -51,6 +51,11 @@ void View::remove_from_superview() {
     delete this;
 }
 
+void View::remove_last_subview() {
+    delete _subviews.back();
+    _subviews.pop_back();
+}
+
 const Rect& View::frame() const {
     return _frame;
 }

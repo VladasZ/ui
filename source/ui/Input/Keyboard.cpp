@@ -10,6 +10,19 @@
 
 using namespace ui;
 
-void Keyboard::add_key_event(Key key, Event event) {
+static const char backspace = 3;
+
+
+void Keyboard::add_key_event(Key key, Mod mod, Event event) {
     on_key_event(key, event);
+
+    if (event == Up) return;
+
+    if (key == backspace) {
+        on_backspace();
+        return;
+    }
+
+    Logvar((int)key);
+    on_key_pressed(key);
 }

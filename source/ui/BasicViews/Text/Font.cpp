@@ -127,6 +127,7 @@ float Font::baseline_shift() const {
 }
 
 Glyph* Font::glyph_for_char(char ch) const {
+    if (ch < 0) return _glyphs['?'];
     return _glyphs[ch];
 }
 

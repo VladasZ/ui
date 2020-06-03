@@ -17,7 +17,7 @@ namespace ui {
 
     class Label : public View {
 
-    private:
+    protected:
 
         std::string _text;
         View* _content_view;
@@ -44,6 +44,11 @@ namespace ui {
 
         void _set_glyphs();
 
+    protected:
+
+        void backspace();
+
+        void setup() override { }
         void layout_subviews() override;
 
     };

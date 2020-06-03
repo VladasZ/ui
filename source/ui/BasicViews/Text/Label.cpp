@@ -41,7 +41,7 @@ void Label::_set_glyphs() {
 
     if (_text.empty()) return;
 
-    int advance = 0;
+    Float advance = 0;
     auto& content_size = _content_view->edit_frame().size;
 
     content_size.height = _font->height();
@@ -66,8 +66,18 @@ void Label::_set_glyphs() {
 
 }
 
+void Label::backspace() {
+    if (_text.empty()) return;
+    _text.pop_back();
+    _content_view->remove_last_subview();
+    if (_text.empty()) {
+        _content_view->edit_frame().size.width = 0;
+    }
+    else {
+        _content_view->edit_frame().size.width = _content_view->subviews().back()->frame().max_x();
+    }
+}
+
 void Label::layout_subviews() {
-
     _content_view->place_at_center_vertically();
-
 }
