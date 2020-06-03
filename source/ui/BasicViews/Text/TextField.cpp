@@ -12,13 +12,11 @@
 using namespace ui;
 
 
-
 void TextField::setup() {
     init_view(_cursor, { 2, _font->height() });
     _cursor->background_color = Color::black;
 
-    Keyboard::on_key_pressed = [&] (Key key) {
-        Ping;
+    Keyboard::on_input = [&] (char key) {
         set_text(_text + key);
     };
 

@@ -10,19 +10,33 @@
 
 using namespace ui;
 
-static const char backspace = 3;
+static const int backspace = 259;
 
 
 void Keyboard::add_key_event(Key key, Mod mod, Event event) {
-    on_key_event(key, event);
 
-    if (event == Up) return;
+    if (event == Event::Up) return;
+
+    Logvar((int)key);
+    Logvar((int)event);
+    Logvar((int)mod);
+    Separator;
+
+    on_key_event(key, event);
 
     if (key == backspace) {
         on_backspace();
         return;
     }
 
-    Logvar((int)key);
     on_key_pressed(key);
+
+    if (key > 128) return;
+
+    if (mod == Mod::Shift) {
+        on_input(key);
+        return;
+    }
+
+    on_input(tolower(key));
 }

@@ -25,7 +25,7 @@ namespace ui {
 
     public:
 
-        gm::Color text_color = gm::Color::white;
+        gm::Color text_color = gm::Color::black;
 
         Label(const Rect& frame = { });
 

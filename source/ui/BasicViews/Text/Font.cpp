@@ -17,9 +17,11 @@
 #include "ui.hpp"
 #include "Log.hpp"
 #include "Font.hpp"
+#include "File.hpp"
 #include "Glyph.hpp"
 #include "Image.hpp"
 
+using namespace cu;
 using namespace ui;
 
 #ifdef USING_FREETYPE

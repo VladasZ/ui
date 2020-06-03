@@ -13,7 +13,7 @@
 
 namespace ui {
 
-    using Key = char;
+    using Key = int;
 
     class Keyboard {
 
@@ -34,7 +34,9 @@ namespace ui {
 
         static inline cu::Event<Key, Event> on_key_event;
         static inline cu::Event<Key> on_key_pressed;
+
         static inline cu::Event<> on_backspace;
+        static inline cu::Event<char> on_input;
 
         static void add_key_event(Key, Mod, Event);
 
