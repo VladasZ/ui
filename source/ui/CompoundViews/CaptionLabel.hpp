@@ -27,6 +27,11 @@ namespace ui {
         void set_caption(const std::string&);
         void set_text(const std::string&);
 
+        template <class T>
+        void set_text(const T& value) {
+            set_text(cu::Log::to_string(value));
+        }
+
     protected:
 
         void setup() override;

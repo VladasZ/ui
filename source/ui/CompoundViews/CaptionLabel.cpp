@@ -11,6 +11,7 @@
 using namespace ui;
 using namespace gm;
 
+
 void CaptionLabel::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
@@ -20,8 +21,8 @@ void CaptionLabel::set_text(const std::string& text) {
 }
 
 void CaptionLabel::setup() {
-    add_subview(_caption_label = new Label());
-    add_subview(_text_label = new Label());
+    init_view(_caption_label);
+    init_view(_text_label);
 }
 
 void CaptionLabel::layout_subviews() {

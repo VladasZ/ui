@@ -35,6 +35,10 @@ void Label::set_font(Font* font) {
     _set_glyphs();
 }
 
+void Label::resize_to_text() {
+    edit_frame().size = _content_view->frame().size;
+}
+
 void Label::_set_glyphs() {
 
     _content_view->remove_all_subviews();

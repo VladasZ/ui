@@ -17,11 +17,6 @@ void Keyboard::add_key_event(Key key, Mod mod, Event event) {
 
     if (event == Event::Up) return;
 
-    Logvar((int)key);
-    Logvar((int)event);
-    Logvar((int)mod);
-    Separator;
-
     on_key_event(key, event);
 
     if (key == backspace) {

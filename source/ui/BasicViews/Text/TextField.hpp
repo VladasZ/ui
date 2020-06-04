@@ -17,6 +17,7 @@ namespace ui {
 
     private:
 
+        bool _is_focused = false;
         View* _cursor;
 
     public:

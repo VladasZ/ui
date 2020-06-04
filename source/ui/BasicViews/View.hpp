@@ -92,7 +92,7 @@ namespace ui {
         void place_bl(Float margin = 0);
         void place_tr(Float margin = 0);
 
-        void stick_to(View* view, Edge edge, Float margin = 0);
+        void stick_to(View* view, Edge edge, Float margin = 0, Edge alignment = Edge::Center);
 
     public:
 

@@ -40,6 +40,8 @@ namespace ui {
             set_text(cu::Log::to_string(value));
         }
 
+        void resize_to_text();
+
     private:
 
         void _set_glyphs();

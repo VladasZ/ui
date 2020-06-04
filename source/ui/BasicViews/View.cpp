@@ -125,21 +125,47 @@ void View::place_tr(Float margin) {
     _set_needs_reposition();
 }
 
-void View::stick_to(View* view, Edge edge, Float margin) {
+void View::stick_to(View* view, Edge edge, Float margin, Edge alignment) {
 
-    _frame.set_center(view->frame().center());
+    const auto& target_frame = view->frame();
+
+    _frame.set_center(target_frame.center());
 
     if (edge == Edge::Right) {
-        _frame.origin.x = view->frame().max_x() + margin;
+        _frame.origin.x = target_frame.max_x() + margin;
     }
     else if (edge == Edge::Left) {
-        _frame.origin.x = view->frame().min_x() - margin - _frame.size.width;
+        _frame.origin.x = target_frame.min_x() - margin - _frame.size.width;
     }
     else if (edge == Edge::Top) {
-        _frame.origin.y = view->frame().min_y() - margin - _frame.size.height;
+        _frame.origin.y = target_frame.min_y() - margin - _frame.size.height;
     }
     else if (edge == Edge::Bottom) {
-        _frame.origin.y = view->frame().max_y() + margin;
+        _frame.origin.y = target_frame.max_y() + margin;
+    }
+    else {
+        Fatal("Invalid edge");
+    }
+
+    if (alignment == Edge::Center) {
+        _set_needs_reposition();
+        return;
+    }
+
+    if (alignment == Edge::Left) {
+        _frame.origin.x = target_frame.origin.x;
+    }
+    else if (alignment == Edge::Right) {
+        _frame.origin.x = target_frame.max_x() - _frame.size.width;
+    }
+    else if (alignment == Edge::Top) {
+        _frame.origin.y = target_frame.origin.y;
+    }
+    else if (alignment == Edge::Bottom) {
+        _frame.origin.y = target_frame.max_y() - _frame.size.height;
+    }
+    else {
+        Fatal("Invalid alignment");
     }
 
     _set_needs_reposition();
