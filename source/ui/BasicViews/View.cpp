@@ -125,6 +125,24 @@ void View::place_tr(Float margin) {
     _set_needs_reposition();
 }
 
+void View::place_at_left_half() {
+    _frame.origin = { };
+    _frame.size = { _superview->frame().size.height, _superview->frame().size.width / 2 };
+}
+
+void View::place_at_right_half() {
+    _frame.origin = { _superview->frame().size.width / 2, 0 };
+    _frame.size = { _superview->frame().size.height, _superview->frame().size.width / 2 };
+}
+
+void View::place_at_top_half() {
+
+}
+
+void View::place_at_bottom_half() {
+
+}
+
 void View::stick_to(View* view, Edge edge, Float margin, Edge alignment) {
 
     const auto& target_frame = view->frame();

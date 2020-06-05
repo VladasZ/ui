@@ -92,6 +92,11 @@ namespace ui {
         void place_bl(Float margin = 0);
         void place_tr(Float margin = 0);
 
+        void place_at_left_half();
+        void place_at_right_half();
+        void place_at_top_half();
+        void place_at_bottom_half();
+
         void stick_to(View* view, Edge edge, Float margin = 0, Edge alignment = Edge::Center);
 
     public:
