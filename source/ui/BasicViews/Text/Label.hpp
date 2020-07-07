@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "ui.hpp"
 #include "Log.hpp"
 #include "View.hpp"
 #include "Font.hpp"
@@ -25,7 +26,7 @@ namespace ui {
 
     public:
 
-        gm::Color text_color = gm::Color::white;
+        gm::Color text_color = config::default_font_color;
 
         Label(const Rect& frame = { });
 
