@@ -32,7 +32,7 @@ namespace ui {
     public:
 
         Font() = default;
-        explicit Font(const std::string& file_name, unsigned size = 28 * 2);
+        explicit Font(const std::string& file_name, unsigned size = 40);
         ~Font();
 
         float height() const;
