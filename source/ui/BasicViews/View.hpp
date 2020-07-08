@@ -159,8 +159,8 @@ namespace ui {
         }
 
         template <class T, class ...Args>
-        void init_view(T*& view, const Args& ... args) {
-            add_subview(view = new T(args ...));
+        void init_view(T*& view, Args&&... args) {
+            add_subview(view = new T(std::forward<Args>(args) ...));
         }
 
     };
