@@ -83,5 +83,5 @@ void Label::backspace() {
 }
 
 void Label::layout_subviews() {
-    _content_view->place_at_center_vertically();
+    _content_view->center_vertically();
 }

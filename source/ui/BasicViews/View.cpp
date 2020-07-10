@@ -96,8 +96,13 @@ void View::place_at_center() {
     _set_needs_reposition();
 }
 
-void View::place_at_center_vertically() {
+void View::center_vertically() {
     _frame.origin.y = _superview->content_height() / 2 - _frame.size.height / 2;
+    _set_needs_reposition();
+}
+
+void View::center_horizontally() {
+    _frame.origin.x = _superview->content_width() / 2 - _frame.size.width / 2;
     _set_needs_reposition();
 }
 
