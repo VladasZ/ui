@@ -36,6 +36,7 @@ public:
 
     float value() const;
     void set_value(float);
+    void set_converted_value(float);
 
     void set_buttons_color(const gm::Color&);
     void set_slider_color(const gm::Color&);

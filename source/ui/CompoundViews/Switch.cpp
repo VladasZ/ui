@@ -15,10 +15,19 @@ bool Switch::is_selected() const {
     return _is_selected;
 }
 
+void Switch::set_value(bool value) {
+    _is_selected = value;
+    on_value_changed(value);
+}
+
+void Switch::set_caption(const std::string& caption) {
+    _label->set_text(caption);
+}
+
 void Switch::setup() {
-    _switch = new View();
+    init_view(_switch);
+    _switch->init_view(_label);
     _switch->background_color = Color::blue;
-    add_subview(_switch);
     enable_touch();
     on_touch = [&](Touch* touch) {
         if (!touch->is_began()) return;
@@ -44,5 +53,7 @@ void Switch::layout_subviews() {
     }
 
     background_color = _is_selected ? Color::green : Color::clear;
+
+    _label->edit_frame() = _switch->frame().with_zero_origin();
 
 }

@@ -31,6 +31,12 @@ void Slider::set_value(float value) {
     on_value_changed(this->value());
 }
 
+void Slider::set_converted_value(float value) {
+    _value = conversion.convert_back(value);
+    gm::math::clamp(_value);
+    on_value_changed(this->value());
+}
+
 void Slider::set_buttons_color(const Color& color) {
     _increase_button->background_color = color;
     _decrease_button->background_color = color;

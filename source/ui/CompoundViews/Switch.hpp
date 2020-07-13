@@ -8,12 +8,16 @@
 
 #pragma once
 
-#include "View.hpp"
+#include "Label.hpp"
 
 
 namespace ui {
 
     class Switch : public View {
+
+    private:
+
+        ui::Label* _label;
 
     protected:
 
@@ -26,6 +30,10 @@ namespace ui {
         using View::View;
 
         bool is_selected() const;
+
+        void set_value(bool);
+
+        void set_caption(const std::string&);
 
         cu::Event<bool> on_value_changed;
 
