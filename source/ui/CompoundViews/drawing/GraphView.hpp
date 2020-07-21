@@ -28,6 +28,8 @@ namespace ui {
 
     public:
 
+        bool auto_ranges = true;
+
         using View::View;
 
         gm::Color graph_color;
@@ -40,6 +42,9 @@ namespace ui {
         virtual void add_point(float);
         void reset();
         void reset_ranges();
+
+        void set_range_min(float);
+        void set_range_max(float);
 
     protected:
 

@@ -30,15 +30,17 @@ void GraphView::add_point(float point) {
 
     _points.push_back(point);
 
-    if (point > _range.max()) {
-        _range.set_max(point);
-        _recalculate_graph();
-        return;
-    }
-    else if (point < _range.min()) {
-        _range.set_min(point);
-        _recalculate_graph();
-        return;
+    if (auto_ranges) {
+        if (point > _range.max()) {
+            _range.set_max(point);
+            _recalculate_graph();
+            return;
+        }
+        else if (point < _range.min()) {
+            _range.set_min(point);
+            _recalculate_graph();
+            return;
+        }
     }
 
      _path->add_point({ _points.size() * _delta(), _frame.size.height - _range.convert(point) });
@@ -53,10 +55,20 @@ void GraphView::reset() {
 }
 
 void GraphView::reset_ranges() {
+    if (!auto_ranges) return;
     reset();
     _range.set_min(std::numeric_limits<float>::max());
     _range.set_max(std::numeric_limits<float>::min());
 }
+
+void GraphView::set_range_min(float min) {
+    _range.set_min(min);
+}
+
+void GraphView::set_range_max(float max) {
+    _range.set_max(max);
+}
+
 
 void GraphView::setup() {
     _path = new gm::PointsPath();

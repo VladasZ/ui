@@ -99,25 +99,41 @@ namespace ui {
         void place_at_top_half();
         void place_at_bottom_half();
 
-        template <class ...Args>
-        void distribute_horizontally(Args&&... args) {
-            constexpr auto size = sizeof...(Args);
-            auto width = _frame.size.width / size;
+//        template <class ...Views>
+//        void distribute_horizontally(Views&&... args) {
+//            constexpr auto size = sizeof...(Views);
+//            auto width = _frame.size.width / size;
+//
+//            cu::static_for<0, size>([&](auto index) {
+//                std::get<index.value>(std::forward_as_tuple(args...))->edit_frame() =
+//                        { index.value * width,
+//                          0,
+//                          width,
+//                          _frame.size.height
+//                        };
+//            });
+//        }
 
-            cu::static_for<0, size>([&](auto index) {
-                std::get<index.value>(std::forward_as_tuple(args...))->edit_frame() =
-                        { index.value * width,
+        template <class Container>
+        void distribute_horizontally(const Container& container) {
+            auto width = _frame.size.width / container.size();
+
+            for (int i = 0; i < container.size(); i++) {
+                container[i]->edit_frame() =
+                        { i * width,
                           0,
                           width,
                           _frame.size.height
                         };
-            });
+            }
 
         }
 
-        template <class ...Args>
-        void distribute_vertically(Args&&... args) {
-            constexpr auto size = sizeof...(Args);
+
+
+        template <class ...Views>
+        void distribute_vertically(Views&&... args) {
+            constexpr auto size = sizeof...(Views);
             auto height = _frame.size.height / size;
 
             cu::static_for<0, size>([&](auto index) {
