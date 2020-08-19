@@ -38,7 +38,7 @@ namespace ui {
 
         template <class T>
         void set_text(const T& value) {
-            set_text(cu::Log::to_string(value));
+            set_text(cu::log::to_string(value));
         }
 
         void resize_to_text();
