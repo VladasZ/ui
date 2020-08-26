@@ -224,13 +224,15 @@ namespace ui {
     public:
 
         template <class T>
-        void init_view(T*& view, const Rect& frame) {
+        T* init_view(T*& view, const Rect& frame) {
             add_subview(view = new T(frame));
+            return view;
         }
 
         template <class T, class ...Args>
-        void init_view(T*& view, Args&&... args) {
+        T* init_view(T*& view, Args&&... args) {
             add_subview(view = new T(std::forward<Args>(args) ...));
+            return view;
         }
 
     };
