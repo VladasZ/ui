@@ -25,8 +25,8 @@ const std::string& Label::text() const {
 
 void Label::set_text(const std::string& text) {
     _text = text;
-#ifdef USING_FREETYPE
-    _set_glyphs();
+#ifndef NO_FREETYPE
+	_set_glyphs();
 #endif
 }
 
@@ -46,9 +46,9 @@ void Label::_set_glyphs() {
     if (_text.empty()) return;
 
     Float advance = 0;
-    auto& content_size = _content_view->edit_frame().size;
+    auto& _content_size = _content_view->edit_frame().size;
 
-    content_size.height = _font->height();
+    _content_size.height = _font->height();
 
     for (auto letter : _text) {
         auto glyph = _font->glyph_for_char(letter);
@@ -59,14 +59,14 @@ void Label::_set_glyphs() {
 
         glyph_view->edit_frame().origin = {
             advance + glyph->bearing.x,
-            content_size.height - glyph->bearing.y + _font->baseline_shift()
+            _content_size.height - glyph->bearing.y + _font->baseline_shift()
         };
 
         _content_view->add_subview(glyph_view);
         advance += glyph->advance;
     }
 
-    content_size.width = _content_view->subviews().back()->frame().max_x();
+    _content_size.width = _content_view->subviews().back()->frame().max_x();
 
 }
 

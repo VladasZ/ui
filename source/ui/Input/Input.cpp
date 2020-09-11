@@ -67,8 +67,8 @@ void Input::process_touch_event(Touch* touch) {
 
 #ifdef LOG_TOUCHES
     Separator;
-    Log(touch);
-    Log(touch->to_string());
+    Log << touch;
+    Log << touch->to_string();
 #endif
 
 

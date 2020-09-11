@@ -6,7 +6,11 @@
 //  Copyright © 2017 VladasZ. All rights reserved.
 //
 
-#ifdef USING_FREETYPE
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS 1
+#endif
+
+#ifndef NO_FREETYPE
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
@@ -24,7 +28,7 @@
 using namespace cu;
 using namespace ui;
 
-#ifdef USING_FREETYPE
+#ifndef NO_FREETYPE
 
 
 static FT_Library ft_library() {
@@ -64,7 +68,7 @@ static Glyph* render_glyph(const FT_Face face, char symbol) {
 
 
 Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _size(size) {
-#ifdef USING_FREETYPE
+#ifndef NO_FREETYPE
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
@@ -73,17 +77,17 @@ Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _siz
     }
 
     fseek(file, 0, SEEK_END);
-    auto _size = static_cast<size_t>(ftell(file));
+    auto file_size = static_cast<size_t>(ftell(file));
     fseek(file, 0, SEEK_SET);
-    auto _data = new char[_size];
-    fread(_data, 1, _size, file);
+    auto _data = new char[file_size];
+    fread(_data, 1, file_size, file);
     fclose(file);
     
     FT_Face face;
 
     FT_New_Memory_Face(ft_library(),
                        reinterpret_cast<FT_Byte*>(_data),
-                       static_cast<FT_Long>(_size),
+                       static_cast<FT_Long>(file_size),
                        0,
                        &face);
 

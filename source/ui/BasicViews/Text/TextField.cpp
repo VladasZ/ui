@@ -18,9 +18,9 @@ void TextField::setup() {
     _cursor->background_color = Color::black;
     _cursor->is_hidden = true;
 
-    Keyboard::on_input = [&] (char key) {
+    Keyboard::on_input = [&] (Key key) {
         if (!_is_focused) return;
-        set_text(_text + key);
+        set_text(_text + static_cast<char>(key));
     };
 
     Keyboard::on_backspace = [&] {
@@ -30,12 +30,12 @@ void TextField::setup() {
 
     enable_touch();
 
-    Input::on_touch = [&] (Touch* touch) {
+    Input::on_touch = [&] (Touch*) {
         _is_focused = false;
         _cursor->is_hidden = true;
     };
 
-    on_touch = [&] (Touch* touch) {
+    on_touch = [&] (Touch*) {
         _is_focused = true;
         _cursor->is_hidden = false;
     };

@@ -6,6 +6,8 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include "Platform.hpp"
+
 #ifdef DESKTOP_BUILD
 
 #include <iostream>
@@ -38,20 +40,20 @@ std::map<Mouse::CursorMode,  std::string> Mouse::cursor_mode_to_string = {
     { Mouse::CursorMode::VResize, "VResize" }
 };
 
-void Mouse::set_position(const Point& position) {
-	frame_shift = position - Mouse::position;
-	Mouse::position = position;
-	on_moved(position);
+void Mouse::set_position(const Point& _position) {
+	frame_shift = _position - Mouse::position;
+	Mouse::position = _position;
+	on_moved(_position);
    if (button_state == ButtonState::Up) {
-       Input::hover_moved(position);
+       Input::hover_moved(_position);
    } else {
-       mouse_touch->location = position;
+       mouse_touch->location = _position;
        mouse_touch->event = Touch::Event::Moved;
        Input::process_touch_event(mouse_touch);
    }
 }
 
-void Mouse::set_button_state(Button button, ButtonState state) {
+void Mouse::set_button_state(Button _button, ButtonState state) {
     button_state = state;
 
     auto event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
@@ -63,7 +65,7 @@ void Mouse::set_button_state(Button button, ButtonState state) {
 
     mouse_touch->event = event;
     mouse_touch->location = position;
-    mouse_touch->button = button;
+    mouse_touch->button = _button;
 
     Input::process_touch_event(mouse_touch);
 }

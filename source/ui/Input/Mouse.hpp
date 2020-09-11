@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "Platform.hpp"
+
 #ifdef DESKTOP_BUILD
 
 #define MOUSE

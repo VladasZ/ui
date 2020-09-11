@@ -11,6 +11,7 @@
 #include <stdint.h>
 
 #include "Point.hpp"
+#include "Platform.hpp"
 
 #if DESKTOP_BUILD
 #include "Mouse.hpp"
@@ -22,6 +23,8 @@ class Touch {
 public:
 
     using ID = uint64_t;
+
+	static inline constexpr ID no_id = static_cast<ID>(-1);
 
     enum Event {
         Began,

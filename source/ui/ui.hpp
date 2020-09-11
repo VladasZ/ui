@@ -11,6 +11,7 @@
 #include "Font.hpp"
 #include "Mouse.hpp"
 #include "System.hpp"
+#include "Platform.hpp"
 #include "UIDrawer.hpp"
 
 #define DRAW_DEBUG_FRAMES
@@ -33,7 +34,7 @@ namespace ui {
         static inline Color default_font_color = Color::black;
     };
 
-#if DESKTOP_BUILD
+#ifdef DESKTOP_BUILD
     struct input {
         static Mouse* const mouse;
     };
