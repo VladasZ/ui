@@ -6,30 +6,26 @@
 //  Copyright © 2017 VladasZ. All rights reserved.
 //
 
+#ifdef _WIN32
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS 1
 #endif
-
-#ifndef NO_FREETYPE
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
 #endif
 
 #include <cmath>
+#include <FreeTypeInclude.hpp>
+
 
 #include "ui.hpp"
 #include "Log.hpp"
 #include "Font.hpp"
-#include "File.hpp"
 #include "Glyph.hpp"
 #include "Image.hpp"
 
 using namespace cu;
 using namespace ui;
 
-#ifndef NO_FREETYPE
-
+#ifdef USING_FREETYPE
 
 static FT_Library ft_library() {
     static FT_Library _library = nullptr;
@@ -68,7 +64,7 @@ static Glyph* render_glyph(const FT_Face face, char symbol) {
 
 
 Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _size(size) {
-#ifndef NO_FREETYPE
+#ifdef USING_FREETYPE
 
     FILE* file = fopen(file_name.c_str(), "rb");
 
