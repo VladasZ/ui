@@ -25,7 +25,7 @@ const std::string& Label::text() const {
 
 void Label::set_text(const std::string& text) {
     _text = text;
-#ifndef NO_FREETYPE
+#ifdef USING_FREETYPE
 	_set_glyphs();
 #endif
 }
