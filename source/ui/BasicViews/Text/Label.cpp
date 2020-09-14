@@ -6,6 +6,8 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
+#include <FreeTypeInclude.hpp>
+
 #include "ui.hpp"
 #include "Label.hpp"
 #include "Glyph.hpp"
