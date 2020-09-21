@@ -129,7 +129,25 @@ namespace ui {
 
         }
 
+		template <class ...Args>
+		void distribute_horizontally_with_ratio(std::vector<float> ratio, Args&&... args) {
 
+			constexpr auto size = sizeof...(Args);
+			auto tuple = std::forward_as_tuple(args...);
+
+			cu::static_for<0, size>([&](auto index) {
+				constexpr auto i = index.value;
+				constexpr bool is_first = i == 0;
+				auto prev_max_x = std::get<is_first ? 0 : i - 1>(tuple)->frame().max_x();
+				std::get<i>(tuple)->edit_frame() =
+				{ is_first ? 0 : prev_max_x,
+				  0,
+				  ratio[i] * _frame.size.width * (1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f)),
+				  _frame.size.height
+				};
+			});
+
+		}
 
         template <class ...Views>
         void distribute_vertically(Views&&... args) {
