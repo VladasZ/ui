@@ -171,6 +171,10 @@ namespace ui {
             constexpr auto size = sizeof...(Args);
             auto tuple = std::forward_as_tuple(args...);
 
+			if (size != ratio.size()) {
+				Fatal("distribute_vertically_with_ratio");
+			}
+
             cu::static_for<0, size>([&](auto index) {
                 constexpr auto i = index.value;
                 constexpr bool is_first = i == 0;
