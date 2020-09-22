@@ -35,7 +35,7 @@ static FT_Library ft_library() {
     return _library;
 }
 
-static Glyph* render_glyph(const FT_Face face, char symbol) {
+static Glyph* render_glyph(FT_Face face, char symbol) {
 
     FT_UInt glyphIndex = FT_Get_Char_Index(face, static_cast<FT_ULong>(symbol));
 
