@@ -49,7 +49,7 @@ namespace ui {
     protected:
 
         void setup() override;
-        void layout_subviews() override;
+        void layout() override;
 
         float _delta() const;
         void _recalculate_graph();

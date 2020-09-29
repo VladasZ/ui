@@ -44,7 +44,7 @@ void LabeledSliderView::setup() {
     add_subview(slider_view);
 }
 
-void LabeledSliderView::layout_subviews() {
+void LabeledSliderView::layout() {
 
     static const float label_height = 28.0f;
     const float slider_width = _frame.size.width - 20;

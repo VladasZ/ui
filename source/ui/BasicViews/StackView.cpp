@@ -15,7 +15,7 @@ void StackView::set_margin(float margin) {
     _margin = margin;
 }
 
-void StackView::layout_subviews() {
+void StackView::layout() {
 
     if (_subviews.empty()) return;
 

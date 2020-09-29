@@ -36,7 +36,7 @@ void FoldableView::setup() {
     };
 }
 
-void FoldableView::layout_subviews() {
+void FoldableView::layout() {
     _hidden_view->edit_frame().origin.y = _main_view->frame().max_y();
     set_folded(_folded);
     _unfold_button->edit_frame() = _frame.with_zero_origin();

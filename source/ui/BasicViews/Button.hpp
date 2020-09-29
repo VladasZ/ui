@@ -31,7 +31,7 @@ namespace ui {
 
     protected:
 
-        void layout_subviews() override;
+        void layout() override;
 
     };
 

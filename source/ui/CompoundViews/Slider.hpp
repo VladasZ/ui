@@ -45,7 +45,7 @@ protected:
 
     void setup() override;
 
-    void layout_subviews() override;
+    void layout() override;
 
     void _set_slider_position();
 };

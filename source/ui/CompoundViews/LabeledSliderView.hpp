@@ -34,7 +34,7 @@ namespace ui {
     private:
 
         void setup() override;
-        void layout_subviews() override;
+        void layout() override;
 
     };
 

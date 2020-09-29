@@ -25,7 +25,7 @@ void CaptionLabel::setup() {
     init_view(_text_label);
 }
 
-void CaptionLabel::layout_subviews() {
+void CaptionLabel::layout() {
 
     const auto width = _frame.size.width / 3;
     const auto height = _frame.size.height;

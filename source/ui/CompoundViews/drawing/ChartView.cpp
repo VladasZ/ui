@@ -60,7 +60,7 @@ void ChartView::setup() {
     set_size(1);
 }
 
-void ChartView::layout_subviews() {
+void ChartView::layout() {
     for (auto graph : _graphs) {
         graph->edit_frame() = _frame.with_zero_origin();
     }

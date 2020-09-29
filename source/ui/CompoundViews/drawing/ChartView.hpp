@@ -14,30 +14,30 @@
 
 namespace ui {
 
-class ChartView : public View {
+	class ChartView : public View {
 
-    std::vector<GraphView*> _graphs;
+		std::vector<GraphView*> _graphs;
 
-public:
+	public:
 
-    using View::View;
+		using View::View;
 
-    size_t size() const;
-    void set_size(size_t);
+		size_t size() const;
+		void set_size(size_t);
 
-    void add_values(const std::initializer_list<float>&);
+		void add_values(const std::initializer_list<float>&);
 
-    void set_colors(const std::initializer_list<gm::Color>&);
+		void set_colors(const std::initializer_list<gm::Color>&);
 
-    void set_points_size(size_t);
+		void set_points_size(size_t);
 
-    void reset();
+		void reset();
 
-private:
+	private:
 
-    void setup() override;
-    void layout_subviews() override;
+		void setup() override;
+		void layout() override;
 
-};
+	};
 
 }

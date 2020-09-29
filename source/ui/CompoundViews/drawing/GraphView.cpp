@@ -75,7 +75,7 @@ void GraphView::setup() {
     add_subview(_drawing_view = new DrawingView());
 }
 
-void GraphView::layout_subviews() {
+void GraphView::layout() {
     _drawing_view->edit_frame() = _frame.with_zero_origin();
     _range.set_target_max(_frame.size.height);
     _recalculate_graph();

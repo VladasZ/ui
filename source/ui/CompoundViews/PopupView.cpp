@@ -60,7 +60,7 @@ void ui::PopupView::setup() {
 
 }
 
-void ui::PopupView::layout_subviews() {
+void ui::PopupView::layout() {
 
     _main_button->edit_frame() = _frame.with_zero_origin();
 

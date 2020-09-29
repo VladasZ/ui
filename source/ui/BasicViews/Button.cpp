@@ -25,6 +25,6 @@ void Button::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
 }
 
-void Button::layout_subviews() {
+void Button::layout() {
     _caption_label->edit_frame() = _frame.with_zero_origin();
 }

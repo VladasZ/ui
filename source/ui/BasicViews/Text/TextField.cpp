@@ -42,7 +42,7 @@ void TextField::setup() {
 
 }
 
-void TextField::layout_subviews() {
-    Label::layout_subviews();
+void TextField::layout() {
+    Label::layout();
     _cursor->stick_to(_content_view, Edge::Right);
 }

@@ -219,7 +219,7 @@ namespace ui {
 
         virtual void setup() { }
 
-        virtual void layout_subviews() { };
+        virtual void layout() { };
 
     protected:
 

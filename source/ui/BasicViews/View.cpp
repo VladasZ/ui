@@ -228,7 +228,7 @@ bool View::is_visible() const {
 void View::_draw() {
     if (is_hidden) return;
     if (_needs_reposition) _calculate_absolute_frame();
-    if (_needs_resize) layout_subviews();
+    if (_needs_resize) layout();
     if (clips) {
         GL::scissor_begin(_absolute_frame);
     }

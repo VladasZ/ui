@@ -77,7 +77,7 @@ void Slider::setup() {
     };
 }
 
-void Slider::layout_subviews() {
+void Slider::layout() {
 
     _increase_button->edit_frame() = {_frame.size.width };
 

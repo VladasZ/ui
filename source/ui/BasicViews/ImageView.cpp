@@ -49,7 +49,7 @@ void ImageView::_draw() {
     }
 }
 
-void ImageView::layout_subviews() {
+void ImageView::layout() {
 
     switch (_content_mode) {
         case ContentMode::Fill:

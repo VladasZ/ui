@@ -23,7 +23,7 @@ void ScrollView::setup() {
     clips = true;
 }
 
-void ScrollView::layout_subviews() {
+void ScrollView::layout() {
 
     _vertical_slider->edit_frame()  = { 20, _frame.size.height };
     _vertical_slider->place_tr();

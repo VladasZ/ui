@@ -36,7 +36,7 @@ void Switch::setup() {
     };
 }
 
-void Switch::layout_subviews() {
+void Switch::layout() {
 
     static constexpr float indent = 4.0f;
 
