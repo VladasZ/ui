@@ -62,7 +62,7 @@ const Rect& View::frame() const {
 
 Rect& View::edit_frame() {
     _needs_reposition = true;
-    _needs_resize = true;
+    _needs_layout = true;
     for (auto view : _subviews) {
         view->_set_needs_reposition();
     }
@@ -112,6 +112,16 @@ void View::place_at_bottom(Float margin) {
     _set_needs_reposition();
 }
 
+void View::place_l(Float margin) {
+    _frame.origin.x = margin;
+    _set_needs_reposition();
+}
+
+void View::place_r(Float margin) {
+    _frame.origin.x = _superview->frame().size.width - _frame.size.width - margin;
+    _set_needs_reposition();
+}
+
 void View::place_br(Float margin) {
     _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
@@ -133,13 +143,13 @@ void View::place_tr(Float margin) {
 void View::place_at_left_half() {
     _frame.origin = { };
     _frame.size = { _superview->frame().size.width / 2, _superview->frame().size.height };
-    _set_needs_resize();
+    _set_needs_layout();
 }
 
 void View::place_at_right_half() {
     _frame.origin = { _superview->frame().size.width / 2, 0 };
     _frame.size = { _superview->frame().size.width / 2, _superview->frame().size.height };
-    _set_needs_resize();
+    _set_needs_layout();
 }
 
 void View::place_at_top_half() {
@@ -148,7 +158,7 @@ void View::place_at_top_half() {
                _superview->frame().size.width,
                _superview->frame().size.height / 2
     };
-    _set_needs_resize();
+    _set_needs_layout();
 }
 
 void View::place_at_bottom_half() {
@@ -157,7 +167,7 @@ void View::place_at_bottom_half() {
                _superview->frame().size.width,
                _superview->frame().size.height / 2
     };
-    _set_needs_resize();
+    _set_needs_layout();
 }
 
 void View::stick_to(View* view, Edge edge, Float margin, Edge alignment) {
@@ -226,9 +236,20 @@ bool View::is_visible() const {
 }
 
 void View::_draw() {
+
+    if (_superview == nullptr) {
+        Fatal("Drawing view without superview");
+    }
+
     if (is_hidden) return;
-    if (_needs_reposition) _calculate_absolute_frame();
-    if (_needs_resize) layout();
+    if (_needs_reposition) {
+        _calculate_absolute_frame();
+        _needs_reposition = false;
+    }
+    if (_needs_layout) {
+        layout();
+        _needs_layout = false;
+    }
     if (clips) {
         GL::scissor_begin(_absolute_frame);
     }
@@ -241,8 +262,8 @@ void View::_draw() {
     }
 }
 
-void View::_set_needs_resize() {
-    _needs_resize = true;
+void View::_set_needs_layout() {
+    _needs_layout = true;
     for (auto view : _subviews) {
         view->_set_needs_reposition();
     }

@@ -29,6 +29,7 @@ void Slider::set_value(float value) {
     _value = value;
     gm::math::clamp(_value);
     on_value_changed(this->value());
+    _set_needs_layout();
 }
 
 void Slider::set_converted_value(float value) {

@@ -90,6 +90,9 @@ namespace ui {
 
         void place_at_bottom(Float margin = 0);
 
+        void place_l(Float margin = 0);
+        void place_r(Float margin = 0);
+
         void place_br(Float margin = 0);
         void place_bl(Float margin = 0);
         void place_tr(Float margin = 0);
@@ -203,11 +206,15 @@ namespace ui {
 
     private:
 
-        bool _needs_resize = true;
+        bool _needs_layout = true;
         bool _needs_reposition = true;
 
-        void _set_needs_resize();
+    protected:
+
+        void _set_needs_layout();
         void _set_needs_reposition();
+
+    private:
 
         Rect _absolute_frame;
 

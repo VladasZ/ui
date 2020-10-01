@@ -20,6 +20,11 @@ namespace ui {
 
     protected:
 
+        bool _needs_redraw = false;
+
+        Edge _alignment = Edge::Center;
+
+        std::string _current_text;
         std::string _text;
         View* _content_view;
         Font* _font;
@@ -34,7 +39,8 @@ namespace ui {
 
         const std::string& text() const;
         void set_text(const std::string&);
-        void set_font(Font*);
+
+        void set_alignment(Edge);
 
         template <class T>
         void set_text(const T& value) {
@@ -46,6 +52,8 @@ namespace ui {
     private:
 
         void _set_glyphs();
+
+        void _draw() override;
 
     protected:
 

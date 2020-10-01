@@ -6,16 +6,12 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include <algorithm>
-
 #include "ui.hpp"
 
-#include "Log.hpp"
 #include "View.hpp"
 #include "Touch.hpp"
 #include "Mouse.hpp"
 #include "Input.hpp"
-#include "UIDrawer.hpp"
 #include "ArrayUtils.hpp"
 #include "FrameResizer.hpp"
 
@@ -23,6 +19,7 @@ using namespace ui;
 using namespace gm;
 
 //#define LOG_TOUCHES
+
 
 #ifdef DESKTOP_BUILD
 static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
@@ -49,7 +46,7 @@ void Input::process_touch_event(Touch* touch) {
     }
 
     if (!_resizable_to_subscribe.empty()) {
-        cu::array::append(_resizable, _resizable_to_subscribe);
+        cu::array::append(_resizables, _resizable_to_subscribe);
         _resizable_to_subscribe.clear();
     }
 
@@ -80,10 +77,10 @@ void Input::process_touch_event(Touch* touch) {
         _resizing_view->_resizer->on_touch(touch);
     }
 
-    for (auto window : _resizable) {
-        if (window->_absolute_frame.contains_with_edge(touch->location, FrameResizer::EdgeInfo::width)) {
-            _resizing_view = window;
-            window->_resizer->on_touch(touch);
+    for (auto resizable : _resizables) {
+        if (resizable->_absolute_frame.contains_with_edge(touch->location, FrameResizer::EdgeInfo::width)) {
+            _resizing_view = resizable;
+            resizable->_resizer->on_touch(touch);
             return;
         }
     }
@@ -152,7 +149,7 @@ void Input::unsubscribe_resizable(View* view) {
 #ifdef DESKTOP_BUILD
 void Input::hover_moved(const Point& position) {
 
-    for (auto view : _resizable) {
+    for (auto view : _resizables) {
         auto edge = view->_resizer->get_edge(position);
         if (edge != Edge::None) {
             ui::config::drawer()->set_cursor_mode(window_edge_to_mouse_cursor_mode(edge));

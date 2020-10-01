@@ -21,8 +21,14 @@ Button::Button(const Rect& frame) : View(frame) {
     };
 }
 
-void Button::set_caption(const std::string& caption) {
+Button* Button::set_caption(const std::string& caption) {
     _caption_label->set_text(caption);
+    return this;
+}
+
+Button* Button::set_alignment(Edge alignment) {
+    _caption_label->set_alignment(alignment);
+    return this;
 }
 
 void Button::layout() {

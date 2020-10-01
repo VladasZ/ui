@@ -6,8 +6,6 @@
 //  Copyright © 2018 VladasZ. All rights reserved.
 //
 
-#include <FreeTypeInclude.hpp>
-
 #include "ui.hpp"
 #include "Label.hpp"
 #include "Glyph.hpp"
@@ -19,6 +17,7 @@ using namespace ui;
 Label::Label(const Rect& frame) : View(frame) {
     _font = config::default_font;
     init_view(_content_view);
+    _content_view->draw_debug_frame = false;
 }
 
 const std::string& Label::text() const {
@@ -26,15 +25,20 @@ const std::string& Label::text() const {
 }
 
 void Label::set_text(const std::string& text) {
+    if (text == _current_text) {
+        _text = text;
+        _needs_redraw = false;
+        return;
+    }
+    if (_text == text) return;
     _text = text;
-#ifdef USING_FREETYPE
-	_set_glyphs();
-#endif
+    _needs_redraw = true;
 }
 
-void Label::set_font(Font* font) {
-    _font = font;
-    _set_glyphs();
+void Label::set_alignment(Edge alignment) {
+    if (_alignment == alignment) return;
+    _alignment = alignment;
+    _set_needs_layout();
 }
 
 void Label::resize_to_text() {
@@ -70,6 +74,17 @@ void Label::_set_glyphs() {
 
     _content_size.width = _content_view->subviews().back()->frame().max_x();
 
+    _set_needs_layout();
+
+}
+
+void Label::_draw() {
+    if (_needs_redraw) {
+        _set_glyphs();
+        _needs_redraw = false;
+        _current_text = _text;
+    }
+    View::_draw();
 }
 
 void Label::backspace() {
@@ -85,5 +100,18 @@ void Label::backspace() {
 }
 
 void Label::layout() {
+
+    if (_alignment == Edge::Center) {
+        _content_view->place_at_center();
+        return;
+    }
+
     _content_view->center_vertically();
+    if (_alignment == Edge::Left) {
+        _content_view->place_l(10);
+    }
+    else {
+        _content_view->place_r(10);
+    }
+
 }

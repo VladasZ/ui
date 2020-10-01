@@ -27,7 +27,8 @@ namespace ui {
 
         Button(const gm::Rect& = { });
 
-        void set_caption(const std::string&);
+        Button* set_caption(const std::string&);
+        Button* set_alignment(Edge);
 
     protected:
 
