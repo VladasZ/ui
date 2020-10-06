@@ -36,6 +36,7 @@ void Slider::set_converted_value(float value) {
     _value = conversion.convert_back(value);
     gm::math::clamp(_value);
     on_value_changed(this->value());
+	_set_needs_layout();
 }
 
 void Slider::set_buttons_color(const Color& color) {
