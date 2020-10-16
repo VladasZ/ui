@@ -57,7 +57,7 @@ void Label::_set_glyphs() {
     _content_size.height = _font->height();
 
     for (auto letter : _text) {
-        auto glyph = _font->glyph_for_char(letter);
+        auto glyph = _font->glyph_for_char(secure ? '*' : letter);
 
         auto glyph_view = new ImageView(glyph->size(), glyph->image);
         glyph_view->tint_color = text_color;

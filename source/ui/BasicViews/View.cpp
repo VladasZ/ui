@@ -305,7 +305,6 @@ void View::enable_touch() {
 
 void View::disable_touch() {
     if (!_touch_enabled) return;
-    Log << this;
     _touch_enabled = false;
     Input::unsubscribe_view(this);
 }

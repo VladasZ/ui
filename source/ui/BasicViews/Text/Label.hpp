@@ -31,6 +31,8 @@ namespace ui {
 
     public:
 
+		bool secure = false;
+
         gm::Color text_color = config::default_font_color;
 
         Label(const Rect& frame = { });
