@@ -140,15 +140,27 @@ void View::place_tr(Float margin) {
     _set_needs_reposition();
 }
 
-void View::place_at_left_half() {
-    _frame.origin = { };
-    _frame.size = { _superview->frame().size.width / 2, _superview->frame().size.height };
+void View::place_at_left_half(bool preserve_height) {
+	if (preserve_height) {
+		_frame.origin.x   = 0;
+		_frame.size.width = _superview->frame().size.width / 2;;
+	}
+	else {
+		_frame.origin = { };
+		_frame.size   = { _superview->frame().size.width / 2, _superview->frame().size.height };
+	}
     _set_needs_layout();
 }
 
-void View::place_at_right_half() {
-    _frame.origin = { _superview->frame().size.width / 2, 0 };
-    _frame.size = { _superview->frame().size.width / 2, _superview->frame().size.height };
+void View::place_at_right_half(bool preserve_height) {
+	if (preserve_height) {
+		_frame.origin.x   = _superview->frame().size.width / 2;
+		_frame.size.width = _superview->frame().size.width / 2;;
+	}
+	else {
+		_frame.origin = { _superview->frame().size.width / 2, 0 };
+		_frame.size   = { _superview->frame().size.width / 2, _superview->frame().size.height };
+	}
     _set_needs_layout();
 }
 
