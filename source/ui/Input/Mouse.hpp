@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "Platform.hpp"
+#include "Target.hpp"
 
 #ifdef DESKTOP_BUILD
 

@@ -11,7 +11,7 @@
 #include "Font.hpp"
 #include "Mouse.hpp"
 #include "System.hpp"
-#include "Platform.hpp"
+#include "Target.hpp"
 #include "UIDrawer.hpp"
 
 #define DRAW_DEBUG_FRAMES

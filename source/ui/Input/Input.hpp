@@ -14,7 +14,7 @@
 #include "Point.hpp"
 #include "Event.hpp"
 #include "Mouse.hpp"
-#include "Platform.hpp"
+#include "Target.hpp"
 
 
 namespace ui {

@@ -11,7 +11,7 @@
 #include <stdint.h>
 
 #include "Point.hpp"
-#include "Platform.hpp"
+#include "Target.hpp"
 
 #if DESKTOP_BUILD
 #include "Mouse.hpp"
