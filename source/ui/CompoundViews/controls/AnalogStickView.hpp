@@ -13,6 +13,7 @@
 #include "Event.hpp"
 #include "DrawingView.hpp"
 
+
 namespace ui {
 
     class AnalogStickView : public DrawingView {
