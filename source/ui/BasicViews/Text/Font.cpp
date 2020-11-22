@@ -18,6 +18,7 @@
 
 #include "ui.hpp"
 #include "Log.hpp"
+#include "File.hpp"
 #include "Font.hpp"
 #include "Glyph.hpp"
 #include "Image.hpp"
@@ -66,26 +67,17 @@ static Glyph* render_glyph(FT_Face face, char symbol) {
 Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _size(size) {
 #ifdef USING_FREETYPE
 
-    FILE* file = fopen(file_name.c_str(), "rb");
+    File* file = new File(file_name);
 
-    if (file == nullptr) {
-        Fatal("Failed to open font file: " + file_name);
-    }
-
-    fseek(file, 0, SEEK_END);
-    auto file_size = static_cast<size_t>(ftell(file));
-    fseek(file, 0, SEEK_SET);
-    auto _data = new char[file_size];
-    fread(_data, 1, file_size, file);
-    fclose(file);
-    
     FT_Face face;
 
     FT_New_Memory_Face(ft_library(),
-                       reinterpret_cast<FT_Byte*>(_data),
-                       static_cast<FT_Long>(file_size),
+                       reinterpret_cast<FT_Byte*>(file->data()),
+                       static_cast<FT_Long>(file->size()),
                        0,
                        &face);
+
+    delete file;
 
     FT_Set_Pixel_Sizes(face, 0, size);
 
