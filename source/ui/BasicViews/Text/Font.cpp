@@ -77,8 +77,6 @@ Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _siz
                        0,
                        &face);
 
-    delete file;
-
     FT_Set_Pixel_Sizes(face, 0, size);
 
     float y_max = 0;
@@ -103,6 +101,9 @@ Font::Font(const std::string& file_name, unsigned size) : _file(file_name), _siz
     float baseline_position = std::fabs(y_min);
 
     _baseline_shift = _height / 2 - baseline_position;
+    
+    delete file;
+    
 #endif
 }
 
