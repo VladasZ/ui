@@ -73,11 +73,11 @@ const Rect& View::absolute_frame() const {
     return _absolute_frame;
 }
 
-Float View::content_width() const {
+float View::content_width() const {
     return std::max(_frame.size.width, content_size.width);
 }
 
-Float View::content_height() const {
+float View::content_height() const {
     return std::max(_frame.size.height, content_size.height);
 }
 
@@ -106,35 +106,35 @@ void View::center_horizontally() {
     _set_needs_reposition();
 }
 
-void View::place_at_bottom(Float margin) {
+void View::place_at_bottom(float margin) {
     _frame.set_center(_superview->frame().center());
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _set_needs_reposition();
 }
 
-void View::place_l(Float margin) {
+void View::place_l(float margin) {
     _frame.origin.x = margin;
     _set_needs_reposition();
 }
 
-void View::place_r(Float margin) {
+void View::place_r(float margin) {
     _frame.origin.x = _superview->frame().size.width - _frame.size.width - margin;
     _set_needs_reposition();
 }
 
-void View::place_br(Float margin) {
+void View::place_br(float margin) {
     _frame.origin.x = _superview->frame().size.width  - _frame.size.width  - margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _set_needs_reposition();
 }
 
-void View::place_bl(Float margin) {
+void View::place_bl(float margin) {
     _frame.origin.x = margin;
     _frame.origin.y = _superview->content_height() - _frame.size.height - margin;
     _set_needs_reposition();
 }
 
-void View::place_tr(Float margin) {
+void View::place_tr(float margin) {
     _frame.origin.x = _superview->content_width() - _frame.size.width - margin;
     _frame.origin.y = margin;
     _set_needs_reposition();
@@ -182,7 +182,7 @@ void View::place_at_bottom_half() {
     _set_needs_layout();
 }
 
-void View::stick_to(View* view, Edge edge, Float margin, Edge alignment) {
+void View::stick_to(View* view, Edge edge, float margin, Edge alignment) {
 
     const auto& target_frame = view->frame();
 

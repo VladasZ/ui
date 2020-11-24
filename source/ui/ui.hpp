@@ -20,7 +20,6 @@
 
 namespace ui {
 
-    using Float = gm::Float;
     using Point = gm::Point;
     using Size  = gm::Size;
     using Rect  = gm::Rect;

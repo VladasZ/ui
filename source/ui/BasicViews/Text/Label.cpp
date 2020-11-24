@@ -51,7 +51,7 @@ void Label::_set_glyphs() {
 
     if (_text.empty()) return;
 
-    Float advance = 0;
+    float advance = 0;
     auto& _content_size = _content_view->edit_frame().size;
 
     _content_size.height = _font->height();

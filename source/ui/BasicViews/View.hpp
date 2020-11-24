@@ -75,8 +75,8 @@ namespace ui {
 
         const Rect& absolute_frame() const;
 
-        Float content_width() const;
-        Float content_height() const;
+        float content_width() const;
+        float content_height() const;
 
     public:
 
@@ -88,14 +88,14 @@ namespace ui {
         void center_vertically();
         void center_horizontally();
 
-        void place_at_bottom(Float margin = 0);
+        void place_at_bottom(float margin = 0);
 
-        void place_l(Float margin = 0);
-        void place_r(Float margin = 0);
+        void place_l(float margin = 0);
+        void place_r(float margin = 0);
 
-        void place_br(Float margin = 0);
-        void place_bl(Float margin = 0);
-        void place_tr(Float margin = 0);
+        void place_br(float margin = 0);
+        void place_bl(float margin = 0);
+        void place_tr(float margin = 0);
 
         void place_at_left_half(bool preserve_height = false);
         void place_at_right_half(bool preserve_height = false);
@@ -192,7 +192,7 @@ namespace ui {
 
         }
 
-        void stick_to(View* view, Edge edge, Float margin = 0, Edge alignment = Edge::Center);
+        void stick_to(View* view, Edge edge, float margin = 0, Edge alignment = Edge::Center);
 
     public:
 
