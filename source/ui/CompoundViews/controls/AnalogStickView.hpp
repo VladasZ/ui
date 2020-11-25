@@ -8,8 +8,6 @@
 
 #pragma once
 
-#ifndef DESKTOP_BUILD
-
 #include "Event.hpp"
 #include "DrawingView.hpp"
 
@@ -34,5 +32,3 @@ namespace ui {
         
     };
 }
-
-#endif
