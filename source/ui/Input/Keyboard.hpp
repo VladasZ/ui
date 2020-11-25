@@ -19,13 +19,13 @@ namespace ui {
 
     public:
 
-        enum Event {
+        enum class Event {
             Up     = 0,
             Down   = 1,
             Repeat = 2
         };
 
-        enum Mod {
+        enum class Mod {
             None    = 0,
             Shift   = 1,
             Control = 2,
