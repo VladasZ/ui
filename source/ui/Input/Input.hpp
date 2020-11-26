@@ -45,6 +45,8 @@ public:
     static inline cu::Event<Touch*> on_touch;
     static inline cu::Event<Touch*> on_free_touch;
 
+    static inline cu::Event<const gm::Point&> on_tap;
+
     static void subscribe_view(View*);
     static void subscribe_resizable(View*);
 

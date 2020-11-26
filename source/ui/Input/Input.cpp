@@ -62,12 +62,21 @@ void Input::process_touch_event(Touch* touch) {
 
     on_touch(touch);
 
+    if (touch->is_began()) {
+#ifdef MOUSE
+        if (touch->is_left_click()) {
+            on_tap(touch->location);
+        }
+#else
+        on_tap(touch->location);
+#endif
+    }
+
 #ifdef LOG_TOUCHES
     Separator;
     Log << touch;
     Log << touch->to_string();
 #endif
-
 
     if (_resizing_view) {
         if (touch->is_ended()) {
