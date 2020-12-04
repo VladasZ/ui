@@ -75,7 +75,7 @@ void Slider::setup() {
         if (touch->is_ended()) {
             return;
         }
-        set_value(1.0f - touch->location.y / _slider_content_view->frame().size.height);
+        set_value(1.0f - touch->position.y / _slider_content_view->frame().size.height);
     };
 }
 

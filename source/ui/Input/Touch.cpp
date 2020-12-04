@@ -15,11 +15,11 @@ using namespace ui;
 using namespace gm;
 
 #if DESKTOP_BUILD
-Touch::Touch(ID id, const Point& location, Event event, Mouse::Button button)
-    : id(id), location(location), event(event), button(button) { }
+Touch::Touch(ID id, const Point& position, Event event, Mouse::Button button)
+    : id(id), position(position), event(event), button(button) { }
 #else
-Touch::Touch(ID id, const Point& location, Touch::Event event)
-    : id(id), location(location), event(event) { }
+Touch::Touch(ID id, const Point& position, Touch::Event event)
+    : id(id), position(position), event(event) { }
 #endif
 
 #if DESKTOP_BUILD
@@ -48,6 +48,14 @@ bool Touch::is_ended() const {
     return event == Event::Ended;
 }
 
+Touch* Touch::clone() const {
+#if DESKTOP_BUILD
+    return new Touch(id, position, event, button);
+#else
+    return new Touch(id, position, event);
+#endif
+}
+
 std::string Touch::event_string() const {
     if (is_began()) return "Began";
     if (is_moved()) return "Moved";
@@ -56,5 +64,5 @@ std::string Touch::event_string() const {
 }
 
 std::string Touch::to_string() const {
-    return location.to_string() + " " + event_string() + " id: " + std::to_string(id);
+    return position.to_string() + " " + event_string() + " id: " + std::to_string(id);
 }

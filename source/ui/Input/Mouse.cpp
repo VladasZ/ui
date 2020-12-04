@@ -47,7 +47,7 @@ void Mouse::set_position(const Point& _position) {
    if (button_state == ButtonState::Up) {
        Input::hover_moved(_position);
    } else {
-       mouse_touch->location = _position;
+       mouse_touch->position = _position;
        mouse_touch->event = Touch::Event::Moved;
        Input::process_touch_event(mouse_touch);
    }
@@ -64,7 +64,7 @@ void Mouse::set_button_state(Button _button, ButtonState state) {
     }
 
     mouse_touch->event = event;
-    mouse_touch->location = position;
+    mouse_touch->position = position;
     mouse_touch->button = _button;
 
     Input::process_touch_event(mouse_touch);

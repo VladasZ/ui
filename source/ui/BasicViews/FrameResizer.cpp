@@ -49,18 +49,18 @@ Edge FrameResizer::get_edge(const Point& point) {
 void FrameResizer::on_touch(ui::Touch* touch) {
 
     if (touch->is_began()) {
-        _initial_touch = touch->location;
+        _initial_touch = touch->position;
         return;
     }
 
     if (_current_edge == Edge::None) {
-        _frame.origin += touch->location - _initial_touch;
+        _frame.origin += touch->position - _initial_touch;
     } else {
-        _frame.set_edge(_current_edge, touch->location);
+        _frame.set_edge(_current_edge, touch->position);
     }
 
     _needs_layout = true;
-    _initial_touch = touch->location;
+    _initial_touch = touch->position;
 
 }
 

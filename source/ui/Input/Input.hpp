@@ -43,9 +43,7 @@ public:
     static void process_touch_event(Touch*);
 
     static inline cu::Event<Touch*> on_touch;
-    static inline cu::Event<Touch*> on_free_touch;
-
-    static inline cu::Event<const gm::Point&> on_tap;
+    static inline cu::Event<Touch*> on_ui_free_touch;
 
     static void subscribe_view(View*);
     static void subscribe_resizable(View*);
@@ -58,7 +56,6 @@ public:
 #endif
 
 #ifdef DESKTOP_BUILD
-    static inline cu::Event<Touch*> on_right_button_drag;
     static void hover_moved(const gm::Point& position);
 #endif
 

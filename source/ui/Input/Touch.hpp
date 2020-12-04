@@ -33,15 +33,15 @@ public:
     };
 
     ID id;
-    gm::Point location;
+    gm::Point position;
     Event event;
 
 #if DESKTOP_BUILD
     Mouse::Button button;
 
-    Touch(ID id, const gm::Point& location, Event event, Mouse::Button button);
+    Touch(ID id, const gm::Point& position, Event event, Mouse::Button button);
 #else
-    Touch(ID id, const gm::Point& location, Event event);
+    Touch(ID id, const gm::Point& position, Event event);
 #endif
 
 #if DESKTOP_BUILD
@@ -53,6 +53,8 @@ public:
     bool is_began() const;
     bool is_moved() const;
     bool is_ended() const;
+
+    Touch* clone() const;
 
     std::string event_string() const;
     std::string to_string() const;

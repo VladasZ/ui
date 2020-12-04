@@ -59,7 +59,7 @@ void AnalogStickView::setup() {
     
     on_touch = [&](Touch* touch) {
         if (!touch->is_ended()) {
-            on_touch_moved(touch->location);
+            on_touch_moved(touch->position);
         }
         else {
             direction_stick->set_center(_frame.size.center());

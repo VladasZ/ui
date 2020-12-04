@@ -62,16 +62,6 @@ void Input::process_touch_event(Touch* touch) {
 
     on_touch(touch);
 
-    if (touch->is_began()) {
-#ifdef MOUSE
-        if (touch->is_left_click()) {
-            on_tap(touch->location);
-        }
-#else
-        on_tap(touch->location);
-#endif
-    }
-
 #ifdef LOG_TOUCHES
     Separator;
     Log << touch;
@@ -87,23 +77,17 @@ void Input::process_touch_event(Touch* touch) {
     }
 
     for (auto resizable : _resizables) {
-        if (resizable->_absolute_frame.contains_with_edge(touch->location, FrameResizer::EdgeInfo::width)) {
+        if (resizable->_absolute_frame.contains_with_edge(touch->position, FrameResizer::EdgeInfo::width)) {
             _resizing_view = resizable;
             resizable->_resizer->on_touch(touch);
             return;
         }
     }
 
-#ifdef MOUSE
-    if (touch->is_moved() && touch->is_right_click()) {
-        on_right_button_drag(touch);
-    }
-#endif
-
     if (touch->is_moved()) {
         for (auto view : _subscribed_views) {
             if (view->_touch_id == touch->id) {
-                touch->location -= view->_absolute_frame.origin;
+                touch->position -= view->_absolute_frame.origin;
                 view->on_touch(touch);
                 return;
             }
@@ -112,8 +96,8 @@ void Input::process_touch_event(Touch* touch) {
 
     if (touch->is_began()) {
         for (auto view : _subscribed_views) {
-            if (view->_absolute_frame.contains(touch->location)) {
-                touch->location -= view->_absolute_frame.origin;
+            if (view->_absolute_frame.contains(touch->position)) {
+                touch->position -= view->_absolute_frame.origin;
                 view->_touch_id = touch->id;
                 view->on_touch(touch);
                 return;
@@ -124,7 +108,7 @@ void Input::process_touch_event(Touch* touch) {
     if (touch->is_ended()) {
         for (auto view : _subscribed_views) {
             if (view->_touch_id == touch->id) {
-                touch->location -= view->_absolute_frame.origin;
+                touch->position -= view->_absolute_frame.origin;
                 view->_touch_id = 0;
                 view->on_touch(touch);
 #ifndef MOUSE
@@ -135,7 +119,7 @@ void Input::process_touch_event(Touch* touch) {
         }
     }
 
-    on_free_touch(touch);
+    on_ui_free_touch(touch);
 
 }
 
