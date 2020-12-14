@@ -9,8 +9,8 @@
 #pragma once
 
 #include "View.hpp"
-#include "ImageButton.hpp"
 #include "RangeConversion.hpp"
+
 
 namespace ui {
 
@@ -20,9 +20,6 @@ protected:
 
     float _value = 0.0f;
 
-    ImageButton* _increase_button;
-    ImageButton* _decrease_button;
-    View* _slider_content_view;
     View* _slider_view;
 
 public:
@@ -31,14 +28,14 @@ public:
 
     cu::Event<float> on_value_changed;
 
-    Slider(const gm::Rect& = { });
-    ~Slider() override;
+	using View::View;
+
+	~Slider();
 
     float value() const;
     void set_value(float);
     void set_converted_value(float);
 
-    void set_buttons_color(const gm::Color&);
     void set_slider_color(const gm::Color&);
 
 protected:

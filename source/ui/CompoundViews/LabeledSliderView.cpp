@@ -44,10 +44,9 @@ void LabeledSliderView::setup() {
     add_subview(slider_view);
 }
 
-void LabeledSliderView::layout() {
+static const float label_height = 28.0f;
 
-    static const float label_height = 28.0f;
-    const float slider_width = _frame.size.width - 20;
+void LabeledSliderView::layout() {
 
     _value_label->edit_frame() =
             { 0,
@@ -57,9 +56,9 @@ void LabeledSliderView::layout() {
             };
 
     slider_view->edit_frame() =
-            { _frame.size.width / 2 - slider_width / 2,
+            { 0,
               label_height,
-              slider_width,
+			  _frame.size.width,
               _frame.size.height - label_height * 2
             };
 
