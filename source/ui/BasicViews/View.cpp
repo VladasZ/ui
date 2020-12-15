@@ -182,6 +182,11 @@ void View::place_at_bottom_half() {
     _set_needs_layout();
 }
 
+void View::same_height(View* view) {
+	_frame.size.height = view->frame().size.height;
+	_set_needs_layout();
+}
+
 void View::stick_to(View* view, Edge edge, float margin, Edge alignment) {
 
     const auto& target_frame = view->frame();

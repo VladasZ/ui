@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <array>
 #include <vector>
 #include <numeric>
 #include <stdint.h>
@@ -102,94 +103,57 @@ namespace ui {
         void place_at_top_half();
         void place_at_bottom_half();
 
-//        template <class ...Views>
-//        void distribute_horizontally(Views&&... args) {
-//            constexpr auto size = sizeof...(Views);
-//            auto width = _frame.size.width / size;
-//
-//            cu::static_for<0, size>([&](auto index) {
-//                std::get<index.value>(std::forward_as_tuple(args...))->edit_frame() =
-//                        { index.value * width,
-//                          0,
-//                          width,
-//                          _frame.size.height
-//                        };
-//            });
-//        }
+		void same_height(View*);
 
         template <class Container>
-        void distribute_horizontally(const Container& container) {
+        void place_array_hor(const Container& container) {
             auto width = _frame.size.width / container.size();
-
-            for (int i = 0; i < container.size(); i++) {
-                container[i]->edit_frame() =
-                        { i * width,
-                          0,
-                          width,
-                          _frame.size.height
-                        };
-            }
-
+            for (int i = 0; i < container.size(); i++)
+                container[i]->edit_frame() = { i * width, 0, width, _frame.size.height };
         }
 
-		template <class ...Args>
-		void distribute_horizontally_with_ratio(std::vector<float> ratio, Args&&... args) {
-
-			constexpr auto size = sizeof...(Args);
-			auto tuple = std::forward_as_tuple(args...);
-
-			cu::static_for<0, size>([&](auto index) {
-				constexpr auto i = index.value;
-				constexpr bool is_first = i == 0;
-				auto prev_max_x = std::get<is_first ? 0 : i - 1>(tuple)->frame().max_x();
+		template <class ...Views, size_t size = sizeof...(Views)>
+		void place_hor(Views& ... views) {
+			auto width = _frame.size.width / size;
+			auto tuple = std::forward_as_tuple(views...);
+			cu::static_for<size>([&](auto i) {
 				std::get<i>(tuple)->edit_frame() =
-				{ is_first ? 0 : prev_max_x,
-				  0,
-				  ratio[i] * _frame.size.width * (1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f)),
-				  _frame.size.height
-				};
+				{ i * width, 0, width, _frame.size.height };
 			});
-
 		}
 
-        template <class ...Views>
-        void distribute_vertically(Views&&... args) {
-            constexpr auto size = sizeof...(Views);
+		template <class ...Views, size_t size = sizeof...(Views)>
+		void place_hor(const std::array<float, size>& ratio, Views& ... views) {
+			auto tuple = std::forward_as_tuple(views...);
+			auto total_ratio = 1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f);
+			cu::static_for<size>([&](auto i) {
+				constexpr bool is_first = i == 0;
+				auto x_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->frame().max_x();
+				std::get<i>(tuple)->edit_frame() = 
+				{ x_pos, 0, ratio[i] * _frame.size.width * total_ratio, _frame.size.height };
+			});
+		}
+
+		template <class ...Views, size_t size = sizeof...(Views)>
+		void place_ver(Views&... views) {
             auto height = _frame.size.height / size;
-
-            cu::static_for<0, size>([&](auto index) {
-                std::get<index.value>(std::forward_as_tuple(args...))->edit_frame() =
-                        { 0,
-                          index.value * height,
-                          _frame.size.width,
-                          height,
-                        };
+			auto tuple = std::forward_as_tuple(views...);
+            cu::static_for<size>([&](auto i) {
+                std::get<i>(tuple)->edit_frame() =
+				{ 0, i * height, _frame.size.width, height, };
             });
-
         }
 
-        template <class ...Args>
-        void distribute_vertically_with_ratio(std::vector<float> ratio, Args&&... args) {
-
-            constexpr auto size = sizeof...(Args);
-            auto tuple = std::forward_as_tuple(args...);
-
-			if (size != ratio.size()) {
-				Fatal("distribute_vertically_with_ratio");
-			}
-
-            cu::static_for<0, size>([&](auto index) {
-                constexpr auto i = index.value;
+		template <class ...Views, size_t size = sizeof...(Views)>
+		void place_ver(const std::array<float, size>& ratio, Views& ... views) {
+            auto tuple = std::forward_as_tuple(views...);
+			auto total_ratio = 1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f);
+            cu::static_for<size>([&](auto i) {
                 constexpr bool is_first = i == 0;
-                auto prev_max_y = std::get<is_first ? 0 : i - 1>(tuple)->frame().max_y();
+                auto y_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->frame().max_y();
                 std::get<i>(tuple)->edit_frame() =
-                        { 0,
-                          is_first ? 0 : prev_max_y,
-                          _frame.size.width,
-                          ratio[i] * _frame.size.height * (1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f)),
-                        };
+				{ 0, y_pos, _frame.size.width, ratio[i] * _frame.size.height * total_ratio, };
             });
-
         }
 
         void stick_to(View* view, Edge edge, float margin = 0, Edge alignment = Edge::Center);
