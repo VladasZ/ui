@@ -19,6 +19,7 @@
 #include "Event.hpp"
 #include "Color.hpp"
 #include "Touch.hpp"
+#include "ArrayUtils.hpp"
 #include "NonCopyable.hpp"
 
 
@@ -71,7 +72,19 @@ namespace ui {
 
     public:
 
-        const Rect& frame() const;
+		const  Rect& frame () const { return _frame;        }
+		const Point& origin() const { return _frame.origin; }
+		const  Size& size  () const { return _frame.size;   }
+
+		float x() const { return _frame.origin.x; }
+		float y() const { return _frame.origin.y; }
+
+		float width () const { return _frame.size.width;  }
+		float height() const { return _frame.size.height; }
+
+		float max_x() const { return _frame.max_x(); }
+		float max_y() const { return _frame.max_y(); }
+
         virtual Rect& edit_frame();
 
         const Rect& absolute_frame() const;
@@ -82,6 +95,8 @@ namespace ui {
     public:
 
         void set_center(const Point&);
+
+		void place_as(View*);
 
         void place_as_background();
 
@@ -112,25 +127,35 @@ namespace ui {
                 container[i]->edit_frame() = { i * width, 0, width, _frame.size.height };
         }
 
-		template <class ...Views, size_t size = sizeof...(Views)>
+		template <bool save_y = false, class ...Views, size_t size = sizeof...(Views)>
 		void place_hor(Views& ... views) {
 			auto width = _frame.size.width / size;
 			auto tuple = std::forward_as_tuple(views...);
 			cu::static_for<size>([&](auto i) {
-				std::get<i>(tuple)->edit_frame() =
-				{ i * width, 0, width, _frame.size.height };
+				auto& frame = std::get<i>(tuple)->edit_frame();
+				if constexpr (save_y) {
+					frame = { i * width, frame.origin.y, width, frame.size.height};
+				}
+				else {
+					frame = { i * width, 0, width, _frame.size.height };
+				}
 			});
 		}
 
-		template <class ...Views, size_t size = sizeof...(Views)>
+		template <bool save_y = false, class ...Views, size_t size = sizeof...(Views)>
 		void place_hor(const std::array<float, size>& ratio, Views& ... views) {
 			auto tuple = std::forward_as_tuple(views...);
-			auto total_ratio = 1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f);
+			auto total_ratio = 1.0f / cu::array::summ(ratio);
 			cu::static_for<size>([&](auto i) {
 				constexpr bool is_first = i == 0;
-				auto x_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->frame().max_x();
-				std::get<i>(tuple)->edit_frame() = 
-				{ x_pos, 0, ratio[i] * _frame.size.width * total_ratio, _frame.size.height };
+				auto x_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->max_x();
+				auto& frame = std::get<i>(tuple)->edit_frame();
+				if constexpr (save_y) {
+					frame = { x_pos, frame.origin.y, ratio[i] * _frame.size.width * total_ratio, frame.size.height };
+				}
+				else {
+					frame = { x_pos, 0, ratio[i] * _frame.size.width * total_ratio, _frame.size.height };
+				}
 			});
 		}
 
@@ -147,10 +172,10 @@ namespace ui {
 		template <class ...Views, size_t size = sizeof...(Views)>
 		void place_ver(const std::array<float, size>& ratio, Views& ... views) {
             auto tuple = std::forward_as_tuple(views...);
-			auto total_ratio = 1.0f / std::accumulate(ratio.begin(), ratio.end(), 0.0f);
+			auto total_ratio = 1.0f / cu::array::summ(ratio);
             cu::static_for<size>([&](auto i) {
                 constexpr bool is_first = i == 0;
-                auto y_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->frame().max_y();
+                auto y_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->max_y();
                 std::get<i>(tuple)->edit_frame() =
 				{ 0, y_pos, _frame.size.width, ratio[i] * _frame.size.height * total_ratio, };
             });

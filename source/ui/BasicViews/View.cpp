@@ -56,10 +56,6 @@ void View::remove_last_subview() {
     _subviews.pop_back();
 }
 
-const Rect& View::frame() const {
-    return _frame;
-}
-
 Rect& View::edit_frame() {
     _needs_reposition = true;
     _needs_layout = true;
@@ -84,6 +80,10 @@ float View::content_height() const {
 void View::set_center(const Point& center) {
     _frame.set_center(center);
     _set_needs_reposition();
+}
+
+void View::place_as(View* view) {
+	edit_frame() = view->frame();
 }
 
 void View::place_as_background() {
