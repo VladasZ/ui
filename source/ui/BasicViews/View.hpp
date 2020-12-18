@@ -21,6 +21,7 @@
 #include "Touch.hpp"
 #include "ArrayUtils.hpp"
 #include "NonCopyable.hpp"
+#include "MetaHelpers.hpp"
 
 
 namespace ui {
