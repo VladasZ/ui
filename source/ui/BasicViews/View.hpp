@@ -254,6 +254,11 @@ namespace ui {
             return view;
         }
 
+		template<class ...Args>
+		void init_views(Args&&... args) {
+			(init_view(args), ...);
+		}
+
     };
 
 }
