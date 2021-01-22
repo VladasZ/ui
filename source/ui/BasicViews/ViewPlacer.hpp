@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ui.hpp"
+#include "MetaHelpers.hpp"
 
 
 namespace ui {
@@ -18,7 +19,7 @@ namespace ui {
 	class ViewPlacer {
 	public:
 
-		ViewPlacer(View*);
+		explicit ViewPlacer(View*);
 
 	public:
 

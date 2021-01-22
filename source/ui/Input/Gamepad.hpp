@@ -2,7 +2,7 @@
 //  Gamepad.hpp
 //  ui
 //
-//  Created by Vladas Zakrevskis on 12/01/21.
+//  Created by Vladas Zakrevskis on 23/01/21.
 //  Copyright © 2021 VladasZ. All rights reserved.
 //
 
@@ -12,6 +12,8 @@
 namespace ui {
 
 	class Gamepad {
+
+	public:
 
 
 
