@@ -102,16 +102,16 @@ void Label::backspace() {
 void Label::layout() {
 
     if (_alignment == Edge::Center) {
-        _content_view->place_at_center();
+        _content_view->place.at_center();
         return;
     }
 
-    _content_view->center_vertically();
+    _content_view->place.center_ver();
     if (_alignment == Edge::Left) {
-        _content_view->place_l(10);
+        _content_view->place.l(10);
     }
     else {
-        _content_view->place_r(10);
+        _content_view->place.r(10);
     }
 
 }

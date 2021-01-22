@@ -26,7 +26,7 @@ void ScrollView::setup() {
 void ScrollView::layout() {
 
     _vertical_slider->edit_frame()  = { 20, _frame.size.height };
-    _vertical_slider->place_tr();
+    _vertical_slider->place.tr();
     _vertical_slider->edit_frame().origin -= content_offset;
 
     _conversion.set_target_max(content_size.height - _frame.size.height);

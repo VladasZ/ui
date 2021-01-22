@@ -57,7 +57,7 @@ void ImageView::layout() {
             break;
         case ContentMode::AspectFit:
             _content_view->edit_frame() = _frame.fit_size({ _image->width(), _image->height() });
-            _content_view->set_center(_frame.center());
+            _content_view->place.set_center(_frame.center());
             break;
     }
 

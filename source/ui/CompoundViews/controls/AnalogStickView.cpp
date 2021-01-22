@@ -29,7 +29,7 @@ void AnalogStickView::on_touch_moved(const Point& touch) {
     
     Point vector = (touch - center).trimmed(max_lenght);
     
-    direction_stick->set_center(vector + _frame.size.center());
+    direction_stick->place.set_center(vector + _frame.size.center());
     on_direction_change(vector * 0.1f);
 }
 
@@ -44,7 +44,7 @@ void AnalogStickView::setup() {
              Color::white);
 
     direction_stick = new DrawingView({ STICK_VIEW_SIZE, STICK_VIEW_SIZE });
-    direction_stick->set_center(_frame.size.center());
+    direction_stick->place.set_center(_frame.size.center());
     add_subview(direction_stick);
 
     auto stick_center = direction_stick->frame().size.center();
@@ -62,7 +62,7 @@ void AnalogStickView::setup() {
             on_touch_moved(touch->position);
         }
         else {
-            direction_stick->set_center(_frame.size.center());
+            direction_stick->place.set_center(_frame.size.center());
             on_direction_change({ });
         }
     };

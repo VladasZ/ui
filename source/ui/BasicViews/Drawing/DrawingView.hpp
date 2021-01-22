@@ -11,6 +11,7 @@
 #include "View.hpp"
 #include "PathData.hpp"
 
+
 namespace ui {
 
 class DrawingView : public View {

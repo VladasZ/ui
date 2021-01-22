@@ -44,5 +44,5 @@ void TextField::setup() {
 
 void TextField::layout() {
     Label::layout();
-    _cursor->stick_to(_content_view, Edge::Right);
+    _cursor->place.to(_content_view, Edge::Right);
 }
