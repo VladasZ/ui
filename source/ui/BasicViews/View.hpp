@@ -134,6 +134,10 @@ namespace ui {
 
         virtual void layout() { };
 
+    public:
+
+        cu::Event<> on_layout;
+
     protected:
 
         friend Input;

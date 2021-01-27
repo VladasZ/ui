@@ -19,26 +19,43 @@ namespace ui {
 
 	public:
 
+		using View::View;
+
 	private:
 
+		Label* a;
+		Label* b;
+		Label* x;
+		Label* y;
+
+		View* buttons;
+
+		View* lb;
+		View* rb;
+
+		View* back;
+		View* start;
+
+		Slider* lt;
+		Slider* rt;
+
 		View* up;
+		View* right;
 		View* down;
 		View* left;
-		View* right;
 
-		View* a;
-		View* b;
-		View* x;
-		View* y;
-
-		View* left_kok;
-		View* right_kok;
+		View* dpad;
+		
 
 		AnalogStickView* left_stick;
 		AnalogStickView* right_stick;
 
 
 
+	protected:
+
+		void setup() override;
+		void layout() override;
 
 	};
 

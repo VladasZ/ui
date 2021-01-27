@@ -107,6 +107,7 @@ void View::_draw() {
         _needs_reposition = false;
     }
     if (_needs_layout) {
+        on_layout();
         layout();
         _needs_layout = false;
     }
