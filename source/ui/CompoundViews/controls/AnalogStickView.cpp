@@ -8,6 +8,7 @@
 
 #include "Log.hpp"
 #include "Event.hpp"
+#include "Touch.hpp"
 #include "AnalogStickView.hpp"
 
 using namespace ui;

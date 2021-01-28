@@ -18,7 +18,6 @@
 #include "Rect.hpp"
 #include "Event.hpp"
 #include "Color.hpp"
-#include "Touch.hpp"
 #include "ViewPlacer.hpp"
 #include "ArrayUtils.hpp"
 #include "NonCopyable.hpp"
@@ -27,6 +26,7 @@
 
 namespace ui {
 
+    class Touch;
     class Input;
     class FrameResizer;
 
@@ -38,7 +38,7 @@ namespace ui {
 
     protected:
 
-        Touch::ID _touch_id = 0;
+        int _touch_id = 0;
 
         Rect _frame;
         View* _superview = nullptr;

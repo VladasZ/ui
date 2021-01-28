@@ -15,10 +15,10 @@ using namespace ui;
 using namespace gm;
 
 #if DESKTOP_BUILD
-Touch::Touch(ID id, const Point& position, Event event, Mouse::Button button)
+Touch::Touch(int id, const Point& position, Event event, Mouse::Button button)
     : id(id), position(position), event(event), button(button) { }
 #else
-Touch::Touch(ID id, const Point& position, Touch::Event event)
+Touch::Touch(int id, const Point& position, Touch::Event event)
     : id(id), position(position), event(event) { }
 #endif
 

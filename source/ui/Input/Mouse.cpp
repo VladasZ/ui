@@ -44,7 +44,7 @@ void Mouse::set_button_state(Button _button, ButtonState state) {
     auto event = state == ButtonState::Down ? Touch::Event::Began : Touch::Event::Ended;
 
     if (event == Touch::Event::Began) {
-        static Touch::ID id = 0;
+        static int id = 0;
         mouse_touch->id = id++;
     }
 

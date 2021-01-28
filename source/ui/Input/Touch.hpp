@@ -22,9 +22,7 @@ namespace ui {
 class Touch {
 public:
 
-    using ID = uint64_t;
-
-	static inline constexpr ID no_id = static_cast<ID>(-1);
+	static inline constexpr int no_id = -1;
 
     enum Event {
         Began,
@@ -32,16 +30,16 @@ public:
         Ended
     };
 
-    ID id;
+    int id;
     gm::Point position;
     Event event;
 
 #if DESKTOP_BUILD
     Mouse::Button button;
 
-    Touch(ID id, const gm::Point& position, Event event, Mouse::Button button);
+    Touch(int id, const gm::Point& position, Event event, Mouse::Button button);
 #else
-    Touch(ID id, const gm::Point& position, Event event);
+    Touch(int id, const gm::Point& position, Event event);
 #endif
 
 #if DESKTOP_BUILD

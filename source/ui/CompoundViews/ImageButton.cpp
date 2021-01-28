@@ -6,6 +6,7 @@
 //  Copyright © 2019 VladasZ. All rights reserved.
 //
 
+#include "Touch.hpp"
 #include "ImageButton.hpp"
 
 using namespace ui;
