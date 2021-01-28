@@ -14,10 +14,9 @@
 
 #define MOUSE
 
-#include <map>
-
 #include "Point.hpp"
 #include "Event.hpp"
+
 
 namespace ui {
 
@@ -44,10 +43,6 @@ public:
         VResize
     };
 
-    static std::map<Button, std::string>      button_to_string;
-    static std::map<ButtonState, std::string> button_state_to_string;
-    static std::map<CursorMode, std::string>  cursor_mode_to_string;
-
 	static inline gm::Point position;
 	static inline Button button = Button::Left;
 	static inline ButtonState button_state = ButtonState::Up;
@@ -59,7 +54,7 @@ public:
     void set_position(const gm::Point&);
     void set_button_state(Button, ButtonState);
 
-    const char* state_string() const;
+    std::string to_string() const;
 };
 
 }
