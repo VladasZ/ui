@@ -14,8 +14,8 @@ static void layout_pad(View* container, View* t, View* b, View* l, View* r) {
 	auto third = container->frame().size.width / 3;
 	t->edit_frame() = { third, 0, third, third };
 	b->edit_frame() = { third * 2, third, third, third };
-	l->edit_frame() = { 0, third, third, third };
-	r->edit_frame() = { third, third * 2, third, third };
+	r->edit_frame() = { 0, third, third, third };
+	l ->edit_frame() = { third, third * 2, third, third };
 }
 
 

@@ -34,6 +34,11 @@ void AnalogStickView::on_touch_moved(const Point& touch) {
     on_direction_change(vector * 0.1f);
 }
 
+void AnalogStickView::set_direction(const gm::Point& dir) {
+    direction_stick->place.set_center((dir * SIZE) + _frame.size.center());
+    on_direction_change(dir * 0.1f);
+}
+
 void AnalogStickView::setup() {
     
     enable_touch();

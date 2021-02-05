@@ -24,6 +24,8 @@ namespace ui {
 
         AnalogStickView();
 
+        void set_direction(const gm::Point&);
+
         cu::Event<const gm::Point&> on_direction_change;
         
     private:

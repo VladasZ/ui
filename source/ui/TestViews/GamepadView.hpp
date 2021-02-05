@@ -21,7 +21,7 @@ namespace ui {
 
 		using View::View;
 
-	private:
+	public:
 
 		Label* a;
 		Label* b;
@@ -49,8 +49,6 @@ namespace ui {
 
 		AnalogStickView* left_stick;
 		AnalogStickView* right_stick;
-
-
 
 	protected:
 
