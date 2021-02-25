@@ -30,7 +30,6 @@ private:
 
     static inline std::list<View*> _subscribed_views;
     static inline std::list<View*> _resizables;
-    static inline std::list<Touch*> _touches;
 
     static inline std::vector<View*> _views_to_subscribe;
     static inline std::vector<View*> _resizable_to_subscribe;
