@@ -82,7 +82,7 @@ void ViewPlacer::tr(float margin) {
 void ViewPlacer::place_at_left_half(bool preserve_height) {
     if (preserve_height) {
         _frame.origin.x = 0;
-        _frame.size.width = _view->_superview->frame().size.width / 2;;
+        _frame.size.width = _view->_superview->frame().size.width / 2;
     }
     else {
         _frame.origin = { };
@@ -94,7 +94,7 @@ void ViewPlacer::place_at_left_half(bool preserve_height) {
 void ViewPlacer::place_at_right_half(bool preserve_height) {
     if (preserve_height) {
         _frame.origin.x = _view->_superview->frame().size.width / 2;
-        _frame.size.width = _view->_superview->frame().size.width / 2;;
+        _frame.size.width = _view->_superview->frame().size.width / 2;
     }
     else {
         _frame.origin = { _view->_superview->frame().size.width / 2, 0 };
