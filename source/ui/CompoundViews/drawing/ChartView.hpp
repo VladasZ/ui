@@ -22,7 +22,7 @@ namespace ui {
 
 		using View::View;
 
-		size_t size() const;
+		size_t graph_size() const;
 		void set_size(size_t);
 
 		void add_values(const std::initializer_list<float>&);

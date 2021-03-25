@@ -10,7 +10,7 @@
 
 using namespace ui;
 
-size_t ChartView::size() const {
+size_t ChartView::graph_size() const {
     return _graphs.size();
 }
 
