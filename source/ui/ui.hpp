@@ -10,7 +10,6 @@
 
 #include "Font.hpp"
 #include "Mouse.hpp"
-#include "System.hpp"
 #include "Target.hpp"
 #include "UIDrawer.hpp"
 
@@ -30,7 +29,7 @@ namespace ui {
         static UIDrawer* drawer();
         static void set_drawer(UIDrawer* drawer);
         static inline Font* default_font = nullptr;
-        static inline Color default_font_color = Color::black;
+        static inline Color default_font_color = Color();
     };
 
 #ifdef DESKTOP_BUILD

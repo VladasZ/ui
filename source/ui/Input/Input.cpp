@@ -41,12 +41,12 @@ static Mouse::CursorMode window_edge_to_mouse_cursor_mode(Edge edge) {
 void Input::process_touch_event(Touch* touch) {
 
     if (!_views_to_subscribe.empty()) {
-        cu::array::append(_subscribed_views, _views_to_subscribe);
+        cu::container::append(_subscribed_views, _views_to_subscribe);
         _views_to_subscribe.clear();
     }
 
     if (!_resizable_to_subscribe.empty()) {
-        cu::array::append(_resizables, _resizable_to_subscribe);
+        cu::container::append(_resizables, _resizable_to_subscribe);
         _resizable_to_subscribe.clear();
     }
 

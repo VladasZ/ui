@@ -47,7 +47,7 @@ void View::remove_all_subviews() {
 }
 
 void View::remove_from_superview() {
-    cu::array::remove(_superview->_subviews, this);
+    cu::container::remove(_superview->_subviews, this);
     delete this;
 }
 

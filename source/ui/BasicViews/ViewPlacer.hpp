@@ -23,32 +23,32 @@ namespace ui {
 
 	public:
 
-		void set_center(const Point&);
-		void as(View*);
+		void set_center(const Point&) const;
+		void as(View*) const;
 
-		void as_background();
+		void as_background() const;
 
-		void at_center();
-		void center_ver();
-		void center_hor();
+		void at_center() const;
+		void center_ver() const;
+		void center_hor() const;
 
-		void at_bottom(float margin = 0);
+		void at_bottom(float margin = 0) const;
 
-		void l(float margin = 0);
-		void r(float margin = 0);
+		void l(float margin = 0) const;
+		void r(float margin = 0) const;
 
-		void br(float margin = 0);
-		void bl(float margin = 0);
-		void tr(float margin = 0);
+		void br(float margin = 0) const;
+		void bl(float margin = 0) const;
+		void tr(float margin = 0) const;
 
-		void place_at_left_half(bool preserve_height = false);
-		void place_at_right_half(bool preserve_height = false);
-		void place_at_top_half();
-		void place_at_bottom_half();
+		void place_at_left_half(bool preserve_height = false) const;
+		void place_at_right_half(bool preserve_height = false) const;
+		void place_at_top_half() const;
+		void place_at_bottom_half() const;
 
-		void same_height(View*);
+		void same_height(View*) const;
 
-		void to(View* view, Edge edge, float margin = 0, Edge alignment = Edge::Center);
+		void to(View* view, Edge edge, float margin = 0, Edge alignment = Edge::Center) const;
 
 		template <class Container>
 		void array_hor(const Container& container) {
@@ -75,7 +75,7 @@ namespace ui {
 		template <bool save_y = false, class ...Views, size_t size = sizeof...(Views)>
 		void hor(const std::array<float, size>& ratio, Views& ... views) {
 			auto tuple = std::forward_as_tuple(views...);
-			auto total_ratio = 1.0f / cu::array::summ(ratio);
+			auto total_ratio = 1.0f / cu::container::summ(ratio);
 			cu::static_for<size>([&](auto i) {
 				constexpr bool is_first = i == 0;
 				auto x_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->max_x();
@@ -102,7 +102,7 @@ namespace ui {
 		template <class ...Views, size_t size = sizeof...(Views)>
 		void ver(const std::array<float, size>& ratio, Views& ... views) {
 			auto tuple = std::forward_as_tuple(views...);
-			auto total_ratio = 1.0f / cu::array::summ(ratio);
+			auto total_ratio = 1.0f / cu::container::summ(ratio);
 			cu::static_for<size>([&](auto i) {
 				constexpr bool is_first = i == 0;
 				auto y_pos = is_first ? 0 : std::get<is_first ? 0 : i - 1>(tuple)->max_y();
