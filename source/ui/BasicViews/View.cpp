@@ -22,7 +22,9 @@ using namespace ui;
 View::View(const Rect& rect) : _frame(rect), place(ViewPlacer(this)) { }
 
 View::~View() {
-    for (auto view : _subviews) delete view;
+    for (auto view : _subviews) {
+    	delete view;
+	}
     disable_touch();
     disable_resize();
 }
@@ -137,13 +139,13 @@ void View::_set_needs_reposition() {
     }
 }
 
-void View::_draw_rect() {
+void View::_draw_rect() const {
     if (!background_color.is_clear()) {
-        ui::config::drawer()->fill_rect(_absolute_frame, background_color);
+        config::drawer()->fill_rect(_absolute_frame, background_color);
     }
 #ifdef DRAW_DEBUG_FRAMES
     if (draw_debug_frame) {
-        ui::config::drawer()->draw_rect(_absolute_frame, Color::turquoise);
+        config::drawer()->draw_rect(_absolute_frame, Color::turquoise);
     }
 #endif
 }

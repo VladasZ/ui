@@ -8,20 +8,14 @@
 
 #pragma once
 
-#include <array>
 #include <vector>
-#include <numeric>
-#include <stdint.h>
-#include <functional>
 
 #include "ui.hpp"
 #include "Rect.hpp"
 #include "Event.hpp"
 #include "Color.hpp"
 #include "ViewPlacer.hpp"
-#include "ArrayUtils.hpp"
 #include "NonCopyable.hpp"
-#include "MetaHelpers.hpp"
 
 
 namespace ui {
@@ -57,6 +51,11 @@ namespace ui {
 
     public:
 
+    	View(View&&) = delete;
+    	View(const View&) = delete;
+    	View& operator=(const View& other) = delete;
+        View& operator=(View&& other) = delete;
+    	
         explicit View(const Rect& = { });
         virtual ~View();
 
@@ -124,7 +123,7 @@ namespace ui {
 
         Rect _absolute_frame;
 
-        void _draw_rect();
+        void _draw_rect() const;
 
         void _calculate_absolute_frame();
 

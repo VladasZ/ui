@@ -142,7 +142,7 @@ void Input::unsubscribe_resizable(View* view) {
 #ifdef DESKTOP_BUILD
 void Input::hover_moved(const Point& position) {
 
-    for (auto view : _resizables) {
+    for (auto* view : _resizables) {
         auto edge = view->_resizer->get_edge(position);
         if (edge != Edge::None) {
             ui::config::drawer()->set_cursor_mode(window_edge_to_mouse_cursor_mode(edge));

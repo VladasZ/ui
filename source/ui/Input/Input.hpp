@@ -28,8 +28,8 @@ private:
 
     static inline View* _resizing_view = nullptr;
 
-    static inline std::list<View*> _subscribed_views;
-    static inline std::list<View*> _resizables;
+    static inline std::vector<View*> _subscribed_views;
+    static inline std::vector<View*> _resizables;
 
     static inline std::vector<View*> _views_to_subscribe;
     static inline std::vector<View*> _resizable_to_subscribe;
