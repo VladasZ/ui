@@ -14,21 +14,24 @@ class Image;
 
 namespace ui {
 
-class Glyph {
+    class Glyph {
 
-public:
-    
-    const char ch;
-    Image* const image;
-    const int advance;
-    const gm::Point bearing;
-    
-    Glyph(char ch, Image* image, int advance, const gm::Point& bearing);
-    ~Glyph();
-    
-    gm::Size size() const;
-    float y_max() const;
-    float y_min() const;
-};
+    public:
+
+        const char ch;
+        Image* const image;
+        const int advance;
+        const gm::Point bearing;
+
+        Glyph(char ch, Image* image, int advance, const gm::Point& bearing);
+        ~Glyph();
+
+        gm::Size size() const;
+        float y_max() const;
+        float y_min() const;
+
+        std::string to_string() const;
+
+    };
 
 }
